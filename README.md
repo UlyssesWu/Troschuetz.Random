@@ -498,4 +498,4 @@ I maintain this project during my spare time, so I can offer limited assistance 
 
 However, if this project helps you, then you might offer me an hot cup of coffee:
 
-[![Donate](https://pomma89.gitlab.io/images/buy-me-a-coffee.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELJWKEYS9QGKA)
+[![Donate](https://pommalabs.xyz/images/buy-me-a-coffee.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELJWKEYS9QGKA)
