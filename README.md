@@ -1,4 +1,4 @@
-# Troschuetz.Random
+# ![](https://pommalabs.xyz/images/codeproject-logo.64.png "Troschuetz.Random Logo") Troschuetz.Random
 
 *Fully managed library providing various random number generators and distributions.*
 
