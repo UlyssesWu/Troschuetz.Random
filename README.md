@@ -1,4 +1,4 @@
-# ![](http://pomma89.altervista.org/troschuetz.random/logo-64.png "Troschuetz.Random Logo") Troschuetz.Random
+# Troschuetz.Random
 
 *Fully managed library providing various random number generators and distributions.*
 
@@ -498,4 +498,4 @@ I maintain this project during my spare time, so I can offer limited assistance 
 
 However, if this project helps you, then you might offer me an hot cup of coffee:
 
-[![Donate](http://pomma89.altervista.org/buy-me-a-coffee.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELJWKEYS9QGKA)
+[![Donate](https://pomma89.gitlab.io/images/buy-me-a-coffee.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELJWKEYS9QGKA)

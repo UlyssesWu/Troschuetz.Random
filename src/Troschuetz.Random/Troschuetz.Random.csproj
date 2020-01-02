@@ -14,7 +14,7 @@
     <Authors>Stefan Troschütz &lt;stefan@troschuetz.de&gt;; Alessio Parma &lt;alessio.parma@gmail.com&gt;</Authors>
     <Copyright>Copyright (c) 2012-2019 Alessio Parma &lt;alessio.parma@gmail.com&gt;</Copyright>
     <PackageReleaseNotes>https://github.com/pomma89/Troschuetz.Random/releases</PackageReleaseNotes>
-    <PackageIconUrl>http://pomma89.altervista.org/troschuetz.random/logo-128.png</PackageIconUrl>
+    <PackageIconUrl>https://pomma89.gitlab.io/images/codeproject-logo.128.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/pomma89/Troschuetz.Random</PackageProjectUrl>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageTags>random;distribution;generator;normal;exponential;python;alf;mt19937;xorshift128;netstandard</PackageTags>
