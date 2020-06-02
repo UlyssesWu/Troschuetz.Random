@@ -1,22 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{48147844-A87B-45D7-A428-1909094301B2}"
 	ProjectSection(SolutionItems) = preProject
-		.appveyor.yml = .appveyor.yml
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		.travis.yml = .travis.yml
 		build.cake = build.cake
 		build.ps1 = build.ps1
 		build.sh = build.sh
 		CHANGELOG.md = CHANGELOG.md
 		config.wyam = config.wyam
-		LICENSE.md = LICENSE.md
-		NuGet.Config = NuGet.Config
-		pomma89.snk = pomma89.snk
+		LICENSE = LICENSE
+		NuGet.config = NuGet.config
 		Random_src.zip = Random_src.zip
 		RandomTester_src.zip = RandomTester_src.zip
 		README.md = README.md
@@ -48,11 +45,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8A09F61A-6
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Troschuetz.Random.UnitTests", "tests\Troschuetz.Random.UnitTests\Troschuetz.Random.UnitTests.csproj", "{3305B6F6-FE17-4DAD-909B-EE59D27DF269}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{66410BEC-6F4E-401D-B4CA-2E17B985D16D}"
-	ProjectSection(SolutionItems) = preProject
-		tools\packages.config = tools\packages.config
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Troschuetz.Random.Benchmarks", "tests\Troschuetz.Random.Benchmarks\Troschuetz.Random.Benchmarks.csproj", "{B9201484-F681-48CE-9331-CC64A48B75E8}"
 EndProject
@@ -91,7 +83,6 @@ Global
 		{52A4D144-3BA1-4768-9F3B-90F5DC86746B} = {8A09F61A-61A7-4409-B58B-BFC5B16A1EAE}
 		{938B9A4C-7CD4-4DEC-8219-9EA1E6116EDE} = {31B8643F-2BBD-4221-8928-62B6B4B221D5}
 		{3305B6F6-FE17-4DAD-909B-EE59D27DF269} = {8A09F61A-61A7-4409-B58B-BFC5B16A1EAE}
-		{66410BEC-6F4E-401D-B4CA-2E17B985D16D} = {48147844-A87B-45D7-A428-1909094301B2}
 		{B9201484-F681-48CE-9331-CC64A48B75E8} = {8A09F61A-61A7-4409-B58B-BFC5B16A1EAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

@@ -20,6 +20,7 @@
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #region Original Summary
+#pragma warning disable HBCommentedCode // Code is commented out
 
 /*
 /// <summary>
@@ -55,6 +56,7 @@
 /// </summary>
  */
 
+#pragma warning restore HBCommentedCode // Code is commented out
 #endregion Original Summary
 
 namespace Troschuetz.Random.Generators
