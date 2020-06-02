@@ -1,6 +1,6 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
+// Copyright (c) 2006-2007 Stefan Troschuetz <stefan@troschuetz.de>
 //
 // Copyright (c) 2012-2020 Alessio Parma <alessio.parma@gmail.com>
 //
