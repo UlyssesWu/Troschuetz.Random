@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Distributions.Discrete
 {
@@ -30,8 +30,8 @@ namespace Troschuetz.Random.Distributions.Discrete
     ///   Provides generation of bernoulli distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The bernoulli distribution generates only discrete numbers. <br/> The implementation of the
-    ///   <see cref="BernoulliDistribution"/> type bases upon information presented on
+    ///   The bernoulli distribution generates only discrete numbers. <br/> The implementation of
+    ///   the <see cref="BernoulliDistribution"/> type bases upon information presented on
     ///   <a href="http://en.wikipedia.org/wiki/Bernoulli_distribution">Wikipedia - Bernoulli distribution</a>.
     ///
     ///   The thread safety of this class depends on the one of the underlying generator.
@@ -51,7 +51,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         #region Fields
 
         /// <summary>
-        ///   Stores the parameter alpha which is used for generation of bernoulli distributed random numbers.
+        ///   Stores the parameter alpha which is used for generation of bernoulli distributed
+        ///   random numbers.
         /// </summary>
         private double _alpha;
 
@@ -179,19 +180,14 @@ namespace Troschuetz.Random.Distributions.Discrete
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>
-        ///   <see langword="true"/> if value is greater than or equal to 0.0, and less than or equal
-        ///   to 1.0; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if value is greater than or equal to 0.0, and less than or
+        ///   equal to 1.0; otherwise, <see langword="false"/>.
         /// </returns>
         public bool IsValidAlpha(double value) => IsValidParam(value);
 
         #endregion Instance Methods
 
         #region IDiscreteDistribution Members
-
-        /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => 0.0;
 
         /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
@@ -218,12 +214,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         }
 
         /// <summary>
-        ///   Gets the variance of distributed random numbers.
+        ///   Gets the minimum possible value of distributed random numbers.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        public double Variance => Alpha * (1.0 - Alpha);
+        public double Minimum => 0.0;
 
         /// <summary>
         ///   Gets the mode of distributed random numbers.
@@ -244,6 +237,14 @@ namespace Troschuetz.Random.Distributions.Discrete
         }
 
         /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        public double Variance => Alpha * (1.0 - Alpha);
+
+        /// <summary>
         ///   Returns a distributed random number.
         /// </summary>
         /// <returns>A distributed 32-bit signed integer.</returns>
@@ -260,9 +261,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         #region TRandom Helpers
 
         /// <summary>
-        ///   Determines whether bernoulli distribution is defined under given parameter. The default
-        ///   definition returns true if alpha is greater than or equal to zero and less than or
-        ///   equal to one; otherwise, it returns false.
+        ///   Determines whether bernoulli distribution is defined under given parameter. The
+        ///   default definition returns true if alpha is greater than or equal to zero and less
+        ///   than or equal to one; otherwise, it returns false.
         /// </summary>
         /// <remarks>
         ///   This is an extensibility point for the <see cref="BernoulliDistribution"/> class.

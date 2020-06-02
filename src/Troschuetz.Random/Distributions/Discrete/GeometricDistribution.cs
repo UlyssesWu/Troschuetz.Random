@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #region Original Copyrights
 
@@ -84,8 +84,8 @@ namespace Troschuetz.Random.Distributions.Discrete
     ///   Provides generation of geometric distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The geometric distribution generates only discrete numbers. <br/> The implementation of the
-    ///   <see cref="GeometricDistribution"/> type bases upon information presented on
+    ///   The geometric distribution generates only discrete numbers. <br/> The implementation of
+    ///   the <see cref="GeometricDistribution"/> type bases upon information presented on
     ///   <a href="http://en.wikipedia.org/wiki/Geometric_distribution">Wikipedia - Geometric
     ///   distribution</a> and the implementation in the
     ///   <a href="http://www.lkn.ei.tum.de/lehre/scn/cncl/doc/html/cncl_toc.html">Communication
@@ -246,11 +246,6 @@ namespace Troschuetz.Random.Distributions.Discrete
         #region IDiscreteDistribution Members
 
         /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => 1.0;
-
-        /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
         /// </summary>
         public double Maximum => double.PositiveInfinity;
@@ -275,12 +270,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         }
 
         /// <summary>
-        ///   Gets the variance of distributed random numbers.
+        ///   Gets the minimum possible value of distributed random numbers.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        public double Variance => (1.0 - Alpha) / TMath.Square(Alpha);
+        public double Minimum => 1.0;
 
         /// <summary>
         ///   Gets the mode of distributed random numbers.
@@ -289,6 +281,14 @@ namespace Troschuetz.Random.Distributions.Discrete
         ///   Thrown if mode is not defined for given distribution with some parameters.
         /// </exception>
         public double[] Mode => new[] { 1.0 };
+
+        /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        public double Variance => (1.0 - Alpha) / TMath.Square(Alpha);
 
         /// <summary>
         ///   Returns a distributed random number.
@@ -307,9 +307,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         #region TRandom Helpers
 
         /// <summary>
-        ///   Determines whether geometric distribution is defined under given parameter. The default
-        ///   definition returns true if alpha is greater than zero and if it is less than or equal
-        ///   to one; otherwise, it returns false.
+        ///   Determines whether geometric distribution is defined under given parameter. The
+        ///   default definition returns true if alpha is greater than zero and if it is less than
+        ///   or equal to one; otherwise, it returns false.
         /// </summary>
         /// <remarks>
         ///   This is an extensibility point for the <see cref="GeometricDistribution"/> class.

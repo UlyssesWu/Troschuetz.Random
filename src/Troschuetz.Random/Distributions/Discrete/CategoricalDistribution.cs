@@ -16,26 +16,26 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #region Original Copyright
 
 // <copyright file="Categorical.cs" company="Math.NET">
-//   Math.NET Numerics, part of the Math.NET Project http://numerics.mathdotnet.com
-//   http://github.com/mathnet/mathnet-numerics http://mathnetnumerics.codeplex.com Copyright (c)
-//   2009-2010 Math.NET Permission is hereby granted, free of charge, to any person obtaining a copy
-//   of this software and associated documentation files (the "Software"), to deal in the Software
-//   without restriction, including without limitation the rights to use, copy, modify, merge,
-//   publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to
-//   whom the Software is furnished to do so, subject to the following conditions: The above
-//   copyright notice and this permission notice shall be included in all copies or substantial
-//   portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-//   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR
-//   A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-//   LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-//   OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-//   IN THE SOFTWARE.
+//     Math.NET Numerics, part of the Math.NET Project http://numerics.mathdotnet.com
+//     http://github.com/mathnet/mathnet-numerics http://mathnetnumerics.codeplex.com Copyright (c)
+//     2009-2010 Math.NET Permission is hereby granted, free of charge, to any person obtaining a
+//     copy of this software and associated documentation files (the "Software"), to deal in the
+//     Software without restriction, including without limitation the rights to use, copy, modify,
+//     merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+//     persons to whom the Software is furnished to do so, subject to the following conditions: The
+//     above copyright notice and this permission notice shall be included in all copies or
+//     substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+//     ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+//     COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+//     OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+//     THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
 #endregion Original Copyright
@@ -55,9 +55,9 @@ namespace Troschuetz.Random.Distributions.Discrete
     ///   distribution</a>. This distribution is sometimes called the Discrete distribution.
     /// </summary>
     /// <remarks>
-    ///   The distribution is parameterized by a vector of ratios: in other words, the parameter does
-    ///   not have to be normalized and sum to 1. The reason is that some vectors can't be exactly
-    ///   normalized to sum to 1 in floating point representation.
+    ///   The distribution is parameterized by a vector of ratios: in other words, the parameter
+    ///   does not have to be normalized and sum to 1. The reason is that some vectors can't be
+    ///   exactly normalized to sum to 1 in floating point representation.
     ///
     ///   The thread safety of this class depends on the one of the underlying generator.
     /// </remarks>
@@ -94,8 +94,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         ///   Any of the weights in <paramref name="value"/> are negative or they sum to zero.
         /// </exception>
         /// <remarks>
-        ///   Sometimes the normalized probability vector cannot be represented exactly in a floating
-        ///   point representation.
+        ///   Sometimes the normalized probability vector cannot be represented exactly in a
+        ///   floating point representation.
         /// </remarks>
         public ICollection<double> Weights
         {
@@ -198,8 +198,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         ///   <see cref="XorShift128Generator"/> as underlying random number generator.
         /// </summary>
         /// <param name="weights">
-        ///   An enumerable of nonnegative weights: this enumerable does not need to be normalized as
-        ///   this is often impossible using floating point arithmetic.
+        ///   An enumerable of nonnegative weights: this enumerable does not need to be normalized
+        ///   as this is often impossible using floating point arithmetic.
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="weights"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="weights"/> is empty.</exception>
@@ -219,8 +219,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         ///   An unsigned number used to calculate a starting value for the pseudo-random number sequence.
         /// </param>
         /// <param name="weights">
-        ///   An enumerable of nonnegative weights: this enumerable does not need to be normalized as
-        ///   this is often impossible using floating point arithmetic.
+        ///   An enumerable of nonnegative weights: this enumerable does not need to be normalized
+        ///   as this is often impossible using floating point arithmetic.
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="weights"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="weights"/> is empty.</exception>
@@ -260,8 +260,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         /// </summary>
         /// <param name="generator">An <see cref="IGenerator"/> object.</param>
         /// <param name="weights">
-        ///   An enumerable of nonnegative weights: this enumerable does not need to be normalized as
-        ///   this is often impossible using floating point arithmetic.
+        ///   An enumerable of nonnegative weights: this enumerable does not need to be normalized
+        ///   as this is often impossible using floating point arithmetic.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="generator"/> or <paramref name="weights"/> are null.
@@ -317,8 +317,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         public bool AreValidWeights(IEnumerable<double> weights) => IsValidParam(weights);
 
         /// <summary>
-        ///   Computes the unnormalized cumulative distribution function and other attributes for the
-        ///   distribution (like mean, variance, and so on).
+        ///   Computes the unnormalized cumulative distribution function and other attributes for
+        ///   the distribution (like mean, variance, and so on).
         /// </summary>
         /// <remarks>
         ///   Also remember to change <see cref="SetUp(int, IEnumerable{double}, out double[])"/>
@@ -367,7 +367,8 @@ namespace Troschuetz.Random.Distributions.Discrete
             var tmpMedian = double.NaN;
             var tmpVar = 0.0;
 
-            // We still need another loop to compute variance; as for the mean, the plus/minus one is needed.
+            // We still need another loop to compute variance; as for the mean, the plus/minus one
+            // is needed.
             for (var i = 0; i < _weights.Count; ++i)
             {
                 if (double.IsNaN(tmpMedian) && _cdf[i] >= halfWeightsSum)
@@ -385,11 +386,6 @@ namespace Troschuetz.Random.Distributions.Discrete
         #endregion Instance Methods
 
         #region IDiscreteDistribution Members
-
-        /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => 0;
 
         /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
@@ -413,12 +409,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         public double Median { get; private set; }
 
         /// <summary>
-        ///   Gets the variance of distributed random numbers.
+        ///   Gets the minimum possible value of distributed random numbers.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        public double Variance { get; private set; }
+        public double Minimum => 0;
 
         /// <summary>
         ///   Gets the mode of distributed random numbers.
@@ -427,6 +420,14 @@ namespace Troschuetz.Random.Distributions.Discrete
         ///   Thrown if mode is not defined for given distribution with some parameters.
         /// </exception>
         public double[] Mode { get; private set; }
+
+        /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        public double Variance { get; private set; }
 
         /// <summary>
         ///   Returns a distributed random number.
@@ -455,9 +456,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         #region TRandom Helpers
 
         /// <summary>
-        ///   Determines whether categorical distribution is defined under given weights. The default
-        ///   definition returns false if any of the weights is negative or if the sum of parameters
-        ///   is 0.0; otherwise, it returns true.
+        ///   Determines whether categorical distribution is defined under given weights. The
+        ///   default definition returns false if any of the weights is negative or if the sum of
+        ///   parameters is 0.0; otherwise, it returns true.
         ///
         ///   Weights do not need to be normalized as this is often impossible using floating point arithmetic.
         /// </summary>

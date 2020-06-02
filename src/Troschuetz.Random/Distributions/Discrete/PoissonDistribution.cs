@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #region Original Copyrights
 
@@ -244,11 +244,6 @@ namespace Troschuetz.Random.Distributions.Discrete
         #region IDiscreteDistribution Members
 
         /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => 0.0;
-
-        /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
         /// </summary>
         public double Maximum => double.PositiveInfinity;
@@ -273,12 +268,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         }
 
         /// <summary>
-        ///   Gets the variance of distributed random numbers.
+        ///   Gets the minimum possible value of distributed random numbers.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        public double Variance => _lambda;
+        public double Minimum => 0.0;
 
         /// <summary>
         ///   Gets the mode of distributed random numbers.
@@ -287,6 +279,14 @@ namespace Troschuetz.Random.Distributions.Discrete
         ///   Thrown if mode is not defined for given distribution with some parameters.
         /// </exception>
         public double[] Mode => TMath.AreEqual(_lambda, Math.Floor(_lambda)) ? new[] { _lambda - 1.0, _lambda } : new[] { Math.Floor(_lambda) };
+
+        /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        public double Variance => _lambda;
 
         /// <summary>
         ///   Returns a distributed random number.
@@ -332,9 +332,9 @@ namespace Troschuetz.Random.Distributions.Discrete
                 k++;
                 while (TMath.IsZero(r = generator.NextDouble()))
                 {
-                    // Cycle until the random number is not zero. According to the Wikipedia page, we
-                    // should multiply p by a random number that must be greater than zero and less
-                    // than 1. NextDouble guarantees only the second clause, not the first one.
+                    // Cycle until the random number is not zero. According to the Wikipedia page,
+                    // we should multiply p by a random number that must be greater than zero and
+                    // less than 1. NextDouble guarantees only the second clause, not the first one.
                 }
                 p *= r;
                 if (p < Math.E && lambda > 0)

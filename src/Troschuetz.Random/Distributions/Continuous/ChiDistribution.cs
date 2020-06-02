@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Distributions.Continuous
 {
@@ -64,7 +64,8 @@ namespace Troschuetz.Random.Distributions.Continuous
         private int _alpha;
 
         /// <summary>
-        ///   Gets or sets the parameter alpha which is used for generation of chi distributed random numbers.
+        ///   Gets or sets the parameter alpha which is used for generation of chi distributed
+        ///   random numbers.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="value"/> is less than or equal to zero.
@@ -217,11 +218,6 @@ namespace Troschuetz.Random.Distributions.Continuous
         #region IContinuousDistribution Members
 
         /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => 0.0;
-
-        /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
         /// </summary>
         public double Maximum => double.PositiveInfinity;
@@ -246,12 +242,9 @@ namespace Troschuetz.Random.Distributions.Continuous
         }
 
         /// <summary>
-        ///   Gets the variance of distributed random numbers.
+        ///   Gets the minimum possible value of distributed random numbers.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        public double Variance => Alpha - TMath.Square(Mean);
+        public double Minimum => 0.0;
 
         /// <summary>
         ///   Gets the mode of distributed random numbers.
@@ -260,6 +253,14 @@ namespace Troschuetz.Random.Distributions.Continuous
         ///   Thrown if mode is not defined for given distribution with some parameters.
         /// </exception>
         public double[] Mode => new[] { Math.Sqrt(Alpha - 1.0) };
+
+        /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        public double Variance => Alpha - TMath.Square(Mean);
 
         /// <summary>
         ///   Returns a distributed floating point random number.
@@ -275,9 +276,7 @@ namespace Troschuetz.Random.Distributions.Continuous
         ///   Determines whether chi distribution is defined under given parameter. The default
         ///   definition returns true if alpha is greater than zero; otherwise, it returns false.
         /// </summary>
-        /// <remarks>
-        ///   This is an extensibility point for the <see cref="ChiDistribution"/> class.
-        /// </remarks>
+        /// <remarks>This is an extensibility point for the <see cref="ChiDistribution"/> class.</remarks>
         public static Func<int, bool> IsValidParam { get; set; } = alpha =>
         {
             return alpha > 0;
@@ -286,9 +285,7 @@ namespace Troschuetz.Random.Distributions.Continuous
         /// <summary>
         ///   Declares a function returning a chi distributed floating point random number.
         /// </summary>
-        /// <remarks>
-        ///   This is an extensibility point for the <see cref="ChiDistribution"/> class.
-        /// </remarks>
+        /// <remarks>This is an extensibility point for the <see cref="ChiDistribution"/> class.</remarks>
         public static Func<IGenerator, int, double> Sample { get; set; } = (generator, alpha) =>
         {
             const double M = 0.0;

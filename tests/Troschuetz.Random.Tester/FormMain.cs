@@ -1666,8 +1666,8 @@ namespace Troschuetz.Random.Tester
 
         /// <summary>
         ///   Create <see cref="NumericUpDown"/> controls for all properties of the currently
-        ///   selected inheritor of Distribution type that are of type <see cref="double"/> or <see
-        ///   cref="int"/> and not defined by the Distribution type.
+        ///   selected inheritor of Distribution type that are of type <see cref="double"/> or
+        ///   <see cref="int"/> and not defined by the Distribution type.
         /// </summary>
         private void UpdateGroupBoxDistribution2()
         {

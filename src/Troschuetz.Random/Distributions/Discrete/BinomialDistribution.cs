@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Distributions.Discrete
 {
@@ -228,8 +228,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>
-        ///   <see langword="true"/> if value is greater than or equal to 0.0, and less than or equal
-        ///   to 1.0; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if value is greater than or equal to 0.0, and less than or
+        ///   equal to 1.0; otherwise, <see langword="false"/>.
         /// </returns>
         public bool IsValidAlpha(double value) => AreValidParams(value, Beta);
 
@@ -245,11 +245,6 @@ namespace Troschuetz.Random.Distributions.Discrete
         #endregion Instance Methods
 
         #region IDiscreteDistribution Members
-
-        /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => 0.0;
 
         /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
@@ -276,12 +271,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         }
 
         /// <summary>
-        ///   Gets the variance of distributed random numbers.
+        ///   Gets the minimum possible value of distributed random numbers.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        public double Variance => Alpha * (1.0 - Alpha) * Beta;
+        public double Minimum => 0.0;
 
         /// <summary>
         ///   Gets the mode of distributed random numbers.
@@ -290,6 +282,14 @@ namespace Troschuetz.Random.Distributions.Discrete
         ///   Thrown if mode is not defined for given distribution with some parameters.
         /// </exception>
         public double[] Mode => new[] { Math.Floor(Alpha * (Beta + 1.0)) };
+
+        /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        public double Variance => Alpha * (1.0 - Alpha) * Beta;
 
         /// <summary>
         ///   Returns a distributed random number.
@@ -308,9 +308,10 @@ namespace Troschuetz.Random.Distributions.Discrete
         #region TRandom Helpers
 
         /// <summary>
-        ///   Determines whether binomial distribution is defined under given parameters. The default
-        ///   definition returns true if alpha is greater than or equal to zero and less than or
-        ///   equal to one, and if beta is greater than or equal to zero; otherwise, it returns false.
+        ///   Determines whether binomial distribution is defined under given parameters. The
+        ///   default definition returns true if alpha is greater than or equal to zero and less
+        ///   than or equal to one, and if beta is greater than or equal to zero; otherwise, it
+        ///   returns false.
         /// </summary>
         /// <remarks>
         ///   This is an extensibility point for the <see cref="BinomialDistribution"/> class.

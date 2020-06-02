@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #region Original Copyright
 
@@ -90,10 +90,10 @@ namespace Troschuetz.Random.Generators
         #region Constants
 
         /// <summary>
-        ///   Represents the number of unsigned random numbers generated at one time. This field is constant.
+        ///   Represents the least significant r bits. This field is constant.
         /// </summary>
-        /// <remarks>The value of this constant is 624.</remarks>
-        private const int N = 624;
+        /// <remarks>The value of this constant is 0x7fffffff.</remarks>
+        private const uint LowerMask = 0x7fffffffU;
 
         /// <summary>
         ///   Represents a constant used for generation of unsigned random numbers. This field is constant.
@@ -102,10 +102,10 @@ namespace Troschuetz.Random.Generators
         private const int M = 397;
 
         /// <summary>
-        ///   Represents the constant vector a. This field is constant.
+        ///   Represents the number of unsigned random numbers generated at one time. This field is constant.
         /// </summary>
-        /// <remarks>The value of this constant is 0x9908b0dfU.</remarks>
-        private const uint VectorA = 0x9908b0dfU;
+        /// <remarks>The value of this constant is 624.</remarks>
+        private const int N = 624;
 
         /// <summary>
         ///   Represents the most significant w-r bits. This field is constant.
@@ -114,10 +114,10 @@ namespace Troschuetz.Random.Generators
         private const uint UpperMask = 0x80000000U;
 
         /// <summary>
-        ///   Represents the least significant r bits. This field is constant.
+        ///   Represents the constant vector a. This field is constant.
         /// </summary>
-        /// <remarks>The value of this constant is 0x7fffffff.</remarks>
-        private const uint LowerMask = 0x7fffffffU;
+        /// <remarks>The value of this constant is 0x9908b0dfU.</remarks>
+        private const uint VectorA = 0x9908b0dfU;
 
         #endregion Constants
 
@@ -155,8 +155,8 @@ namespace Troschuetz.Random.Generators
         ///   specified seed value.
         /// </summary>
         /// <param name="seed">
-        ///   A number used to calculate a starting value for the pseudo-random number sequence. If a
-        ///   negative number is specified, the absolute value of the number is used.
+        ///   A number used to calculate a starting value for the pseudo-random number sequence. If
+        ///   a negative number is specified, the absolute value of the number is used.
         /// </param>
         public MT19937Generator(int seed) : base((uint)Math.Abs(seed))
         {
@@ -226,6 +226,35 @@ namespace Troschuetz.Random.Generators
         #region Instance methods
 
         /// <summary>
+        ///   Generates <see cref="N"/> unsigned random numbers.
+        /// </summary>
+        /// <remarks>
+        ///   Generated random numbers are 32-bit unsigned integers greater than or equal to
+        ///   <see cref="uint.MinValue"/> and less than or equal to <see cref="uint.MaxValue"/>.
+        /// </remarks>
+        private void GenerateNUInts()
+        {
+            int kk;
+            uint y;
+            var mag01 = new[] { 0x0U, VectorA };
+
+            for (kk = 0; kk < N - M; kk++)
+            {
+                y = (_mt[kk] & UpperMask) | (_mt[kk + 1] & LowerMask);
+                _mt[kk] = _mt[kk + M] ^ (y >> 1) ^ mag01[y & 0x1U];
+            }
+            for (; kk < N - 1; kk++)
+            {
+                y = (_mt[kk] & UpperMask) | (_mt[kk + 1] & LowerMask);
+                _mt[kk] = _mt[kk + (M - N)] ^ (y >> 1) ^ mag01[y & 0x1U];
+            }
+            y = (_mt[N - 1] & UpperMask) | (_mt[0] & LowerMask);
+            _mt[N - 1] = _mt[M - 1] ^ (y >> 1) ^ mag01[y & 0x1U];
+
+            _mti = 0;
+        }
+
+        /// <summary>
         ///   Extends resetting of the <see cref="MT19937Generator"/> using the <see cref="_seedArray"/>.
         /// </summary>
         private void ResetBySeedArray()
@@ -263,35 +292,6 @@ namespace Troschuetz.Random.Generators
             _mt[0] = 0x80000000U; // MSB is 1; assuring non-0 initial array
         }
 
-        /// <summary>
-        ///   Generates <see cref="N"/> unsigned random numbers.
-        /// </summary>
-        /// <remarks>
-        ///   Generated random numbers are 32-bit unsigned integers greater than or equal to
-        ///   <see cref="uint.MinValue"/> and less than or equal to <see cref="uint.MaxValue"/>.
-        /// </remarks>
-        private void GenerateNUInts()
-        {
-            int kk;
-            uint y;
-            var mag01 = new[] { 0x0U, VectorA };
-
-            for (kk = 0; kk < N - M; kk++)
-            {
-                y = (_mt[kk] & UpperMask) | (_mt[kk + 1] & LowerMask);
-                _mt[kk] = _mt[kk + M] ^ (y >> 1) ^ mag01[y & 0x1U];
-            }
-            for (; kk < N - 1; kk++)
-            {
-                y = (_mt[kk] & UpperMask) | (_mt[kk + 1] & LowerMask);
-                _mt[kk] = _mt[kk + (M - N)] ^ (y >> 1) ^ mag01[y & 0x1U];
-            }
-            y = (_mt[N - 1] & UpperMask) | (_mt[0] & LowerMask);
-            _mt[N - 1] = _mt[M - 1] ^ (y >> 1) ^ mag01[y & 0x1U];
-
-            _mti = 0;
-        }
-
         #endregion Instance methods
 
         #region IGenerator members
@@ -303,30 +303,31 @@ namespace Troschuetz.Random.Generators
         public override bool CanReset => true;
 
         /// <summary>
-        ///   Resets the random number generator using the specified seed, so that it produces the
-        ///   same random number sequence again. To understand whether this generator can be reset,
-        ///   you can query the <see cref="CanReset"/> property.
+        ///   Returns a nonnegative floating point random number less than 1.0.
         /// </summary>
-        /// <param name="seed">The seed value used by the generator.</param>
-        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
-        public override bool Reset(uint seed)
+        /// <returns>
+        ///   A double-precision floating point number greater than or equal to 0.0, and less than
+        ///   1.0; that is, the range of return values includes 0.0 but not 1.0.
+        /// </returns>
+        public override double NextDouble()
         {
-            base.Reset(seed);
-
-            _mt[0] = seed & 0xffffffffU;
-            for (_mti = 1; _mti < N; _mti++)
+            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+            if (_mti >= N)
             {
-                _mt[_mti] = (1812433253U * (_mt[_mti - 1] ^ (_mt[_mti - 1] >> 30)) + _mti);
-                // See Knuth TAOCP Vol2. 3rd Ed. P.106 for multiplier. In the previous versions, MSBs
-                // of the seed affect only MSBs of the array mt[]. 2002/01/09 modified by Makoto Matsumoto
+                // Generate N words at one time
+                GenerateNUInts();
             }
+            var y = _mt[_mti++];
+            // Tempering
+            y ^= (y >> 11);
+            y ^= (y << 7) & 0x9d2c5680U;
+            y ^= (y << 15) & 0xefc60000U;
 
-            // If the object was instanciated with a seed array do some further (re)initialisation.
-            if (_seedArray != null)
-            {
-                ResetBySeedArray();
-            }
-            return true;
+            var result = (int)((y ^ (y >> 18)) >> 1) * IntToDoubleMultiplier;
+
+            // Postconditions
+            Debug.Assert(result >= 0.0 && result < 1.0);
+            return result;
         }
 
         /// <summary>
@@ -358,34 +359,6 @@ namespace Troschuetz.Random.Generators
         }
 
         /// <summary>
-        ///   Returns a nonnegative floating point random number less than 1.0.
-        /// </summary>
-        /// <returns>
-        ///   A double-precision floating point number greater than or equal to 0.0, and less than
-        ///   1.0; that is, the range of return values includes 0.0 but not 1.0.
-        /// </returns>
-        public override double NextDouble()
-        {
-            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
-            if (_mti >= N)
-            {
-                // Generate N words at one time
-                GenerateNUInts();
-            }
-            var y = _mt[_mti++];
-            // Tempering
-            y ^= (y >> 11);
-            y ^= (y << 7) & 0x9d2c5680U;
-            y ^= (y << 15) & 0xefc60000U;
-
-            var result = (int)((y ^ (y >> 18)) >> 1) * IntToDoubleMultiplier;
-
-            // Postconditions
-            Debug.Assert(result >= 0.0 && result < 1.0);
-            return result;
-        }
-
-        /// <summary>
         ///   Returns an unsigned random number.
         /// </summary>
         /// <returns>
@@ -406,6 +379,34 @@ namespace Troschuetz.Random.Generators
             y ^= (y << 7) & 0x9d2c5680U;
             y ^= (y << 15) & 0xefc60000U;
             return (y ^ (y >> 18));
+        }
+
+        /// <summary>
+        ///   Resets the random number generator using the specified seed, so that it produces the
+        ///   same random number sequence again. To understand whether this generator can be reset,
+        ///   you can query the <see cref="CanReset"/> property.
+        /// </summary>
+        /// <param name="seed">The seed value used by the generator.</param>
+        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
+        public override bool Reset(uint seed)
+        {
+            base.Reset(seed);
+
+            _mt[0] = seed & 0xffffffffU;
+            for (_mti = 1; _mti < N; _mti++)
+            {
+                _mt[_mti] = (1812433253U * (_mt[_mti - 1] ^ (_mt[_mti - 1] >> 30)) + _mti);
+                // See Knuth TAOCP Vol2. 3rd Ed. P.106 for multiplier. In the previous versions,
+                // MSBs of the seed affect only MSBs of the array mt[]. 2002/01/09 modified by
+                // Makoto Matsumoto
+            }
+
+            // If the object was instanciated with a seed array do some further (re)initialisation.
+            if (_seedArray != null)
+            {
+                ResetBySeedArray();
+            }
+            return true;
         }
 
         #endregion IGenerator members

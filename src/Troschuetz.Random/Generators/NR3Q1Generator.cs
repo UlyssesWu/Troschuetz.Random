@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Generators
 {
@@ -42,20 +42,18 @@ namespace Troschuetz.Random.Generators
         #region Constants
 
         /// <summary>
-        ///   Represents the seed for the <see cref="_v"/> variable. This field is constant.
-        /// </summary>
-        /// <remarks>The value of this constant is 4101842887655102017.</remarks>
-        public const ulong SeedV = 4101842887655102017UL;
-
-        /// <summary>
         ///   Represents the seed for the <see cref="ulong"/> numbers generation. This field is constant.
         /// </summary>
         /// <remarks>The value of this constant is 2685821657736338717.</remarks>
         public const ulong SeedU = 2685821657736338717UL;
 
-        #endregion Constants
+        /// <summary>
+        ///   Represents the seed for the <see cref="_v"/> variable. This field is constant.
+        /// </summary>
+        /// <remarks>The value of this constant is 4101842887655102017.</remarks>
+        public const ulong SeedV = 4101842887655102017UL;
 
-        private ulong _v;
+        #endregion Constants
 
         /// <summary>
         ///   Generators like <see cref="NextDouble"/> and <see cref="NextInclusiveMaxValue"/> use
@@ -65,6 +63,8 @@ namespace Troschuetz.Random.Generators
         ///   still available and ready to be used.
         /// </summary>
         private bool _bytesAvailable;
+
+        private ulong _v;
 
         #region Construction
 
@@ -81,8 +81,8 @@ namespace Troschuetz.Random.Generators
         ///   specified seed value.
         /// </summary>
         /// <param name="seed">
-        ///   A number used to calculate a starting value for the pseudo-random number sequence. If a
-        ///   negative number is specified, the absolute value of the number is used.
+        ///   A number used to calculate a starting value for the pseudo-random number sequence. If
+        ///   a negative number is specified, the absolute value of the number is used.
         /// </param>
         public NR3Q1Generator(int seed) : base((uint)Math.Abs(seed))
         {
@@ -110,21 +110,31 @@ namespace Troschuetz.Random.Generators
         public override bool CanReset => true;
 
         /// <summary>
-        ///   Resets the random number generator using the specified seed, so that it produces the
-        ///   same random number sequence again. To understand whether this generator can be reset,
-        ///   you can query the <see cref="CanReset"/> property.
+        ///   Returns a nonnegative floating point random number less than 1.0.
         /// </summary>
-        /// <param name="seed">The seed value used by the generator.</param>
-        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
-        public override bool Reset(uint seed)
+        /// <returns>
+        ///   A double-precision floating point number greater than or equal to 0.0, and less than
+        ///   1.0; that is, the range of return values includes 0.0 but not 1.0.
+        /// </returns>
+        public override double NextDouble()
         {
-            base.Reset(seed);
+            if (_bytesAvailable)
+            {
+                _bytesAvailable = false;
+                return (int)((_v * SeedU) << ULongToIntShift >> ULongToIntShift) * IntToDoubleMultiplier;
+            }
 
-            _v = SeedV;
-            _v ^= seed;
-            _v = NextULong();
-            _bytesAvailable = false;
-            return true;
+            // Its faster to explicitly calculate the unsigned random number than simply call NextULong().
+            _v ^= _v >> 21;
+            _v ^= _v << 35;
+            _v ^= _v >> 4;
+            _bytesAvailable = true;
+
+            var result = (int)((_v * SeedU) >> ULongToIntShift) * IntToDoubleMultiplier;
+
+            // Postconditions
+            Debug.Assert(result >= 0.0 && result < 1.0);
+            return result;
         }
 
         /// <summary>
@@ -152,34 +162,6 @@ namespace Troschuetz.Random.Generators
 
             // Postconditions
             Debug.Assert(result >= 0);
-            return result;
-        }
-
-        /// <summary>
-        ///   Returns a nonnegative floating point random number less than 1.0.
-        /// </summary>
-        /// <returns>
-        ///   A double-precision floating point number greater than or equal to 0.0, and less than
-        ///   1.0; that is, the range of return values includes 0.0 but not 1.0.
-        /// </returns>
-        public override double NextDouble()
-        {
-            if (_bytesAvailable)
-            {
-                _bytesAvailable = false;
-                return (int)((_v * SeedU) << ULongToIntShift >> ULongToIntShift) * IntToDoubleMultiplier;
-            }
-
-            // Its faster to explicitly calculate the unsigned random number than simply call NextULong().
-            _v ^= _v >> 21;
-            _v ^= _v << 35;
-            _v ^= _v >> 4;
-            _bytesAvailable = true;
-
-            var result = (int)((_v * SeedU) >> ULongToIntShift) * IntToDoubleMultiplier;
-
-            // Postconditions
-            Debug.Assert(result >= 0.0 && result < 1.0);
             return result;
         }
 
@@ -220,6 +202,24 @@ namespace Troschuetz.Random.Generators
             _v ^= _v >> 4;
             _bytesAvailable = false;
             return _v * SeedU;
+        }
+
+        /// <summary>
+        ///   Resets the random number generator using the specified seed, so that it produces the
+        ///   same random number sequence again. To understand whether this generator can be reset,
+        ///   you can query the <see cref="CanReset"/> property.
+        /// </summary>
+        /// <param name="seed">The seed value used by the generator.</param>
+        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
+        public override bool Reset(uint seed)
+        {
+            base.Reset(seed);
+
+            _v = SeedV;
+            _v ^= seed;
+            _v = NextULong();
+            _bytesAvailable = false;
+            return true;
         }
 
         #endregion IGenerator members

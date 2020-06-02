@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random
 {
@@ -35,13 +35,6 @@ namespace Troschuetz.Random
         public const double Tolerance = 1E-6;
 
         /// <summary>
-        ///   Safely checks if given double is zero.
-        /// </summary>
-        /// <param name="d">A double.</param>
-        /// <returns>True if given double is near zero, false otherwise.</returns>
-        public static bool IsZero(double d) => d > -Tolerance && d < Tolerance;
-
-        /// <summary>
         ///   Safely checks if given doubles are equal.
         /// </summary>
         /// <param name="d1">A double.</param>
@@ -50,11 +43,11 @@ namespace Troschuetz.Random
         public static bool AreEqual(double d1, double d2) => IsZero(d1 - d2);
 
         /// <summary>
-        ///   Fast square power.
+        ///   Safely checks if given double is zero.
         /// </summary>
         /// <param name="d">A double.</param>
-        /// <returns>The square of given double.</returns>
-        public static double Square(double d) => IsZero(d) ? 0.0 : d * d;
+        /// <returns>True if given double is near zero, false otherwise.</returns>
+        public static bool IsZero(double d) => d > -Tolerance && d < Tolerance;
 
         /// <summary>
         ///   Generates a new seed, using all information available, including time.
@@ -80,5 +73,12 @@ namespace Troschuetz.Random
                 return seed;
             }
         }
+
+        /// <summary>
+        ///   Fast square power.
+        /// </summary>
+        /// <param name="d">A double.</param>
+        /// <returns>The square of given double.</returns>
+        public static double Square(double d) => IsZero(d) ? 0.0 : d * d;
     }
 }

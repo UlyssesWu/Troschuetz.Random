@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Distributions.Continuous
 {
@@ -57,7 +57,8 @@ namespace Troschuetz.Random.Distributions.Continuous
         #region Fields
 
         /// <summary>
-        ///   Stores the parameter alpha which is used for generation of uniformly distributed random numbers.
+        ///   Stores the parameter alpha which is used for generation of uniformly distributed
+        ///   random numbers.
         /// </summary>
         private double _alpha;
 
@@ -237,7 +238,8 @@ namespace Troschuetz.Random.Distributions.Continuous
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>
-        ///   <see langword="true"/> if value is less than or equal to <see cref="Beta"/>; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if value is less than or equal to <see cref="Beta"/>;
+        ///   otherwise, <see langword="false"/>.
         /// </returns>
         public bool IsValidAlpha(double value) => AreValidParams(value, _beta);
 
@@ -254,11 +256,6 @@ namespace Troschuetz.Random.Distributions.Continuous
         #endregion Instance Methods
 
         #region IContinuousDistribution Members
-
-        /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => _alpha;
 
         /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
@@ -282,12 +279,9 @@ namespace Troschuetz.Random.Distributions.Continuous
         public double Median => _alpha / 2.0 + _beta / 2.0;
 
         /// <summary>
-        ///   Gets the variance of distributed random numbers.
+        ///   Gets the minimum possible value of distributed random numbers.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        public double Variance => TMath.Square(_beta - _alpha) / 12.0;
+        public double Minimum => _alpha;
 
         /// <summary>
         ///   Gets the mode of distributed random numbers.
@@ -299,6 +293,14 @@ namespace Troschuetz.Random.Distributions.Continuous
         {
             get { throw new NotSupportedException(ErrorMessages.UndefinedMode); }
         }
+
+        /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        public double Variance => TMath.Square(_beta - _alpha) / 12.0;
 
         /// <summary>
         ///   Returns a distributed floating point random number.

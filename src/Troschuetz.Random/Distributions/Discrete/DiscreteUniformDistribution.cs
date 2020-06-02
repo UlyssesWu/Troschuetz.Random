@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Distributions.Discrete
 {
@@ -30,8 +30,9 @@ namespace Troschuetz.Random.Distributions.Discrete
     ///   Provides generation of discrete uniformly distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The discrete uniform distribution generates only discrete numbers. <br/> The implementation
-    ///   of the <see cref="DiscreteUniformDistribution"/> type bases upon information presented on
+    ///   The discrete uniform distribution generates only discrete numbers. <br/> The
+    ///   implementation of the <see cref="DiscreteUniformDistribution"/> type bases upon
+    ///   information presented on
     ///   <a href="http://en.wikipedia.org/wiki/Uniform_distribution_%28discrete%29">Wikipedia -
     ///   Uniform distribution (discrete)</a>.
     ///
@@ -59,12 +60,12 @@ namespace Troschuetz.Random.Distributions.Discrete
         /// <summary>
         ///   Stores the parameter beta which is used for generation of uniformly distributed random numbers.
         /// </summary>
-        private int _beta;
+        private int _alpha;
 
         /// <summary>
         ///   Stores the parameter beta which is used for generation of uniformly distributed random numbers.
         /// </summary>
-        private int _alpha;
+        private int _beta;
 
         /// <summary>
         ///   Gets or sets the parameter alpha which is used for generation of uniformly distributed
@@ -155,7 +156,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         ///   using a <see cref="XorShift128Generator"/> as underlying random number generator.
         /// </summary>
         /// <param name="alpha">
-        ///   The parameter alpha which is used for generation of discrete uniform distributed random numbers.
+        ///   The parameter alpha which is used for generation of discrete uniform distributed
+        ///   random numbers.
         /// </param>
         /// <param name="beta">
         ///   The parameter beta which is used for generation of discrete uniform distributed random numbers.
@@ -179,7 +181,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         ///   An unsigned number used to calculate a starting value for the pseudo-random number sequence.
         /// </param>
         /// <param name="alpha">
-        ///   The parameter alpha which is used for generation of discrete uniform distributed random numbers.
+        ///   The parameter alpha which is used for generation of discrete uniform distributed
+        ///   random numbers.
         /// </param>
         /// <param name="beta">
         ///   The parameter beta which is used for generation of discrete uniform distributed random numbers.
@@ -203,7 +206,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         /// </summary>
         /// <param name="generator">An <see cref="IGenerator"/> object.</param>
         /// <param name="alpha">
-        ///   The parameter alpha which is used for generation of discrete uniform distributed random numbers.
+        ///   The parameter alpha which is used for generation of discrete uniform distributed
+        ///   random numbers.
         /// </param>
         /// <param name="beta">
         ///   The parameter beta which is used for generation of discrete uniform distributed random numbers.
@@ -230,7 +234,8 @@ namespace Troschuetz.Random.Distributions.Discrete
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>
-        ///   <see langword="true"/> if value is less than or equal to <see cref="Beta"/>; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if value is less than or equal to <see cref="Beta"/>;
+        ///   otherwise, <see langword="false"/>.
         /// </returns>
         public bool IsValidAlpha(int value) => AreValidParams(value, _beta);
 
@@ -247,11 +252,6 @@ namespace Troschuetz.Random.Distributions.Discrete
         #endregion Instance Methods
 
         #region IDiscreteDistribution Members
-
-        /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => Alpha;
 
         /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
@@ -275,12 +275,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         public double Median => Alpha / 2.0 + _beta / 2.0;
 
         /// <summary>
-        ///   Gets the variance of distributed random numbers.
+        ///   Gets the minimum possible value of distributed random numbers.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        public double Variance => (TMath.Square(_beta - Alpha + 1.0) - 1.0) / 12.0;
+        public double Minimum => Alpha;
 
         /// <summary>
         ///   Gets the mode of distributed random numbers.
@@ -292,6 +289,14 @@ namespace Troschuetz.Random.Distributions.Discrete
         {
             get { throw new NotSupportedException(ErrorMessages.UndefinedMode); }
         }
+
+        /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        public double Variance => (TMath.Square(_beta - Alpha + 1.0) - 1.0) / 12.0;
 
         /// <summary>
         ///   Returns a distributed random number.
@@ -310,9 +315,9 @@ namespace Troschuetz.Random.Distributions.Discrete
         #region TRandom Helpers
 
         /// <summary>
-        ///   Determines whether discrete uniform distribution is defined under given parameters. The
-        ///   default definition returns true if alpha is less than or equal to beta, and if beta is
-        ///   less than <see cref="int.MaxValue"/>; otherwise, it returns false.
+        ///   Determines whether discrete uniform distribution is defined under given parameters.
+        ///   The default definition returns true if alpha is less than or equal to beta, and if
+        ///   beta is less than <see cref="int.MaxValue"/>; otherwise, it returns false.
         /// </summary>
         /// <remarks>
         ///   This is an extensibility point for the <see cref="DiscreteUniformDistribution"/> class.

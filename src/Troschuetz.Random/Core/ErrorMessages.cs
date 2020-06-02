@@ -16,20 +16,20 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Core
 {
     internal static class ErrorMessages
     {
         public const string EmptyList = "List must not be empty.";
+        public const string InfiniteMaxValue = "maxValue cannot be equal to positive infinity.";
+        public const string InfiniteMaxValueMinusMinValue = "maxValue minus minValue cannot be equal to infinity.";
         public const string InvalidParams = "Given parameter (or parameters) are not valid.";
         public const string MaxValueIsTooSmall = "Given max value is too small.";
         public const string MinValueGreaterThanMaxValue = "maxValue should be greater than or equal to minValue.";
         public const string NegativeMaxValue = "maxValue must be greater than or equal to zero.";
-        public const string InfiniteMaxValue = "maxValue cannot be equal to positive infinity.";
-        public const string InfiniteMaxValueMinusMinValue = "maxValue minus minValue cannot be equal to infinity.";
         public const string NullBuffer = "Buffer must not be undefined.";
         public const string NullDistribution = "Distribution must not be undefined.";
         public const string NullGenerator = "Generator must not be undefined.";

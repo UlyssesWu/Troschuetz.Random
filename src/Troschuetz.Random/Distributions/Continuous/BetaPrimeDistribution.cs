@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Distributions.Continuous
 {
@@ -61,13 +61,14 @@ namespace Troschuetz.Random.Distributions.Continuous
         private double _alpha;
 
         /// <summary>
-        ///   Stores the parameter beta which is used for generation of beta-prime distributed random numbers.
+        ///   Stores the parameter beta which is used for generation of beta-prime distributed
+        ///   random numbers.
         /// </summary>
         private double _beta;
 
         /// <summary>
-        ///   Gets or sets the parameter alpha which is used for generation of beta-prime distributed
-        ///   random numbers.
+        ///   Gets or sets the parameter alpha which is used for generation of beta-prime
+        ///   distributed random numbers.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="value"/> is less than or equal to one.
@@ -244,11 +245,6 @@ namespace Troschuetz.Random.Distributions.Continuous
         #region IContinuousDistribution Members
 
         /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => 0.0;
-
-        /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
         /// </summary>
         public double Maximum => double.PositiveInfinity;
@@ -273,6 +269,19 @@ namespace Troschuetz.Random.Distributions.Continuous
         }
 
         /// <summary>
+        ///   Gets the minimum possible value of distributed random numbers.
+        /// </summary>
+        public double Minimum => 0.0;
+
+        /// <summary>
+        ///   Gets the mode of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if mode is not defined for given distribution with some parameters.
+        /// </exception>
+        public double[] Mode => new[] { (_alpha - 1.0) / (_beta + 1.0) };
+
+        /// <summary>
         ///   Gets the variance of distributed random numbers.
         /// </summary>
         /// <exception cref="NotSupportedException">
@@ -289,14 +298,6 @@ namespace Troschuetz.Random.Distributions.Continuous
                 throw new NotSupportedException(ErrorMessages.UndefinedVarianceForParams);
             }
         }
-
-        /// <summary>
-        ///   Gets the mode of distributed random numbers.
-        /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if mode is not defined for given distribution with some parameters.
-        /// </exception>
-        public double[] Mode => new[] { (_alpha - 1.0) / (_beta + 1.0) };
 
         /// <summary>
         ///   Returns a distributed floating point random number.

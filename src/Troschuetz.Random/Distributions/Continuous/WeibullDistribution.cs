@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Distributions.Continuous
 {
@@ -266,11 +266,6 @@ namespace Troschuetz.Random.Distributions.Continuous
         #region IContinuousDistribution Members
 
         /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        public double Minimum => 0.0;
-
-        /// <summary>
         ///   Gets the maximum possible value of distributed random numbers.
         /// </summary>
         public double Maximum => double.PositiveInfinity;
@@ -292,12 +287,9 @@ namespace Troschuetz.Random.Distributions.Continuous
         public double Median => Lambda * Math.Pow(Math.Log(2.0), 1.0 / _alpha);
 
         /// <summary>
-        ///   Gets the variance of distributed random numbers.
+        ///   Gets the minimum possible value of distributed random numbers.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        public double Variance => TMath.Square(Lambda) * Gamma(1.0 + 2.0 / _alpha) - TMath.Square(Mean);
+        public double Minimum => 0.0;
 
         /// <summary>
         ///   Gets the mode of distributed random numbers.
@@ -316,6 +308,14 @@ namespace Troschuetz.Random.Distributions.Continuous
                 throw new NotSupportedException(ErrorMessages.UndefinedModeForParams);
             }
         }
+
+        /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        public double Variance => TMath.Square(Lambda) * Gamma(1.0 + 2.0 / _alpha) - TMath.Square(Mean);
 
         /// <summary>
         ///   Returns a distributed floating point random number.

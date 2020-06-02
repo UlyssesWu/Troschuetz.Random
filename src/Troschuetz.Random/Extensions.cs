@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random
 {
@@ -34,8 +34,8 @@ namespace Troschuetz.Random
         #region IContinuousDistribution Extensions
 
         /// <summary>
-        ///   Returns an infinites series of random double numbers, by repeating calls to NextDouble.
-        ///   Therefore, the series obtained will follow given distribution.
+        ///   Returns an infinites series of random double numbers, by repeating calls to
+        ///   NextDouble. Therefore, the series obtained will follow given distribution.
         /// </summary>
         /// <param name="distribution">The distribution.</param>
         /// <returns>An infinites series of random double numbers, following given distribution.</returns>
@@ -81,8 +81,8 @@ namespace Troschuetz.Random
         ///   Returns an infinite sequence random Boolean values.
         /// </summary>
         /// <remarks>
-        ///   Buffers 31 random bits for future calls, so the random number generator is only invoked
-        ///   once in every 31 calls.
+        ///   Buffers 31 random bits for future calls, so the random number generator is only
+        ///   invoked once in every 31 calls.
         /// </remarks>
         /// <typeparam name="TGen">The type of the random numbers generator.</typeparam>
         /// <param name="generator">The generator from which random numbers are drawn.</param>
@@ -196,8 +196,8 @@ namespace Troschuetz.Random
         }
 
         /// <summary>
-        ///   Returns an infinite sequence of nonnegative floating point random numbers less than the
-        ///   specified maximum.
+        ///   Returns an infinite sequence of nonnegative floating point random numbers less than
+        ///   the specified maximum.
         /// </summary>
         /// <typeparam name="TGen">The type of the random numbers generator.</typeparam>
         /// <param name="generator">The generator from which random numbers are drawn.</param>
@@ -233,9 +233,9 @@ namespace Troschuetz.Random
         /// <param name="minValue">The inclusive lower bound of the random number to be generated.</param>
         /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
         /// <returns>
-        ///   Returns an infinite sequence of double-precision floating point numbers greater than or
-        ///   equal to <paramref name="minValue"/>, and less than <paramref name="maxValue"/>; that
-        ///   is, the range of return values includes <paramref name="minValue"/> but not <paramref name="maxValue"/>.
+        ///   Returns an infinite sequence of double-precision floating point numbers greater than
+        ///   or equal to <paramref name="minValue"/>, and less than <paramref name="maxValue"/>;
+        ///   that is, the range of return values includes <paramref name="minValue"/> but not <paramref name="maxValue"/>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="maxValue"/> must be greater than or equal to <paramref name="minValue"/>.
@@ -265,7 +265,8 @@ namespace Troschuetz.Random
         /// <param name="generator">The generator from which random numbers are drawn.</param>
         /// <returns>
         ///   An infinite sequence of 32-bit signed integers greater than or equal to 0, and less
-        ///   than <see cref="int.MaxValue"/>; that is, the range of return values includes 0 but not <see cref="int.MaxValue"/>.
+        ///   than <see cref="int.MaxValue"/>; that is, the range of return values includes 0 but
+        ///   not <see cref="int.MaxValue"/>.
         /// </returns>
         public static IEnumerable<int> Integers<TGen>(this TGen generator)
             where TGen : class, IGenerator

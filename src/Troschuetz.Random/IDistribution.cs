@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -16,106 +16,13 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random
 {
     using System;
     using System.Collections.Generic;
-
-    /// <summary>
-    ///   Declares common functionality for all random number distributions.
-    /// </summary>
-    public interface IDistribution
-    {
-        /// <summary>
-        ///   Gets the <see cref="IGenerator"/> object that is used as underlying random number generator.
-        /// </summary>
-        IGenerator Generator { get; }
-
-        /// <summary>
-        ///   Gets a value indicating whether the random number distribution can be reset, so that it
-        ///   produces the same random number sequence again.
-        /// </summary>
-        bool CanReset { get; }
-
-        /// <summary>
-        ///   Gets the minimum possible value of distributed random numbers.
-        /// </summary>
-        double Minimum { get; }
-
-        /// <summary>
-        ///   Gets the maximum possible value of distributed random numbers.
-        /// </summary>
-        double Maximum { get; }
-
-        /// <summary>
-        ///   Gets the mean of distributed random numbers.
-        /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if mean is not defined for given distribution with some parameters.
-        /// </exception>
-        double Mean { get; }
-
-        /// <summary>
-        ///   Gets the median of distributed random numbers.
-        /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if median is not defined for given distribution with some parameters.
-        /// </exception>
-        double Median { get; }
-
-        /// <summary>
-        ///   Gets the variance of distributed random numbers.
-        /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if variance is not defined for given distribution with some parameters.
-        /// </exception>
-        double Variance { get; }
-
-        /// <summary>
-        ///   Gets the mode of distributed random numbers.
-        /// </summary>
-        /// <exception cref="NotSupportedException">
-        ///   Thrown if mode is not defined for given distribution with some parameters.
-        /// </exception>
-        double[] Mode { get; }
-
-        /// <summary>
-        ///   Resets the random number distribution, so that it produces the same random number
-        ///   sequence again.
-        /// </summary>
-        /// <returns>
-        ///   <see langword="true"/>, if the random number distribution was reset; otherwise, <see langword="false"/>.
-        /// </returns>
-        bool Reset();
-
-        /// <summary>
-        ///   Returns a distributed floating point random number.
-        /// </summary>
-        /// <returns>A distributed double-precision floating point number.</returns>
-        double NextDouble();
-    }
-
-    /// <summary>
-    ///   Declares common functionality for all continuous random number distributions.
-    /// </summary>
-    public interface IContinuousDistribution : IDistribution
-    {
-    }
-
-    /// <summary>
-    ///   Declares common functionality for all discrete random number distributions.
-    /// </summary>
-    public interface IDiscreteDistribution : IDistribution
-    {
-        /// <summary>
-        ///   Returns a distributed random number.
-        /// </summary>
-        /// <returns>A distributed 32-bit signed integer.</returns>
-        int Next();
-    }
 
     /// <summary>
     ///   Models a distribution with an alpha parameter.
@@ -160,6 +67,99 @@ namespace Troschuetz.Random
     }
 
     /// <summary>
+    ///   Declares common functionality for all continuous random number distributions.
+    /// </summary>
+    public interface IContinuousDistribution : IDistribution
+    {
+    }
+
+    /// <summary>
+    ///   Declares common functionality for all discrete random number distributions.
+    /// </summary>
+    public interface IDiscreteDistribution : IDistribution
+    {
+        /// <summary>
+        ///   Returns a distributed random number.
+        /// </summary>
+        /// <returns>A distributed 32-bit signed integer.</returns>
+        int Next();
+    }
+
+    /// <summary>
+    ///   Declares common functionality for all random number distributions.
+    /// </summary>
+    public interface IDistribution
+    {
+        /// <summary>
+        ///   Gets a value indicating whether the random number distribution can be reset, so that
+        ///   it produces the same random number sequence again.
+        /// </summary>
+        bool CanReset { get; }
+
+        /// <summary>
+        ///   Gets the <see cref="IGenerator"/> object that is used as underlying random number generator.
+        /// </summary>
+        IGenerator Generator { get; }
+
+        /// <summary>
+        ///   Gets the maximum possible value of distributed random numbers.
+        /// </summary>
+        double Maximum { get; }
+
+        /// <summary>
+        ///   Gets the mean of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if mean is not defined for given distribution with some parameters.
+        /// </exception>
+        double Mean { get; }
+
+        /// <summary>
+        ///   Gets the median of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if median is not defined for given distribution with some parameters.
+        /// </exception>
+        double Median { get; }
+
+        /// <summary>
+        ///   Gets the minimum possible value of distributed random numbers.
+        /// </summary>
+        double Minimum { get; }
+
+        /// <summary>
+        ///   Gets the mode of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if mode is not defined for given distribution with some parameters.
+        /// </exception>
+        double[] Mode { get; }
+
+        /// <summary>
+        ///   Gets the variance of distributed random numbers.
+        /// </summary>
+        /// <exception cref="NotSupportedException">
+        ///   Thrown if variance is not defined for given distribution with some parameters.
+        /// </exception>
+        double Variance { get; }
+
+        /// <summary>
+        ///   Returns a distributed floating point random number.
+        /// </summary>
+        /// <returns>A distributed double-precision floating point number.</returns>
+        double NextDouble();
+
+        /// <summary>
+        ///   Resets the random number distribution, so that it produces the same random number
+        ///   sequence again.
+        /// </summary>
+        /// <returns>
+        ///   <see langword="true"/>, if the random number distribution was reset; otherwise, <see langword="false"/>.
+        /// </returns>
+        bool Reset();
+    }
+
+    /// <summary>
     ///   Models a distribution with a gamma parameter.
     /// </summary>
     /// <typeparam name="TNum">The numeric type of the parameter.</typeparam>
@@ -196,7 +196,8 @@ namespace Troschuetz.Random
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>
-        ///   <see langword="true"/> if value is valid for parameter <see cref="Lambda"/>; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if value is valid for parameter <see cref="Lambda"/>;
+        ///   otherwise, <see langword="false"/>.
         /// </returns>
         bool IsValidLambda(TNum value);
     }

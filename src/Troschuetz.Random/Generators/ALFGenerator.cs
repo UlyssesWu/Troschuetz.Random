@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #region Original Copyright
 
@@ -87,25 +87,6 @@ namespace Troschuetz.Random.Generators
         private uint[] _x;
 
         /// <summary>
-        ///   Gets or sets the short lag of the Lagged Fibonacci pseudo-random number generator.
-        /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">
-        ///   <paramref name="value"/> is less than or equal to zero.
-        /// </exception>
-        /// <remarks>
-        ///   Calls <see cref="IsValidShortLag"/> to determine whether a value is valid and therefore assignable.
-        /// </remarks>
-        public int ShortLag
-        {
-            get { return _shortLag; }
-            set
-            {
-                _shortLag = IsValidShortLag(value) ? value : throw new ArgumentOutOfRangeException(nameof(ShortLag));
-                Reset();
-            }
-        }
-
-        /// <summary>
         ///   Gets or sets the long lag of the Lagged Fibonacci pseudo-random number generator.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -124,6 +105,26 @@ namespace Troschuetz.Random.Generators
             }
         }
 
+        /// <summary>
+        ///   Gets or sets the short lag of the Lagged Fibonacci pseudo-random number generator.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///   <paramref name="value"/> is less than or equal to zero.
+        /// </exception>
+        /// <remarks>
+        ///   Calls <see cref="IsValidShortLag"/> to determine whether a value is valid and
+        ///   therefore assignable.
+        /// </remarks>
+        public int ShortLag
+        {
+            get { return _shortLag; }
+            set
+            {
+                _shortLag = IsValidShortLag(value) ? value : throw new ArgumentOutOfRangeException(nameof(ShortLag));
+                Reset();
+            }
+        }
+
         #endregion Fields
 
         #region Construction
@@ -137,12 +138,12 @@ namespace Troschuetz.Random.Generators
         }
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="ALFGenerator"/> class, using the specified
-        ///   seed value.
+        ///   Initializes a new instance of the <see cref="ALFGenerator"/> class, using the
+        ///   specified seed value.
         /// </summary>
         /// <param name="seed">
-        ///   A number used to calculate a starting value for the pseudo-random number sequence. If a
-        ///   negative number is specified, the absolute value of the number is used.
+        ///   A number used to calculate a starting value for the pseudo-random number sequence. If
+        ///   a negative number is specified, the absolute value of the number is used.
         /// </param>
         public ALFGenerator(int seed) : base((uint)Math.Abs(seed))
         {
@@ -211,24 +212,24 @@ namespace Troschuetz.Random.Generators
         public override bool CanReset => true;
 
         /// <summary>
-        ///   Resets the random number generator using the specified seed, so that it produces the
-        ///   same random number sequence again. To understand whether this generator can be reset,
-        ///   you can query the <see cref="CanReset"/> property.
+        ///   Returns a nonnegative floating point random number less than 1.0.
         /// </summary>
-        /// <param name="seed">The seed value used by the generator.</param>
-        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
-        public override bool Reset(uint seed)
+        /// <returns>
+        ///   A double-precision floating point number greater than or equal to 0.0, and less than
+        ///   1.0; that is, the range of return values includes 0.0 but not 1.0.
+        /// </returns>
+        public override double NextDouble()
         {
-            base.Reset(seed);
-
-            var gen = new MT19937Generator(seed);
-            _x = new uint[_longLag];
-            for (uint j = 0; j < _longLag; ++j)
+            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+            if (_i >= _longLag)
             {
-                _x[j] = gen.NextUInt();
+                Fill();
             }
-            _i = _longLag;
-            return true;
+            var result = (int)(_x[_i++] >> 1) * IntToDoubleMultiplier;
+
+            // Postconditions
+            Debug.Assert(result >= 0.0 && result < 1.0);
+            return result;
         }
 
         /// <summary>
@@ -253,27 +254,6 @@ namespace Troschuetz.Random.Generators
         }
 
         /// <summary>
-        ///   Returns a nonnegative floating point random number less than 1.0.
-        /// </summary>
-        /// <returns>
-        ///   A double-precision floating point number greater than or equal to 0.0, and less than
-        ///   1.0; that is, the range of return values includes 0.0 but not 1.0.
-        /// </returns>
-        public override double NextDouble()
-        {
-            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
-            if (_i >= _longLag)
-            {
-                Fill();
-            }
-            var result = (int)(_x[_i++] >> 1) * IntToDoubleMultiplier;
-
-            // Postconditions
-            Debug.Assert(result >= 0.0 && result < 1.0);
-            return result;
-        }
-
-        /// <summary>
         ///   Returns an unsigned random number.
         /// </summary>
         /// <returns>
@@ -287,6 +267,27 @@ namespace Troschuetz.Random.Generators
                 Fill();
             }
             return _x[_i++];
+        }
+
+        /// <summary>
+        ///   Resets the random number generator using the specified seed, so that it produces the
+        ///   same random number sequence again. To understand whether this generator can be reset,
+        ///   you can query the <see cref="CanReset"/> property.
+        /// </summary>
+        /// <param name="seed">The seed value used by the generator.</param>
+        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
+        public override bool Reset(uint seed)
+        {
+            base.Reset(seed);
+
+            var gen = new MT19937Generator(seed);
+            _x = new uint[_longLag];
+            for (uint j = 0; j < _longLag; ++j)
+            {
+                _x[j] = gen.NextUInt();
+            }
+            _i = _longLag;
+            return true;
         }
 
         #endregion IGenerator members

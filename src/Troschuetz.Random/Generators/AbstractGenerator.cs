@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Generators
 {
@@ -27,14 +27,14 @@ namespace Troschuetz.Random.Generators
     using Core;
 
     /// <summary>
-    ///   An abstract generator which efficiently implements everything required by the <see
-    ///   cref="IGenerator"/> interface using only few methods: <see cref="NextUInt()"/>, <see
-    ///   cref="NextDouble()"/>, <see cref="NextInclusiveMaxValue()"/>.
+    ///   An abstract generator which efficiently implements everything required by the
+    ///   <see cref="IGenerator"/> interface using only few methods: <see cref="NextUInt()"/>,
+    ///   <see cref="NextDouble()"/>, <see cref="NextInclusiveMaxValue()"/>.
     ///
-    ///   Therefore, in order to build a new generator, one must "simply" override the <see
-    ///   cref="Reset(uint)"/>, which is used to automatically initialize the generator, and the
-    ///   generator methods, which, as stated above, are used to generate every kind of random object
-    ///   exposed by the interface.
+    ///   Therefore, in order to build a new generator, one must "simply" override the
+    ///   <see cref="Reset(uint)"/>, which is used to automatically initialize the generator, and
+    ///   the generator methods, which, as stated above, are used to generate every kind of random
+    ///   object exposed by the interface.
     ///
     ///   All generators implemented in this library extend this abstract class.
     /// </summary>
@@ -53,18 +53,6 @@ namespace Troschuetz.Random.Generators
     public abstract class AbstractGenerator : IGenerator
     {
         #region Constants
-
-        /// <summary>
-        ///   The number of left shifts required to transform a 64-bit unsigned integer into a
-        ///   nonnegative 32-bit signed integer.
-        /// </summary>
-        protected const byte ULongToIntShift = 33;
-
-        /// <summary>
-        ///   The number of left shifts required to transform a 64-bit unsigned integer into a 32-bit
-        ///   unsigned integer.
-        /// </summary>
-        protected const byte ULongToUIntShift = 32;
 
         /// <summary>
         ///   Represents the multiplier that computes a double-precision floating point number
@@ -86,6 +74,18 @@ namespace Troschuetz.Random.Generators
         ///   unsigned integer.
         /// </summary>
         protected const double ULongToDoubleMultiplier = 1.0 / (ulong.MaxValue + 1.0);
+
+        /// <summary>
+        ///   The number of left shifts required to transform a 64-bit unsigned integer into a
+        ///   nonnegative 32-bit signed integer.
+        /// </summary>
+        protected const byte ULongToIntShift = 33;
+
+        /// <summary>
+        ///   The number of left shifts required to transform a 64-bit unsigned integer into a
+        ///   32-bit unsigned integer.
+        /// </summary>
+        protected const byte ULongToUIntShift = 32;
 
         #endregion Constants
 
@@ -123,55 +123,22 @@ namespace Troschuetz.Random.Generators
         #region IGenerator members
 
         /// <summary>
-        ///   The seed value used by the generator.
-        /// </summary>
-        public uint Seed { get; set; }
-
-        /// <summary>
         ///   Gets a value indicating whether the random number generator can be reset, so that it
         ///   produces the same random number sequence again.
         /// </summary>
         public abstract bool CanReset { get; }
 
         /// <summary>
-        ///   Resets the random number generator using the initial seed, so that it produces the same
-        ///   random number sequence again. To understand whether this generator can be reset, you
-        ///   can query the <see cref="CanReset"/> property.
+        ///   The seed value used by the generator.
         /// </summary>
-        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
-        public bool Reset() => Reset(Seed);
-
-        /// <summary>
-        ///   Resets the random number generator using the specified seed, so that it produces the
-        ///   same random number sequence again. To understand whether this generator can be reset,
-        ///   you can query the <see cref="CanReset"/> property.
-        /// </summary>
-        /// <param name="seed">The seed value used by the generator.</param>
-        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
-        /// <remarks>If this method is overridden, always remember to call it inside the override.</remarks>
-        public virtual bool Reset(uint seed)
-        {
-            if (!CanReset)
-            {
-                return false;
-            }
-
-            // Reset helper variables used for generation of random bools.
-            _bitBuffer = 0U;
-            _bitCount = 0;
-
-            // Store the new seed.
-            Seed = seed;
-
-            return true;
-        }
+        public uint Seed { get; set; }
 
         /// <summary>
         ///   Returns a nonnegative random number less than <see cref="int.MaxValue"/>.
         /// </summary>
         /// <returns>
-        ///   A 32-bit signed integer greater than or equal to 0, and less than <see
-        ///   cref="int.MaxValue"/>; that is, the range of return values includes 0 but not <see cref="int.MaxValue"/>.
+        ///   A 32-bit signed integer greater than or equal to 0, and less than
+        ///   <see cref="int.MaxValue"/>; that is, the range of return values includes 0 but not <see cref="int.MaxValue"/>.
         /// </returns>
         public int Next()
         {
@@ -184,21 +151,12 @@ namespace Troschuetz.Random.Generators
         }
 
         /// <summary>
-        ///   Returns a nonnegative random number less than or equal to <see cref="int.MaxValue"/>.
-        /// </summary>
-        /// <returns>
-        ///   A 32-bit signed integer greater than or equal to 0, and less than or equal to <see
-        ///   cref="int.MaxValue"/>; that is, the range of return values includes 0 and <see cref="int.MaxValue"/>.
-        /// </returns>
-        public abstract int NextInclusiveMaxValue();
-
-        /// <summary>
         ///   Returns a nonnegative random number less than the specified maximum.
         /// </summary>
         /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
         /// <returns>
-        ///   A 32-bit signed integer greater than or equal to 0, and less than <paramref
-        ///   name="maxValue"/>; that is, the range of return values includes 0 but not <paramref name="maxValue"/>.
+        ///   A 32-bit signed integer greater than or equal to 0, and less than
+        ///   <paramref name="maxValue"/>; that is, the range of return values includes 0 but not <paramref name="maxValue"/>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="maxValue"/> must be greater than 0.
@@ -220,8 +178,8 @@ namespace Troschuetz.Random.Generators
         /// </summary>
         /// <param name="minValue">The inclusive lower bound of the random number to be generated.</param>
         /// <param name="maxValue">
-        ///   The exclusive upper bound of the random number to be generated. <paramref
-        ///   name="maxValue"/> must be greater than or equal to <paramref name="minValue"/>.
+        ///   The exclusive upper bound of the random number to be generated.
+        ///   <paramref name="maxValue"/> must be greater than or equal to <paramref name="minValue"/>.
         /// </param>
         /// <returns>
         ///   A 32-bit signed integer greater than or equal to <paramref name="minValue"/>, and less
@@ -246,155 +204,11 @@ namespace Troschuetz.Random.Generators
         }
 
         /// <summary>
-        ///   Returns a nonnegative floating point random number less than 1.0.
-        /// </summary>
-        /// <returns>
-        ///   A double-precision floating point number greater than or equal to 0.0, and less than
-        ///   1.0; that is, the range of return values includes 0.0 but not 1.0.
-        /// </returns>
-        public abstract double NextDouble();
-
-        /// <summary>
-        ///   Returns a nonnegative floating point random number less than the specified maximum.
-        /// </summary>
-        /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
-        /// <returns>
-        ///   A double-precision floating point number greater than or equal to 0.0, and less than
-        ///   <paramref name="maxValue"/>; that is, the range of return values includes 0 but not
-        ///   <paramref name="maxValue"/>.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        ///   <paramref name="maxValue"/> must be greater than 0.0.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        ///   <paramref name="maxValue"/> cannot be <see cref="double.PositiveInfinity"/>.
-        /// </exception>
-        public double NextDouble(double maxValue)
-        {
-            // Preconditions
-            if (maxValue < 0.0) throw new ArgumentOutOfRangeException(nameof(maxValue), ErrorMessages.NegativeMaxValue);
-            if (double.IsPositiveInfinity(maxValue)) throw new ArgumentException(ErrorMessages.InfiniteMaxValue, nameof(maxValue));
-
-            var result = NextDouble() * maxValue;
-
-            // Postconditions
-            Debug.Assert(result >= 0.0 && result < maxValue);
-            return result;
-        }
-
-        /// <summary>
-        ///   Returns a floating point random number within the specified range.
-        /// </summary>
-        /// <param name="minValue">The inclusive lower bound of the random number to be generated.</param>
-        /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
-        /// <returns>
-        ///   A double-precision floating point number greater than or equal to <paramref
-        ///   name="minValue"/>, and less than <paramref name="maxValue"/>; that is, the range of
-        ///   return values includes <paramref name="minValue"/> but not <paramref name="maxValue"/>.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        ///   <paramref name="maxValue"/> must be greater than or equal to <paramref name="minValue"/>.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        ///   The difference between <paramref name="maxValue"/> and <paramref name="minValue"/>
-        ///   cannot be <see cref="double.PositiveInfinity"/>.
-        /// </exception>
-        public double NextDouble(double minValue, double maxValue)
-        {
-            // Preconditions
-            if (minValue > maxValue) throw new ArgumentOutOfRangeException(nameof(minValue), ErrorMessages.MinValueGreaterThanMaxValue);
-            if (double.IsPositiveInfinity(maxValue - minValue)) throw new ArgumentException(ErrorMessages.InfiniteMaxValueMinusMinValue, nameof(minValue));
-
-            var result = minValue + NextDouble() * (maxValue - minValue);
-
-            // Postconditions
-            Debug.Assert((TMath.AreEqual(result, minValue) && TMath.AreEqual(minValue, maxValue)) || (result >= minValue && result < maxValue));
-            return result;
-        }
-
-        /// <summary>
-        ///   Returns an unsigned random number.
-        /// </summary>
-        /// <returns>
-        ///   A 32-bit unsigned integer greater than or equal to 0, and less than <see
-        ///   cref="uint.MaxValue"/>; that is, the range of return values includes 0 but not <see cref="uint.MaxValue"/>.
-        /// </returns>
-        public uint NextUInt()
-        {
-            uint result;
-            do result = NextUIntInclusiveMaxValue(); while (result == uint.MaxValue);
-
-            // Postconditions
-            Debug.Assert(result < uint.MaxValue);
-            return result;
-        }
-
-        /// <summary>
-        ///   Returns an unsigned random number less than <see cref="uint.MaxValue"/>.
-        /// </summary>
-        /// <returns>
-        ///   A 32-bit unsigned integer greater than or equal to 0, and less than <see
-        ///   cref="uint.MaxValue"/>; that is, the range of return values includes 0 but not <see cref="uint.MaxValue"/>.
-        /// </returns>
-        public uint NextUIntExclusiveMaxValue() => NextUInt();
-
-        /// <summary>
-        ///   Returns an unsigned random number.
-        /// </summary>
-        /// <returns>
-        ///   A 32-bit unsigned integer greater than or equal to 0, and less than or equal to <see
-        ///   cref="uint.MaxValue"/>; that is, the range of return values includes 0 and <see cref="uint.MaxValue"/>.
-        /// </returns>
-        public abstract uint NextUIntInclusiveMaxValue();
-
-        /// <summary>
-        ///   Returns an unsigned random number less than the specified maximum.
-        /// </summary>
-        /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
-        /// <returns>
-        ///   A 32-bit unsigned integer greater than or equal to 0, and less than <paramref
-        ///   name="maxValue"/>; that is, the range of return values includes 0 but not <paramref name="maxValue"/>.
-        /// </returns>
-        public uint NextUInt(uint maxValue)
-        {
-            var result = (uint)(NextDouble() * maxValue);
-
-            // Postconditions
-            Debug.Assert(result < maxValue);
-            return result;
-        }
-
-        /// <summary>
-        ///   Returns an unsigned random number within the specified range.
-        /// </summary>
-        /// <param name="minValue">The inclusive lower bound of the random number to be generated.</param>
-        /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
-        /// <returns>
-        ///   A 32-bit unsigned integer greater than or equal to <paramref name="minValue"/> and less
-        ///   than <paramref name="maxValue"/>; that is, the range of return values includes
-        ///   <paramref name="minValue"/> but not <paramref name="maxValue"/>.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        ///   <paramref name="maxValue"/> must be greater than or equal to <paramref name="minValue"/>.
-        /// </exception>
-        public uint NextUInt(uint minValue, uint maxValue)
-        {
-            // Preconditions
-            if (minValue > maxValue) throw new ArgumentOutOfRangeException(nameof(minValue), ErrorMessages.MinValueGreaterThanMaxValue);
-
-            var result = minValue + (uint)(NextDouble() * (maxValue - minValue));
-
-            // Postconditions
-            Debug.Assert((result == minValue && minValue == maxValue) || (result >= minValue && result < maxValue));
-            return result;
-        }
-
-        /// <summary>
         ///   Returns a random Boolean value.
         /// </summary>
         /// <remarks>
-        ///   Buffers 31 random bits for future calls, so the random number generator is only invoked
-        ///   once in every 31 calls.
+        ///   Buffers 31 random bits for future calls, so the random number generator is only
+        ///   invoked once in every 31 calls.
         /// </remarks>
         /// <returns>A <see cref="bool"/> value.</returns>
         public bool NextBoolean()
@@ -473,6 +287,189 @@ namespace Troschuetz.Random.Generators
                     }
                 }
             }
+        }
+
+        /// <summary>
+        ///   Returns a nonnegative floating point random number less than 1.0.
+        /// </summary>
+        /// <returns>
+        ///   A double-precision floating point number greater than or equal to 0.0, and less than
+        ///   1.0; that is, the range of return values includes 0.0 but not 1.0.
+        /// </returns>
+        public abstract double NextDouble();
+
+        /// <summary>
+        ///   Returns a nonnegative floating point random number less than the specified maximum.
+        /// </summary>
+        /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
+        /// <returns>
+        ///   A double-precision floating point number greater than or equal to 0.0, and less than
+        ///   <paramref name="maxValue"/>; that is, the range of return values includes 0 but not <paramref name="maxValue"/>.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///   <paramref name="maxValue"/> must be greater than 0.0.
+        /// </exception>
+        /// <exception cref="ArgumentException"><paramref name="maxValue"/> cannot be <see cref="double.PositiveInfinity"/>.</exception>
+        public double NextDouble(double maxValue)
+        {
+            // Preconditions
+            if (maxValue < 0.0) throw new ArgumentOutOfRangeException(nameof(maxValue), ErrorMessages.NegativeMaxValue);
+            if (double.IsPositiveInfinity(maxValue)) throw new ArgumentException(ErrorMessages.InfiniteMaxValue, nameof(maxValue));
+
+            var result = NextDouble() * maxValue;
+
+            // Postconditions
+            Debug.Assert(result >= 0.0 && result < maxValue);
+            return result;
+        }
+
+        /// <summary>
+        ///   Returns a floating point random number within the specified range.
+        /// </summary>
+        /// <param name="minValue">The inclusive lower bound of the random number to be generated.</param>
+        /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
+        /// <returns>
+        ///   A double-precision floating point number greater than or equal to
+        ///   <paramref name="minValue"/>, and less than <paramref name="maxValue"/>; that is, the
+        ///   range of return values includes <paramref name="minValue"/> but not <paramref name="maxValue"/>.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///   <paramref name="maxValue"/> must be greater than or equal to <paramref name="minValue"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        ///   The difference between <paramref name="maxValue"/> and <paramref name="minValue"/>
+        ///   cannot be <see cref="double.PositiveInfinity"/>.
+        /// </exception>
+        public double NextDouble(double minValue, double maxValue)
+        {
+            // Preconditions
+            if (minValue > maxValue) throw new ArgumentOutOfRangeException(nameof(minValue), ErrorMessages.MinValueGreaterThanMaxValue);
+            if (double.IsPositiveInfinity(maxValue - minValue)) throw new ArgumentException(ErrorMessages.InfiniteMaxValueMinusMinValue, nameof(minValue));
+
+            var result = minValue + NextDouble() * (maxValue - minValue);
+
+            // Postconditions
+            Debug.Assert((TMath.AreEqual(result, minValue) && TMath.AreEqual(minValue, maxValue)) || (result >= minValue && result < maxValue));
+            return result;
+        }
+
+        /// <summary>
+        ///   Returns a nonnegative random number less than or equal to <see cref="int.MaxValue"/>.
+        /// </summary>
+        /// <returns>
+        ///   A 32-bit signed integer greater than or equal to 0, and less than or equal to
+        ///   <see cref="int.MaxValue"/>; that is, the range of return values includes 0 and <see cref="int.MaxValue"/>.
+        /// </returns>
+        public abstract int NextInclusiveMaxValue();
+
+        /// <summary>
+        ///   Returns an unsigned random number.
+        /// </summary>
+        /// <returns>
+        ///   A 32-bit unsigned integer greater than or equal to 0, and less than
+        ///   <see cref="uint.MaxValue"/>; that is, the range of return values includes 0 but not <see cref="uint.MaxValue"/>.
+        /// </returns>
+        public uint NextUInt()
+        {
+            uint result;
+            do result = NextUIntInclusiveMaxValue(); while (result == uint.MaxValue);
+
+            // Postconditions
+            Debug.Assert(result < uint.MaxValue);
+            return result;
+        }
+
+        /// <summary>
+        ///   Returns an unsigned random number less than the specified maximum.
+        /// </summary>
+        /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
+        /// <returns>
+        ///   A 32-bit unsigned integer greater than or equal to 0, and less than
+        ///   <paramref name="maxValue"/>; that is, the range of return values includes 0 but not <paramref name="maxValue"/>.
+        /// </returns>
+        public uint NextUInt(uint maxValue)
+        {
+            var result = (uint)(NextDouble() * maxValue);
+
+            // Postconditions
+            Debug.Assert(result < maxValue);
+            return result;
+        }
+
+        /// <summary>
+        ///   Returns an unsigned random number within the specified range.
+        /// </summary>
+        /// <param name="minValue">The inclusive lower bound of the random number to be generated.</param>
+        /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
+        /// <returns>
+        ///   A 32-bit unsigned integer greater than or equal to <paramref name="minValue"/> and
+        ///   less than <paramref name="maxValue"/>; that is, the range of return values includes
+        ///   <paramref name="minValue"/> but not <paramref name="maxValue"/>.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///   <paramref name="maxValue"/> must be greater than or equal to <paramref name="minValue"/>.
+        /// </exception>
+        public uint NextUInt(uint minValue, uint maxValue)
+        {
+            // Preconditions
+            if (minValue > maxValue) throw new ArgumentOutOfRangeException(nameof(minValue), ErrorMessages.MinValueGreaterThanMaxValue);
+
+            var result = minValue + (uint)(NextDouble() * (maxValue - minValue));
+
+            // Postconditions
+            Debug.Assert((result == minValue && minValue == maxValue) || (result >= minValue && result < maxValue));
+            return result;
+        }
+
+        /// <summary>
+        ///   Returns an unsigned random number less than <see cref="uint.MaxValue"/>.
+        /// </summary>
+        /// <returns>
+        ///   A 32-bit unsigned integer greater than or equal to 0, and less than
+        ///   <see cref="uint.MaxValue"/>; that is, the range of return values includes 0 but not <see cref="uint.MaxValue"/>.
+        /// </returns>
+        public uint NextUIntExclusiveMaxValue() => NextUInt();
+
+        /// <summary>
+        ///   Returns an unsigned random number.
+        /// </summary>
+        /// <returns>
+        ///   A 32-bit unsigned integer greater than or equal to 0, and less than or equal to
+        ///   <see cref="uint.MaxValue"/>; that is, the range of return values includes 0 and <see cref="uint.MaxValue"/>.
+        /// </returns>
+        public abstract uint NextUIntInclusiveMaxValue();
+
+        /// <summary>
+        ///   Resets the random number generator using the initial seed, so that it produces the
+        ///   same random number sequence again. To understand whether this generator can be reset,
+        ///   you can query the <see cref="CanReset"/> property.
+        /// </summary>
+        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
+        public bool Reset() => Reset(Seed);
+
+        /// <summary>
+        ///   Resets the random number generator using the specified seed, so that it produces the
+        ///   same random number sequence again. To understand whether this generator can be reset,
+        ///   you can query the <see cref="CanReset"/> property.
+        /// </summary>
+        /// <param name="seed">The seed value used by the generator.</param>
+        /// <returns>True if the random number generator was reset; otherwise, false.</returns>
+        /// <remarks>If this method is overridden, always remember to call it inside the override.</remarks>
+        public virtual bool Reset(uint seed)
+        {
+            if (!CanReset)
+            {
+                return false;
+            }
+
+            // Reset helper variables used for generation of random bools.
+            _bitBuffer = 0U;
+            _bitCount = 0;
+
+            // Store the new seed.
+            Seed = seed;
+
+            return true;
         }
 
         #endregion IGenerator members
