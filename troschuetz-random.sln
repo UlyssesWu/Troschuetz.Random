@@ -21,15 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{48147844-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Troschuetz.Random.Tester", "tests\Troschuetz.Random.Tester\Troschuetz.Random.Tester.csproj", "{598F64C2-1343-4202-B6A7-A91CF3248D0C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logo", "logo", "{07EA9A7E-47F0-4173-855E-4A5B6B517A66}"
-	ProjectSection(SolutionItems) = preProject
-		logo\logo-128.png = logo\logo-128.png
-		logo\logo-256.png = logo\logo-256.png
-		logo\logo-32.png = logo\logo-32.png
-		logo\logo-64.png = logo\logo-64.png
-		logo\logo-original.png = logo\logo-original.png
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Troschuetz.Random.Examples", "tests\Troschuetz.Random.Examples\Troschuetz.Random.Examples.csproj", "{52A4D144-3BA1-4768-9F3B-90F5DC86746B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{31B8643F-2BBD-4221-8928-62B6B4B221D5}"
