@@ -53,7 +53,7 @@ using System.Linq;
 using Troschuetz.Random.Distributions.Continuous;
 using Troschuetz.Random.Generators;
 
-namespace Troschuetz.Random.Examples
+namespace Troschuetz.Random.Samples
 {
     /// <summary>
     ///   Some examples of what you can do with this library.
@@ -124,7 +124,7 @@ using Troschuetz.Random.Distributions;
 using Troschuetz.Random.Distributions.Continuous;
 using Troschuetz.Random.Generators;
 
-namespace Troschuetz.Random.Examples
+namespace Troschuetz.Random.Samples
 {
     /// <summary>
     ///   Examples on how the library can be extended or modified.

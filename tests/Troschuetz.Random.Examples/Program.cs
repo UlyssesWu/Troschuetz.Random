@@ -21,7 +21,7 @@
 
 using System;
 
-namespace Troschuetz.Random.Examples
+namespace Troschuetz.Random.Samples
 {
     internal static class Program
     {
