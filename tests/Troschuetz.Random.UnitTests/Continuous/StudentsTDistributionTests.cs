@@ -63,10 +63,10 @@ namespace Troschuetz.Random.Tests.Continuous
         [TestCase(LargeNeg)]
         public void Nu_WrongValues(double d)
         {
-            var i = (int) d;
+            var i = (int)d;
             Assert.False(StudentsTDistribution.IsValidParam(i));
-            Assert.False(Dist.IsValidNu(i));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Nu = i; });
+            Assert.False(_dist.IsValidNu(i));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Nu = i; });
         }
 
         // nu > 0

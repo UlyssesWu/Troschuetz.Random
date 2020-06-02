@@ -63,10 +63,10 @@ namespace Troschuetz.Random.Tests.Continuous
         [TestCase(LargeNeg)]
         public void Alpha_WrongValues(double d)
         {
-            var i = (int) d;
+            var i = (int)d;
             Assert.False(ErlangDistribution.AreValidParams(i, 1));
-            Assert.False(Dist.IsValidAlpha(i));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Alpha = i; });
+            Assert.False(_dist.IsValidAlpha(i));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = i; });
         }
 
         [TestCase(double.NaN)]
@@ -77,8 +77,8 @@ namespace Troschuetz.Random.Tests.Continuous
         public void Lambda_WrongValues(double d)
         {
             Assert.False(ErlangDistribution.AreValidParams(1, d));
-            Assert.False(Dist.IsValidLambda(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Lambda = d; });
+            Assert.False(_dist.IsValidLambda(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Lambda = d; });
         }
 
         // alpha > 0

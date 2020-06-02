@@ -37,7 +37,7 @@ namespace Troschuetz.Random.Tests.Generators
 
         protected override IGenerator GetGenerator(uint seed)
         {
-            return new StandardGenerator((int) seed);
+            return new StandardGenerator((int)seed);
         }
     }
 }

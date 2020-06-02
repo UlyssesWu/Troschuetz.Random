@@ -67,8 +67,8 @@ namespace Troschuetz.Random.Tests.Discrete
         public void Alpha_WrongValues(double d)
         {
             Assert.False(BinomialDistribution.AreValidParams(d, 1));
-            Assert.False(Dist.IsValidAlpha(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Alpha = d; });
+            Assert.False(_dist.IsValidAlpha(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
         }
 
         [TestCase(double.NaN)]
@@ -76,10 +76,10 @@ namespace Troschuetz.Random.Tests.Discrete
         [TestCase(LargeNeg)]
         public void Beta_WrongValues(double d)
         {
-            var i = (int) d;
+            var i = (int)d;
             Assert.False(BinomialDistribution.AreValidParams(0.5, i));
-            Assert.False(Dist.IsValidBeta(i));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Beta = i; });
+            Assert.False(_dist.IsValidBeta(i));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = i; });
         }
 
         // alpha >= 0 && alpha <= 1

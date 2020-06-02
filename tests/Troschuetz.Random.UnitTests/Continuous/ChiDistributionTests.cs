@@ -63,10 +63,10 @@ namespace Troschuetz.Random.Tests.Continuous
         [TestCase(LargeNeg)]
         public void Alpha_WrongValues(double d)
         {
-            var i = (int) d;
+            var i = (int)d;
             Assert.False(ChiDistribution.IsValidParam(i));
-            Assert.False(Dist.IsValidAlpha(i));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Alpha = i; });
+            Assert.False(_dist.IsValidAlpha(i));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = i; });
         }
 
         // alpha > 0

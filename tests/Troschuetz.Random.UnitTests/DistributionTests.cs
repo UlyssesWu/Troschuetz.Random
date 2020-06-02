@@ -21,11 +21,11 @@
 
 namespace Troschuetz.Random.Tests
 {
+    using System;
+    using System.IO;
     using NUnit.Framework;
     using Random.Generators;
     using Shouldly;
-    using System;
-    using System.IO;
 
     public abstract class DistributionTests<TDist> : TestBase where TDist : IDistribution
     {
@@ -35,39 +35,39 @@ namespace Troschuetz.Random.Tests
             switch (_currDist)
             {
                 case 0:
-                    Dist = GetDist();
-                    OtherDist = GetDist(Dist.Generator.Seed, Dist);
+                    _dist = GetDist();
+                    _otherDist = GetDist(_dist.Generator.Seed, _dist);
                     break;
 
                 case 1:
-                    var s = (uint) Rand.Next();
-                    Dist = GetDist(s);
-                    OtherDist = GetDist(s, Dist);
+                    var s = (uint)Rand.Next();
+                    _dist = GetDist(s);
+                    _otherDist = GetDist(s, _dist);
                     break;
 
                 case 2:
                     var g1 = new StandardGenerator(Rand.Next());
-                    var g2 = new StandardGenerator((int) g1.Seed);
-                    Dist = GetDist(g1);
-                    OtherDist = GetDist(g2, Dist);
+                    var g2 = new StandardGenerator((int)g1.Seed);
+                    _dist = GetDist(g1);
+                    _otherDist = GetDist(g2, _dist);
                     break;
 
                 case 3:
-                    Dist = GetDistWithParams();
-                    OtherDist = GetDistWithParams(Dist.Generator.Seed, Dist);
+                    _dist = GetDistWithParams();
+                    _otherDist = GetDistWithParams(_dist.Generator.Seed, _dist);
                     break;
 
                 case 4:
-                    s = (uint) Rand.Next();
-                    Dist = GetDistWithParams(s);
-                    OtherDist = GetDistWithParams(s, Dist);
+                    s = (uint)Rand.Next();
+                    _dist = GetDistWithParams(s);
+                    _otherDist = GetDistWithParams(s, _dist);
                     break;
 
                 case 5:
                     g1 = new StandardGenerator(Rand.Next());
-                    g2 = new StandardGenerator((int) g1.Seed);
-                    Dist = GetDistWithParams(g1);
-                    OtherDist = GetDistWithParams(g2, Dist);
+                    g2 = new StandardGenerator((int)g1.Seed);
+                    _dist = GetDistWithParams(g1);
+                    _otherDist = GetDistWithParams(g2, _dist);
                     break;
 
                 default:
@@ -77,21 +77,21 @@ namespace Troschuetz.Random.Tests
         }
 
         protected const int RepetitionCount = 6;
-        protected TDist Dist;
-        protected TDist OtherDist;
+        protected TDist _dist;
+        protected TDist _otherDist;
         private int _currDist;
 
-        protected abstract TDist GetDist(TDist other = default(TDist));
+        protected abstract TDist GetDist(TDist other = default);
 
-        protected abstract TDist GetDist(uint seed, TDist other = default(TDist));
+        protected abstract TDist GetDist(uint seed, TDist other = default);
 
-        protected abstract TDist GetDist(IGenerator gen, TDist other = default(TDist));
+        protected abstract TDist GetDist(IGenerator gen, TDist other = default);
 
-        protected abstract TDist GetDistWithParams(TDist other = default(TDist));
+        protected abstract TDist GetDistWithParams(TDist other = default);
 
-        protected abstract TDist GetDistWithParams(uint seed, TDist other = default(TDist));
+        protected abstract TDist GetDistWithParams(uint seed, TDist other = default);
 
-        protected abstract TDist GetDistWithParams(IGenerator gen, TDist other = default(TDist));
+        protected abstract TDist GetDistWithParams(IGenerator gen, TDist other = default);
 
         /*=============================================================================
             Construction
@@ -118,24 +118,24 @@ namespace Troschuetz.Random.Tests
         [Repeat(RepetitionCount)]
         public void Doubles_ManyRand()
         {
-            var doubles = Dist.DistributedDoubles().GetEnumerator();
+            var doubles = _dist.DistributedDoubles().GetEnumerator();
             doubles.MoveNext();
             for (var i = 0; i < Iterations; ++i, doubles.MoveNext())
             {
                 Results[i] = doubles.Current;
             }
-            AssertDist(Dist);
+            AssertDist(_dist);
         }
 
         [Test]
         [Repeat(RepetitionCount)]
         public void Doubles_SameOutput()
         {
-            var doubles = Dist.DistributedDoubles().GetEnumerator();
+            var doubles = _dist.DistributedDoubles().GetEnumerator();
             doubles.MoveNext();
             for (var i = 0; i < Iterations; ++i, doubles.MoveNext())
             {
-                Assert.AreEqual(OtherDist.NextDouble(), doubles.Current);
+                Assert.AreEqual(_otherDist.NextDouble(), doubles.Current);
             }
         }
 
@@ -149,9 +149,9 @@ namespace Troschuetz.Random.Tests
         {
             for (var i = 0; i < Iterations; ++i)
             {
-                Results[i] = Dist.NextDouble();
+                Results[i] = _dist.NextDouble();
             }
-            AssertDist(Dist);
+            AssertDist(_dist);
         }
 
         /*=============================================================================
@@ -162,19 +162,19 @@ namespace Troschuetz.Random.Tests
         [Repeat(RepetitionCount)]
         public void Reset_AfterManyRand()
         {
-            if (!Dist.CanReset)
+            if (!_dist.CanReset)
             {
                 Assert.Pass();
             }
             for (var i = 0; i < Iterations; ++i)
             {
-                Results[i] = Dist.NextDouble();
+                Results[i] = _dist.NextDouble();
             }
-            AssertDist(Dist);
-            Assert.True(Dist.Reset());
+            AssertDist(_dist);
+            Assert.True(_dist.Reset());
             for (var i = 0; i < Iterations; ++i)
             {
-                Assert.AreEqual(Results[i], Dist.NextDouble());
+                Assert.AreEqual(Results[i], _dist.NextDouble());
             }
         }
 
@@ -182,33 +182,33 @@ namespace Troschuetz.Random.Tests
         [Repeat(RepetitionCount)]
         public void Reset_AfterOneRand()
         {
-            if (!Dist.CanReset)
+            if (!_dist.CanReset)
             {
                 Assert.Pass();
             }
-            var d = Dist.NextDouble();
-            Assert.True(Dist.Reset());
-            Assert.AreEqual(d, Dist.NextDouble());
+            var d = _dist.NextDouble();
+            Assert.True(_dist.Reset());
+            Assert.AreEqual(d, _dist.NextDouble());
         }
 
         [Test]
         [Repeat(RepetitionCount)]
         public void Reset_DoubleCall_AfterManyRand()
         {
-            if (!Dist.CanReset)
+            if (!_dist.CanReset)
             {
                 Assert.Pass();
             }
             for (var i = 0; i < Iterations; ++i)
             {
-                Results[i] = Dist.NextDouble();
+                Results[i] = _dist.NextDouble();
             }
-            AssertDist(Dist);
-            Assert.True(Dist.Reset());
-            Assert.True(Dist.Reset());
+            AssertDist(_dist);
+            Assert.True(_dist.Reset());
+            Assert.True(_dist.Reset());
             for (var i = 0; i < Iterations; ++i)
             {
-                Assert.AreEqual(Results[i], Dist.NextDouble());
+                Assert.AreEqual(Results[i], _dist.NextDouble());
             }
         }
 
@@ -216,14 +216,14 @@ namespace Troschuetz.Random.Tests
         [Repeat(RepetitionCount)]
         public void Reset_DoubleCall_AfterOneRand()
         {
-            if (!Dist.CanReset)
+            if (!_dist.CanReset)
             {
                 Assert.Pass();
             }
-            var d = Dist.NextDouble();
-            Assert.True(Dist.Reset());
-            Assert.True(Dist.Reset());
-            Assert.AreEqual(d, Dist.NextDouble());
+            var d = _dist.NextDouble();
+            Assert.True(_dist.Reset());
+            Assert.True(_dist.Reset());
+            Assert.AreEqual(d, _dist.NextDouble());
         }
 
         /*=============================================================================
@@ -238,18 +238,18 @@ namespace Troschuetz.Random.Tests
         {
             for (var i = 0; i < Iterations; ++i)
             {
-                Dist.NextDouble();
+                _dist.NextDouble();
             }
             var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             using (var ms = new MemoryStream())
             {
-                bf.Serialize(ms, Dist);
+                bf.Serialize(ms, _dist);
                 ms.Position = 0;
 
                 var otherDist = bf.Deserialize(ms) as TDist;
                 for (var i = 0; i < Iterations; ++i)
                 {
-                    Assert.AreEqual(Dist.NextDouble(), otherDist.NextDouble());
+                    Assert.AreEqual(_dist.NextDouble(), otherDist.NextDouble());
                 }
             }
         }
@@ -272,24 +272,24 @@ namespace Troschuetz.Random.Tests
         [Repeat(RepetitionCount)]
         public void Integers_ManyRand()
         {
-            var integers = Dist.DistributedIntegers().GetEnumerator();
+            var integers = _dist.DistributedIntegers().GetEnumerator();
             integers.MoveNext();
             for (var i = 0; i < Iterations; ++i, integers.MoveNext())
             {
                 Results[i] = integers.Current;
             }
-            AssertDist(Dist);
+            AssertDist(_dist);
         }
 
         [Test]
         [Repeat(RepetitionCount)]
         public void Integers_Next_SameOutput()
         {
-            var integers = Dist.DistributedIntegers().GetEnumerator();
+            var integers = _dist.DistributedIntegers().GetEnumerator();
             for (var i = 0; i < Iterations; ++i)
             {
                 integers.MoveNext();
-                Assert.AreEqual(integers.Current, OtherDist.Next());
+                Assert.AreEqual(integers.Current, _otherDist.Next());
             }
         }
 
@@ -297,11 +297,11 @@ namespace Troschuetz.Random.Tests
         [Repeat(RepetitionCount)]
         public void Integers_SameOutput()
         {
-            var integers = Dist.DistributedIntegers().GetEnumerator();
+            var integers = _dist.DistributedIntegers().GetEnumerator();
             integers.MoveNext();
             for (var i = 0; i < Iterations; ++i, integers.MoveNext())
             {
-                OtherDist.Next().ShouldBe(integers.Current);
+                _otherDist.Next().ShouldBe(integers.Current);
             }
         }
 
@@ -311,9 +311,9 @@ namespace Troschuetz.Random.Tests
         {
             for (var i = 0; i < Iterations; ++i)
             {
-                Results[i] = Dist.Next();
+                Results[i] = _dist.Next();
             }
-            AssertDist(Dist);
+            AssertDist(_dist);
         }
 
         /*=============================================================================
@@ -324,19 +324,19 @@ namespace Troschuetz.Random.Tests
         [Repeat(RepetitionCount)]
         public void Reset_AfterManyRand()
         {
-            if (!Dist.CanReset)
+            if (!_dist.CanReset)
             {
                 Assert.Pass();
             }
             for (var i = 0; i < Iterations; ++i)
             {
-                Results[i] = Dist.Next();
+                Results[i] = _dist.Next();
             }
-            AssertDist(Dist);
-            Assert.True(Dist.Reset());
+            AssertDist(_dist);
+            Assert.True(_dist.Reset());
             for (var i = 0; i < Iterations; ++i)
             {
-                Assert.AreEqual(Results[i], Dist.Next());
+                Assert.AreEqual(Results[i], _dist.Next());
             }
         }
 
@@ -344,33 +344,33 @@ namespace Troschuetz.Random.Tests
         [Repeat(RepetitionCount)]
         public void Reset_AfterOneRand()
         {
-            if (!Dist.CanReset)
+            if (!_dist.CanReset)
             {
                 Assert.Pass();
             }
-            var d = Dist.Next();
-            Assert.True(Dist.Reset());
-            Assert.AreEqual(d, Dist.Next());
+            var d = _dist.Next();
+            Assert.True(_dist.Reset());
+            Assert.AreEqual(d, _dist.Next());
         }
 
         [Test]
         [Repeat(RepetitionCount)]
         public void Reset_DoubleCall_AfterManyRand()
         {
-            if (!Dist.CanReset)
+            if (!_dist.CanReset)
             {
                 Assert.Pass();
             }
             for (var i = 0; i < Iterations; ++i)
             {
-                Results[i] = Dist.Next();
+                Results[i] = _dist.Next();
             }
-            AssertDist(Dist);
-            Assert.True(Dist.Reset());
-            Assert.True(Dist.Reset());
+            AssertDist(_dist);
+            Assert.True(_dist.Reset());
+            Assert.True(_dist.Reset());
             for (var i = 0; i < Iterations; ++i)
             {
-                Assert.AreEqual(Results[i], Dist.Next());
+                Assert.AreEqual(Results[i], _dist.Next());
             }
         }
 
@@ -378,14 +378,14 @@ namespace Troschuetz.Random.Tests
         [Repeat(RepetitionCount)]
         public void Reset_DoubleCall_AfterOneRand()
         {
-            if (!Dist.CanReset)
+            if (!_dist.CanReset)
             {
                 Assert.Pass();
             }
-            var d = Dist.Next();
-            Assert.True(Dist.Reset());
-            Assert.True(Dist.Reset());
-            Assert.AreEqual(d, Dist.Next());
+            var d = _dist.Next();
+            Assert.True(_dist.Reset());
+            Assert.True(_dist.Reset());
+            Assert.AreEqual(d, _dist.Next());
         }
 
         /*=============================================================================
@@ -400,18 +400,18 @@ namespace Troschuetz.Random.Tests
         {
             for (var i = 0; i < Iterations; ++i)
             {
-                Dist.Next();
+                _dist.Next();
             }
             var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             using (var ms = new MemoryStream())
             {
-                bf.Serialize(ms, Dist);
+                bf.Serialize(ms, _dist);
                 ms.Position = 0;
 
                 var otherDist = bf.Deserialize(ms) as TDist;
                 for (var i = 0; i < Iterations; ++i)
                 {
-                    Assert.AreEqual(Dist.NextDouble(), otherDist.NextDouble());
+                    Assert.AreEqual(_dist.NextDouble(), otherDist.NextDouble());
                 }
             }
         }
