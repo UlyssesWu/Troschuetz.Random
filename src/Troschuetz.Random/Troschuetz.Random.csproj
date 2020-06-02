@@ -1,4 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\netfx.props" />
+  
   <PropertyGroup>
     <AssemblyTitle>Troschuetz.Random - Easy random number generation</AssemblyTitle>
     <TargetFrameworks>netstandard1.0;netstandard2.0;netstandard2.1;net35;net40;net45;net461;net472</TargetFrameworks>
