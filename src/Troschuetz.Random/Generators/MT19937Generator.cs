@@ -212,10 +212,7 @@ namespace Troschuetz.Random.Generators
         /// </exception>
         public MT19937Generator(uint[] seedArray) : base(19650218U)
         {
-            // Preconditions
-            if (seedArray == null) throw new ArgumentNullException(nameof(seedArray));
-
-            _seedArray = seedArray;
+            _seedArray = seedArray ?? throw new ArgumentNullException(nameof(seedArray));
 
             // Necessary, because as seed array has been specified.
             Reset();

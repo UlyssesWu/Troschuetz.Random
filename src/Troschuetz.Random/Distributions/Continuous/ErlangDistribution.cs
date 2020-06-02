@@ -325,8 +325,8 @@ namespace Troschuetz.Random.Distributions.Continuous
                 return alpha;
             }
 
-            const double mu = 0.0;
-            const double sigma = 1.0;
+            const double Mu = 0.0;
+            const double Sigma = 1.0;
             var a = alpha;
             var alphafix = 1.0;
 
@@ -341,17 +341,17 @@ namespace Troschuetz.Random.Distributions.Continuous
             var c = 1.0 / Math.Sqrt(9.0 * d);
             while (true)
             {
-                var x = NormalDistribution.Sample(generator, mu, sigma);
+                var x = NormalDistribution.Sample(generator, Mu, Sigma);
                 var v = 1.0 + (c * x);
                 while (v <= 0.0)
                 {
-                    x = NormalDistribution.Sample(generator, mu, sigma);
+                    x = NormalDistribution.Sample(generator, Mu, Sigma);
                     v = 1.0 + (c * x);
                 }
 
                 v = v * v * v;
                 var u = generator.NextDouble();
-                x = x * x;
+                x *= x;
                 if (u < 1.0 - (0.0331 * x * x))
                 {
                     return alphafix * d * v / lambda;

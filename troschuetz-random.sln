@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Troschuetz.Random.UnitTests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Troschuetz.Random.Benchmarks", "tests\Troschuetz.Random.Benchmarks\Troschuetz.Random.Benchmarks.csproj", "{B9201484-F681-48CE-9331-CC64A48B75E8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5B7378F6-79C7-49AF-836E-3C3275342370}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
