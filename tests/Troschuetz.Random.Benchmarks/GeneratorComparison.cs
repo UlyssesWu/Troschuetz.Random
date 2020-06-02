@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using BenchmarkDotNet.Attributes;
 
@@ -26,22 +26,22 @@ namespace Troschuetz.Random.Benchmarks
     [Config(typeof(Program.Config))]
     public class GeneratorComparison : AbstractComparison
     {
-        private readonly byte[] Bytes64 = new byte[64];
-        private readonly byte[] Bytes128 = new byte[128];
+        private readonly byte[] _bytes128 = new byte[128];
+        private readonly byte[] _bytes64 = new byte[64];
 
         [Benchmark]
-        public void NextBytes64() => Generators[Generator].NextBytes(Bytes64);
+        public bool NextBoolean() => Generators[Generator].NextBoolean();
 
         [Benchmark]
-        public void NextBytes128() => Generators[Generator].NextBytes(Bytes128);
+        public void NextBytes128() => Generators[Generator].NextBytes(_bytes128);
+
+        [Benchmark]
+        public void NextBytes64() => Generators[Generator].NextBytes(_bytes64);
 
         [Benchmark]
         public double NextDouble() => Generators[Generator].NextDouble();
 
         [Benchmark]
         public uint NextUInt() => Generators[Generator].NextUInt();
-
-        [Benchmark]
-        public bool NextBoolean() => Generators[Generator].NextBoolean();
     }
 }

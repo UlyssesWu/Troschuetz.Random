@@ -16,12 +16,12 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
 using System.Linq;
+using BenchmarkDotNet.Attributes;
 using Troschuetz.Random.Distributions.Discrete;
 
 namespace Troschuetz.Random.Benchmarks
@@ -29,7 +29,7 @@ namespace Troschuetz.Random.Benchmarks
     [Config(typeof(Program.Config))]
     public class DiscreteDistributionComparison : AbstractComparison
     {
-        private readonly Dictionary<string, Dictionary<string, IDiscreteDistribution>> Distributions = new Dictionary<string, Dictionary<string, IDiscreteDistribution>>
+        private readonly Dictionary<string, Dictionary<string, IDiscreteDistribution>> _distributions = new Dictionary<string, Dictionary<string, IDiscreteDistribution>>
         {
             [N<BernoulliDistribution>()] = Generators.ToDictionary(x => x.Key, x => new BernoulliDistribution(x.Value) as IDiscreteDistribution),
             [N<BinomialDistribution>()] = Generators.ToDictionary(x => x.Key, x => new BinomialDistribution(x.Value) as IDiscreteDistribution),
@@ -43,9 +43,9 @@ namespace Troschuetz.Random.Benchmarks
         public string Distribution { get; set; }
 
         [Benchmark]
-        public double NextDouble() => Distributions[Distribution][Generator].NextDouble();
+        public int Next() => _distributions[Distribution][Generator].Next();
 
         [Benchmark]
-        public int Next() => Distributions[Distribution][Generator].Next();
+        public double NextDouble() => _distributions[Distribution][Generator].NextDouble();
     }
 }

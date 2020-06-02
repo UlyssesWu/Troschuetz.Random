@@ -16,19 +16,17 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
+using BenchmarkDotNet.Attributes;
 using Troschuetz.Random.Generators;
 
 namespace Troschuetz.Random.Benchmarks
 {
     public abstract class AbstractComparison
     {
-        protected static string N<T>() => typeof(T).Name.Replace(nameof(Generator), string.Empty).Replace("Distribution", string.Empty);
-
         protected static readonly Dictionary<string, IGenerator> Generators = new Dictionary<string, IGenerator>
         {
             [N<XorShift128Generator>()] = new XorShift128Generator(),
@@ -42,5 +40,7 @@ namespace Troschuetz.Random.Benchmarks
 
         [Params("XorShift128", "MT19937", "NR3", "NR3Q1", "NR3Q2", "ALF", "Standard")]
         public string Generator { get; set; }
+
+        protected static string N<T>() => typeof(T).Name.Replace(nameof(Generator), string.Empty).Replace("Distribution", string.Empty);
     }
 }

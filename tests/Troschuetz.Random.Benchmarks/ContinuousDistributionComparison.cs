@@ -16,12 +16,12 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
 using System.Linq;
+using BenchmarkDotNet.Attributes;
 using Troschuetz.Random.Distributions.Continuous;
 
 namespace Troschuetz.Random.Benchmarks
@@ -29,7 +29,7 @@ namespace Troschuetz.Random.Benchmarks
     [Config(typeof(Program.Config))]
     public class ContinuousDistributionComparison : AbstractComparison
     {
-        private readonly Dictionary<string, Dictionary<string, IContinuousDistribution>> Distributions = new Dictionary<string, Dictionary<string, IContinuousDistribution>>
+        private readonly Dictionary<string, Dictionary<string, IContinuousDistribution>> _distributions = new Dictionary<string, Dictionary<string, IContinuousDistribution>>
         {
             [N<BetaDistribution>()] = Generators.ToDictionary(x => x.Key, x => new BetaDistribution(x.Value) as IContinuousDistribution),
             [N<BetaPrimeDistribution>()] = Generators.ToDictionary(x => x.Key, x => new BetaPrimeDistribution(x.Value) as IContinuousDistribution),
@@ -45,6 +45,6 @@ namespace Troschuetz.Random.Benchmarks
         public string Distribution { get; set; }
 
         [Benchmark]
-        public double NextDouble() => Distributions[Distribution][Generator].NextDouble();
+        public double NextDouble() => _distributions[Distribution][Generator].NextDouble();
     }
 }

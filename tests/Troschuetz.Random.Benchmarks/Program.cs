@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using BenchmarkDotNet.Analysers;
 using BenchmarkDotNet.Configs;
@@ -31,17 +31,6 @@ namespace Troschuetz.Random.Benchmarks
 {
     internal static class Program
     {
-        public class Config : ManualConfig
-        {
-            public Config()
-            {
-                AddJob(Job.RyuJitX64);
-                AddExporter(CsvExporter.Default, HtmlExporter.Default, MarkdownExporter.GitHub, PlainExporter.Default, CsvMeasurementsExporter.Default, RPlotExporter.Default);
-                AddDiagnoser(MemoryDiagnoser.Default);
-                AddAnalyser(EnvironmentAnalyser.Default);
-            }
-        }
-
         private static void Main(string[] args)
         {
             var switcher = new BenchmarkSwitcher(new[]
@@ -51,6 +40,17 @@ namespace Troschuetz.Random.Benchmarks
                 typeof(ContinuousDistributionComparison)
             });
             switcher.Run(args);
+        }
+
+        public class Config : ManualConfig
+        {
+            public Config()
+            {
+                AddJob(Job.RyuJitX64);
+                AddExporter(CsvExporter.Default, HtmlExporter.Default, MarkdownExporter.GitHub, PlainExporter.Default, CsvMeasurementsExporter.Default, RPlotExporter.Default);
+                AddDiagnoser(MemoryDiagnoser.Default);
+                AddAnalyser(EnvironmentAnalyser.Default);
+            }
         }
     }
 }
