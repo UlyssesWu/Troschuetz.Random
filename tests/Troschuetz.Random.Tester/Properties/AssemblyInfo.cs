@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -22,7 +22,6 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Security;
 
 // General Information about an assembly is controlled through the following set of attributes.
 // Change these attribute values to modify the information associated with an assembly.
@@ -31,7 +30,7 @@ using System.Security;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Troschuetz.Random")]
-[assembly: AssemblyCopyright("Copyright � Stefan Trosch�tz")]
+[assembly: AssemblyCopyright("Copyright (c) Stefan Troschuetz")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -50,6 +49,3 @@ using System.Security;
 // as shown below: [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4.3.0")]
 [assembly: AssemblyFileVersion("4.3.0")]
-
-// Specifies that an assembly cannot cause an elevation of privilege.
-[assembly: SecurityTransparent]
