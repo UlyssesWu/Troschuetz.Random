@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Linq;
@@ -89,6 +89,47 @@ namespace Troschuetz.Random.Examples
         }
     }
 
+    // An example of how to enrich the TRandom class with your custom distribution.
+    internal static class TRandomExtensions
+    {
+        // Simply call the static Sample you defined above. In the Main function, you can see that
+        // this method can be used as other methods defined in TRandom.
+        public static double SuperSilly(this TRandom r) => SuperSillyContinuousDistribution.Sample(r.Generator);
+    }
+
+    // Super silly continuous distribution which is provided as an example on how one can build a
+    // new distribution. Of course, never use this distribution in production... It is super silly,
+    // after all.
+    internal class SuperSillyContinuousDistribution : AbstractDistribution, IContinuousDistribution
+    {
+        // Just a simple constructor which passes the generator to the base constructor.
+        public SuperSillyContinuousDistribution(IGenerator generator) : base(generator)
+        {
+        }
+
+        // Optional: Define your logic in a delegate, so that you can reuse it in TRandom or let
+        // others change it, if necessary. All standard distributions do this.
+        public static Func<IGenerator, double> Sample { get; set; } = generator => generator.NextDouble();
+
+        public double Maximum => 1.0;
+
+        public double Mean => 0.5;
+
+        public double Median => 0.5;
+
+        public double Minimum => 0.0;
+
+        public double[] Mode
+        {
+            get { throw new NotSupportedException(); }
+        }
+
+        public double Variance => 1.0 / 12.0;
+
+        // The generation method, in which you define the logic of your distribution.
+        public double NextDouble() => Sample(Generator);
+    }
+
     // Super silly generator, which is provided as an example on how one can build a new generator.
     // Of course, never use this generator in production... It is super silly, after all.
     internal class SuperSillyGenerator : AbstractGenerator
@@ -105,6 +146,14 @@ namespace Troschuetz.Random.Examples
         // Should return true if your generator can reset, false otherwise.
         public override bool CanReset => true;
 
+        public override double NextDouble() => ++_state * UIntToDoubleMultiplier;
+
+        // You must provide only three generation methods; from these methods, the AbstractGenerator
+        // returns all other necessary objects.
+        public override int NextInclusiveMaxValue() => (int)(++_state >> 1);
+
+        public override uint NextUIntInclusiveMaxValue() => ++_state;
+
         // Here you should handle the state of your generator. ALWAYS remember to call
         // base.Reset(seed), since it is necessary to correctly reset the AbstractGenerator.
         public override bool Reset(uint seed)
@@ -113,53 +162,5 @@ namespace Troschuetz.Random.Examples
             _state = seed;
             return true;
         }
-
-        // You must provide only three generation methods; from these methods, the AbstractGenerator
-        // returns all other necessary objects.
-        public override int NextInclusiveMaxValue() => (int) (++_state >> 1);
-
-        public override double NextDouble() => ++_state * UIntToDoubleMultiplier;
-
-        public override uint NextUIntInclusiveMaxValue() => ++_state;
-    }
-
-    // Super silly continuous distribution which is provided as an example on how one can build a new
-    // distribution. Of course, never use this distribution in production... It is super silly, after all.
-    internal class SuperSillyContinuousDistribution : AbstractDistribution, IContinuousDistribution
-    {
-        // Just a simple constructor which passes the generator to the base constructor.
-        public SuperSillyContinuousDistribution(IGenerator generator) : base(generator)
-        {
-        }
-
-        public double Minimum => 0.0;
-
-        public double Maximum => 1.0;
-
-        public double Mean => 0.5;
-
-        public double Median => 0.5;
-
-        public double[] Mode
-        {
-            get { throw new NotSupportedException(); }
-        }
-
-        public double Variance => 1.0 / 12.0;
-
-        // The generation method, in which you define the logic of your distribution.
-        public double NextDouble() => Sample(Generator);
-
-        // Optional: Define your logic in a delegate, so that you can reuse it in TRandom or let
-        //           others change it, if necessary. All standard distributions do this.
-        public static Func<IGenerator, double> Sample { get; set; } = generator => generator.NextDouble();
-    }
-
-    // An example of how to enrich the TRandom class with your custom distribution.
-    internal static class TRandomExtensions
-    {
-        // Simply call the static Sample you defined above. In the Main function, you can see that
-        // this method can be used as other methods defined in TRandom.
-        public static double SuperSilly(this TRandom r) => SuperSillyContinuousDistribution.Sample(r.Generator);
     }
 }
