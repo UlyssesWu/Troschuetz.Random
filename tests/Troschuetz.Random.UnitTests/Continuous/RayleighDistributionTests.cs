@@ -16,17 +16,29 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests.Continuous
 {
+    using System;
     using Distributions.Continuous;
     using NUnit.Framework;
-    using System;
 
     public sealed class RayleighDistributionTests : ContinuousDistributionTests<RayleighDistribution>
     {
+        [TestCase(double.NaN)]
+        [TestCase(0)]
+        [TestCase(TinyNeg)]
+        [TestCase(SmallNeg)]
+        [TestCase(LargeNeg)]
+        public void Sigma_WrongValues(double d)
+        {
+            Assert.False(RayleighDistribution.IsValidParam(d));
+            Assert.False(_dist.IsValidSigma(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Sigma = d; });
+        }
+
         protected override RayleighDistribution GetDist(RayleighDistribution other = null)
         {
             return new RayleighDistribution { Sigma = GetSigma(other) };
@@ -55,18 +67,6 @@ namespace Troschuetz.Random.Tests.Continuous
         protected override RayleighDistribution GetDistWithParams(IGenerator gen, RayleighDistribution other = null)
         {
             return new RayleighDistribution(gen, GetSigma(other));
-        }
-
-        [TestCase(double.NaN)]
-        [TestCase(0)]
-        [TestCase(TinyNeg)]
-        [TestCase(SmallNeg)]
-        [TestCase(LargeNeg)]
-        public void Sigma_WrongValues(double d)
-        {
-            Assert.False(RayleighDistribution.IsValidParam(d));
-            Assert.False(_dist.IsValidSigma(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Sigma = d; });
         }
 
         // sigma > 0

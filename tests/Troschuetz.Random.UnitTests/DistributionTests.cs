@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests
 {
@@ -26,86 +26,6 @@ namespace Troschuetz.Random.Tests
     using NUnit.Framework;
     using Random.Generators;
     using Shouldly;
-
-    public abstract class DistributionTests<TDist> : TestBase where TDist : IDistribution
-    {
-        [SetUp]
-        public void SetUp()
-        {
-            switch (_currDist)
-            {
-                case 0:
-                    _dist = GetDist();
-                    _otherDist = GetDist(_dist.Generator.Seed, _dist);
-                    break;
-
-                case 1:
-                    var s = (uint)Rand.Next();
-                    _dist = GetDist(s);
-                    _otherDist = GetDist(s, _dist);
-                    break;
-
-                case 2:
-                    var g1 = new StandardGenerator(Rand.Next());
-                    var g2 = new StandardGenerator((int)g1.Seed);
-                    _dist = GetDist(g1);
-                    _otherDist = GetDist(g2, _dist);
-                    break;
-
-                case 3:
-                    _dist = GetDistWithParams();
-                    _otherDist = GetDistWithParams(_dist.Generator.Seed, _dist);
-                    break;
-
-                case 4:
-                    s = (uint)Rand.Next();
-                    _dist = GetDistWithParams(s);
-                    _otherDist = GetDistWithParams(s, _dist);
-                    break;
-
-                case 5:
-                    g1 = new StandardGenerator(Rand.Next());
-                    g2 = new StandardGenerator((int)g1.Seed);
-                    _dist = GetDistWithParams(g1);
-                    _otherDist = GetDistWithParams(g2, _dist);
-                    break;
-
-                default:
-                    throw new Exception();
-            }
-            _currDist = (_currDist + 1) % RepetitionCount;
-        }
-
-        protected const int RepetitionCount = 6;
-        protected TDist _dist;
-        protected TDist _otherDist;
-        private int _currDist;
-
-        protected abstract TDist GetDist(TDist other = default);
-
-        protected abstract TDist GetDist(uint seed, TDist other = default);
-
-        protected abstract TDist GetDist(IGenerator gen, TDist other = default);
-
-        protected abstract TDist GetDistWithParams(TDist other = default);
-
-        protected abstract TDist GetDistWithParams(uint seed, TDist other = default);
-
-        protected abstract TDist GetDistWithParams(IGenerator gen, TDist other = default);
-
-        /*=============================================================================
-            Construction
-        =============================================================================*/
-
-        [Test]
-        public void Construction_NullGenerator()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                GetDist(null);
-            });
-        }
-    }
 
     public abstract class ContinuousDistributionTests<TDist> : DistributionTests<TDist>
         where TDist : class, IContinuousDistribution
@@ -417,5 +337,88 @@ namespace Troschuetz.Random.Tests
         }
 
 #endif
+    }
+
+    public abstract class DistributionTests<TDist> : TestBase where TDist : IDistribution
+    {
+        protected const int RepetitionCount = 6;
+
+        protected TDist _dist;
+
+        protected TDist _otherDist;
+
+        private int _currDist;
+
+        [Test]
+        public void Construction_NullGenerator()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                GetDist(null);
+            });
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            switch (_currDist)
+            {
+                case 0:
+                    _dist = GetDist();
+                    _otherDist = GetDist(_dist.Generator.Seed, _dist);
+                    break;
+
+                case 1:
+                    var s = (uint)Rand.Next();
+                    _dist = GetDist(s);
+                    _otherDist = GetDist(s, _dist);
+                    break;
+
+                case 2:
+                    var g1 = new StandardGenerator(Rand.Next());
+                    var g2 = new StandardGenerator((int)g1.Seed);
+                    _dist = GetDist(g1);
+                    _otherDist = GetDist(g2, _dist);
+                    break;
+
+                case 3:
+                    _dist = GetDistWithParams();
+                    _otherDist = GetDistWithParams(_dist.Generator.Seed, _dist);
+                    break;
+
+                case 4:
+                    s = (uint)Rand.Next();
+                    _dist = GetDistWithParams(s);
+                    _otherDist = GetDistWithParams(s, _dist);
+                    break;
+
+                case 5:
+                    g1 = new StandardGenerator(Rand.Next());
+                    g2 = new StandardGenerator((int)g1.Seed);
+                    _dist = GetDistWithParams(g1);
+                    _otherDist = GetDistWithParams(g2, _dist);
+                    break;
+
+                default:
+                    throw new Exception();
+            }
+            _currDist = (_currDist + 1) % RepetitionCount;
+        }
+
+        protected abstract TDist GetDist(TDist other = default);
+
+        protected abstract TDist GetDist(uint seed, TDist other = default);
+
+        protected abstract TDist GetDist(IGenerator gen, TDist other = default);
+
+        protected abstract TDist GetDistWithParams(TDist other = default);
+
+        protected abstract TDist GetDistWithParams(uint seed, TDist other = default);
+
+        protected abstract TDist GetDistWithParams(IGenerator gen, TDist other = default);
+
+        /*=============================================================================
+            Construction
+        =============================================================================*/
     }
 }

@@ -16,19 +16,51 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests.Discrete
 {
-    using Distributions.Discrete;
-    using NUnit.Framework;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Distributions.Discrete;
+    using NUnit.Framework;
 
     public sealed class CategoricalDistributionTests : DiscreteDistributionTests<CategoricalDistribution>
     {
+        [Test]
+        public void Median_EvenEquiWeights()
+        {
+            _dist = new CategoricalDistribution(new double[] { 1, 1, 1, 1, 1, 1 });
+            for (var i = 0; i < Iterations; ++i)
+                Results[i] = _dist.Next();
+            AssertDist(_dist);
+        }
+
+        [Test]
+        public void Median_OddEquiWeights()
+        {
+            _dist = new CategoricalDistribution(new double[] { 1, 1, 1, 1, 1 });
+            for (var i = 0; i < Iterations; ++i)
+                Results[i] = _dist.Next();
+            AssertDist(_dist);
+        }
+
+        [TestCase(double.NaN, 1, 2)]
+        [TestCase(SmallNeg, 1, 2)]
+        [TestCase(1, LargeNeg, 2)]
+        [TestCase(1, 2, TinyNeg)]
+        [TestCase(0, -2, 2)]
+        [TestCase(-3, -2, -1)]
+        public void Weights_WrongValues(double d1, double d2, double d3)
+        {
+            var w = new List<double> { d1, d2, d3 };
+            Assert.False(CategoricalDistribution.IsValidParam(w));
+            Assert.False(_dist.AreValidWeights(w));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Weights = w; });
+        }
+
         protected override CategoricalDistribution GetDist(CategoricalDistribution other = null)
         {
             return new CategoricalDistribution(GetValueCount(other));
@@ -57,38 +89,6 @@ namespace Troschuetz.Random.Tests.Discrete
         protected override CategoricalDistribution GetDistWithParams(IGenerator gen, CategoricalDistribution other = null)
         {
             return new CategoricalDistribution(gen, GetWeights(other));
-        }
-
-        [TestCase(double.NaN, 1, 2)]
-        [TestCase(SmallNeg, 1, 2)]
-        [TestCase(1, LargeNeg, 2)]
-        [TestCase(1, 2, TinyNeg)]
-        [TestCase(0, -2, 2)]
-        [TestCase(-3, -2, -1)]
-        public void Weights_WrongValues(double d1, double d2, double d3)
-        {
-            var w = new List<double> { d1, d2, d3 };
-            Assert.False(CategoricalDistribution.IsValidParam(w));
-            Assert.False(_dist.AreValidWeights(w));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Weights = w; });
-        }
-
-        [Test]
-        public void Median_EvenEquiWeights()
-        {
-            _dist = new CategoricalDistribution(new double[] { 1, 1, 1, 1, 1, 1 });
-            for (var i = 0; i < Iterations; ++i)
-                Results[i] = _dist.Next();
-            AssertDist(_dist);
-        }
-
-        [Test]
-        public void Median_OddEquiWeights()
-        {
-            _dist = new CategoricalDistribution(new double[] { 1, 1, 1, 1, 1 });
-            for (var i = 0; i < Iterations; ++i)
-                Results[i] = _dist.Next();
-            AssertDist(_dist);
         }
 
         // value count > 0

@@ -16,17 +16,38 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests.Discrete
 {
+    using System;
     using Distributions.Discrete;
     using NUnit.Framework;
-    using System;
 
     public sealed class DiscreteUniformDistributionTests : DiscreteDistributionTests<DiscreteUniformDistribution>
     {
+        [Test]
+        public void InvalidParameters1()
+        {
+            Assert.False(DiscreteUniformDistribution.AreValidParams(50, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = 1; _dist.Alpha = 50; });
+        }
+
+        [Test]
+        public void InvalidParameters2()
+        {
+            Assert.False(DiscreteUniformDistribution.AreValidParams(_dist.Alpha, _dist.Alpha - 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = _dist.Alpha - 1; });
+        }
+
+        [Test]
+        public void InvalidParameters3()
+        {
+            Assert.False(DiscreteUniformDistribution.AreValidParams(50, int.MaxValue));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = int.MaxValue; });
+        }
+
         protected override DiscreteUniformDistribution GetDist(DiscreteUniformDistribution other = null)
         {
             return new DiscreteUniformDistribution { Beta = GetBeta(other), Alpha = GetAlpha(other) };
@@ -55,27 +76,6 @@ namespace Troschuetz.Random.Tests.Discrete
         protected override DiscreteUniformDistribution GetDistWithParams(IGenerator gen, DiscreteUniformDistribution other = null)
         {
             return new DiscreteUniformDistribution(gen, GetAlpha(other), GetBeta(other));
-        }
-
-        [Test]
-        public void InvalidParameters1()
-        {
-            Assert.False(DiscreteUniformDistribution.AreValidParams(50, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = 1; _dist.Alpha = 50; });
-        }
-
-        [Test]
-        public void InvalidParameters2()
-        {
-            Assert.False(DiscreteUniformDistribution.AreValidParams(_dist.Alpha, _dist.Alpha - 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = _dist.Alpha - 1; });
-        }
-
-        [Test]
-        public void InvalidParameters3()
-        {
-            Assert.False(DiscreteUniformDistribution.AreValidParams(50, int.MaxValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = int.MaxValue; });
         }
 
         // alpha <= beta && beta < int.MaxValue

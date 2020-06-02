@@ -16,17 +16,32 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests.Discrete
 {
+    using System;
     using Distributions.Discrete;
     using NUnit.Framework;
-    using System;
 
     public sealed class GeometricDistributionTests : DiscreteDistributionTests<GeometricDistribution>
     {
+        [TestCase(double.NaN)]
+        [TestCase(0)]
+        [TestCase(TinyNeg)]
+        [TestCase(SmallNeg)]
+        [TestCase(LargeNeg)]
+        [TestCase(1 + TinyPos)]
+        [TestCase(1 + SmallPos)]
+        [TestCase(1 + LargePos)]
+        public void Alpha_WrongValues(double d)
+        {
+            Assert.False(GeometricDistribution.IsValidParam(d));
+            Assert.False(_dist.IsValidAlpha(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
+        }
+
         protected override GeometricDistribution GetDist(GeometricDistribution other = null)
         {
             return new GeometricDistribution { Alpha = GetAlpha(other) };
@@ -55,21 +70,6 @@ namespace Troschuetz.Random.Tests.Discrete
         protected override GeometricDistribution GetDistWithParams(IGenerator gen, GeometricDistribution other = null)
         {
             return new GeometricDistribution(gen, GetAlpha(other));
-        }
-
-        [TestCase(double.NaN)]
-        [TestCase(0)]
-        [TestCase(TinyNeg)]
-        [TestCase(SmallNeg)]
-        [TestCase(LargeNeg)]
-        [TestCase(1 + TinyPos)]
-        [TestCase(1 + SmallPos)]
-        [TestCase(1 + LargePos)]
-        public void Alpha_WrongValues(double d)
-        {
-            Assert.False(GeometricDistribution.IsValidParam(d));
-            Assert.False(_dist.IsValidAlpha(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
         }
 
         // alpha > 0 && alpha <= 1

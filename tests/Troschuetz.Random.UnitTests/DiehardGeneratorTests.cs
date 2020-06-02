@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
@@ -38,11 +38,11 @@ namespace Troschuetz.Random.Tests
         [Test]
         public void Diehard_BirthdaySpacings()
         {
-            const int days = 365;
-            const int sampleCount = 1000;
+            const int Days = 365;
+            const int SampleCount = 1000;
 
-            var samples = _generator.Integers(days).Take(sampleCount).ToArray();
-            var distances = new List<double>(sampleCount * sampleCount);
+            var samples = _generator.Integers(Days).Take(SampleCount).ToArray();
+            var distances = new List<double>(SampleCount * SampleCount);
 
             //Parallel.For(0, sampleCount, i =>
             //{
@@ -75,9 +75,9 @@ namespace Troschuetz.Random.Tests
             var medianLow = Math.Log(2.0) / lambdaUpp;
             var medianUpp = Math.Log(2.0) / lambdaLow;
 
-            const double adj = 1.28; // Factor found while testing...
-            Assert.True(ApproxEquals(median / adj, medianLow), $"Generator {_generator.GetType().Name} failed: {median} < {medianLow}");
-            Assert.True(ApproxEquals(median / adj, medianUpp), $"Generator {_generator.GetType().Name} failed: {median} > {medianUpp}");
+            const double Adj = 1.28; // Factor found while testing...
+            Assert.True(ApproxEquals(median / Adj, medianLow), $"Generator {_generator.GetType().Name} failed: {median} < {medianLow}");
+            Assert.True(ApproxEquals(median / Adj, medianUpp), $"Generator {_generator.GetType().Name} failed: {median} > {medianUpp}");
         }
     }
 }

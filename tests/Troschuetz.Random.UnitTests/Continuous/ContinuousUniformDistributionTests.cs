@@ -16,17 +16,33 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests.Continuous
 {
+    using System;
     using Distributions.Continuous;
     using NUnit.Framework;
-    using System;
 
     public sealed class ContinuousUniformDistributionTests : ContinuousDistributionTests<ContinuousUniformDistribution>
     {
+        [TestCase(double.NaN, 1.0)]
+        [TestCase(1.0, double.NaN)]
+        [TestCase(TinyPos, TinyNeg)]
+        [TestCase(SmallPos, SmallNeg)]
+        [TestCase(LargePos, LargeNeg)]
+        public void AlphaBeta_WrongValues(double a, double b)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Assert.False(ContinuousUniformDistribution.AreValidParams(a, b));
+                _dist.Alpha = _dist.Beta = a;
+                Assert.False(_dist.IsValidBeta(b));
+                _dist.Beta = b;
+            });
+        }
+
         protected override ContinuousUniformDistribution GetDist(ContinuousUniformDistribution other = null)
         {
             return new ContinuousUniformDistribution { Beta = GetBeta(other), Alpha = GetAlpha(other) };
@@ -55,22 +71,6 @@ namespace Troschuetz.Random.Tests.Continuous
         protected override ContinuousUniformDistribution GetDistWithParams(IGenerator gen, ContinuousUniformDistribution other = null)
         {
             return new ContinuousUniformDistribution(gen, GetAlpha(other), GetBeta(other));
-        }
-
-        [TestCase(double.NaN, 1.0)]
-        [TestCase(1.0, double.NaN)]
-        [TestCase(TinyPos, TinyNeg)]
-        [TestCase(SmallPos, SmallNeg)]
-        [TestCase(LargePos, LargeNeg)]
-        public void AlphaBeta_WrongValues(double a, double b)
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                Assert.False(ContinuousUniformDistribution.AreValidParams(a, b));
-                _dist.Alpha = _dist.Beta = a;
-                Assert.False(_dist.IsValidBeta(b));
-                _dist.Beta = b;
-            });
         }
 
         // alpha <= beta

@@ -16,17 +16,41 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests.Continuous
 {
+    using System;
     using Distributions.Continuous;
     using NUnit.Framework;
-    using System;
 
     public sealed class BetaDistributionTests : ContinuousDistributionTests<BetaDistribution>
     {
+        [TestCase(double.NaN)]
+        [TestCase(0)]
+        [TestCase(TinyNeg)]
+        [TestCase(SmallNeg)]
+        [TestCase(LargeNeg)]
+        public void Alpha_WrongValues(double d)
+        {
+            Assert.False(BetaDistribution.AreValidParams(d, 1));
+            Assert.False(_dist.IsValidAlpha(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
+        }
+
+        [TestCase(double.NaN)]
+        [TestCase(0)]
+        [TestCase(TinyNeg)]
+        [TestCase(SmallNeg)]
+        [TestCase(LargeNeg)]
+        public void Beta_WrongValues(double d)
+        {
+            Assert.False(BetaDistribution.AreValidParams(1, d));
+            Assert.False(_dist.IsValidBeta(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = d; });
+        }
+
         protected override BetaDistribution GetDist(BetaDistribution other = null)
         {
             return new BetaDistribution { Alpha = GetAlpha(other), Beta = GetBeta(other) };
@@ -55,30 +79,6 @@ namespace Troschuetz.Random.Tests.Continuous
         protected override BetaDistribution GetDistWithParams(IGenerator gen, BetaDistribution other = null)
         {
             return new BetaDistribution(gen, GetAlpha(other), GetBeta(other));
-        }
-
-        [TestCase(double.NaN)]
-        [TestCase(0)]
-        [TestCase(TinyNeg)]
-        [TestCase(SmallNeg)]
-        [TestCase(LargeNeg)]
-        public void Alpha_WrongValues(double d)
-        {
-            Assert.False(BetaDistribution.AreValidParams(d, 1));
-            Assert.False(_dist.IsValidAlpha(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
-        }
-
-        [TestCase(double.NaN)]
-        [TestCase(0)]
-        [TestCase(TinyNeg)]
-        [TestCase(SmallNeg)]
-        [TestCase(LargeNeg)]
-        public void Beta_WrongValues(double d)
-        {
-            Assert.False(BetaDistribution.AreValidParams(1, d));
-            Assert.False(_dist.IsValidBeta(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = d; });
         }
 
         // alpha > 0

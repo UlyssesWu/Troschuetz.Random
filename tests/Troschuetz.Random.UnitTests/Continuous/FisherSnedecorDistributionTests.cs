@@ -16,17 +16,41 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests.Continuous
 {
+    using System;
     using Distributions.Continuous;
     using NUnit.Framework;
-    using System;
 
     public sealed class FisherSnedecorDistributionTests : ContinuousDistributionTests<FisherSnedecorDistribution>
     {
+        [TestCase(double.NaN)]
+        [TestCase(0)]
+        [TestCase(SmallNeg)]
+        [TestCase(LargeNeg)]
+        public void Alpha_WrongValues(double d)
+        {
+            var i = (int)d;
+            Assert.False(FisherSnedecorDistribution.AreValidParams(i, 1));
+            Assert.False(_dist.IsValidAlpha(i));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = i; });
+        }
+
+        [TestCase(double.NaN)]
+        [TestCase(0)]
+        [TestCase(SmallNeg)]
+        [TestCase(LargeNeg)]
+        public void Beta_WrongValues(double d)
+        {
+            var i = (int)d;
+            Assert.False(FisherSnedecorDistribution.AreValidParams(1, i));
+            Assert.False(_dist.IsValidBeta(i));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = i; });
+        }
+
         protected override FisherSnedecorDistribution GetDist(FisherSnedecorDistribution other = null)
         {
             return new FisherSnedecorDistribution { Alpha = GetAlpha(other), Beta = GetBeta(other) };
@@ -55,30 +79,6 @@ namespace Troschuetz.Random.Tests.Continuous
         protected override FisherSnedecorDistribution GetDistWithParams(IGenerator gen, FisherSnedecorDistribution other = null)
         {
             return new FisherSnedecorDistribution(gen, GetAlpha(other), GetBeta(other));
-        }
-
-        [TestCase(double.NaN)]
-        [TestCase(0)]
-        [TestCase(SmallNeg)]
-        [TestCase(LargeNeg)]
-        public void Alpha_WrongValues(double d)
-        {
-            var i = (int)d;
-            Assert.False(FisherSnedecorDistribution.AreValidParams(i, 1));
-            Assert.False(_dist.IsValidAlpha(i));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = i; });
-        }
-
-        [TestCase(double.NaN)]
-        [TestCase(0)]
-        [TestCase(SmallNeg)]
-        [TestCase(LargeNeg)]
-        public void Beta_WrongValues(double d)
-        {
-            var i = (int)d;
-            Assert.False(FisherSnedecorDistribution.AreValidParams(1, i));
-            Assert.False(_dist.IsValidBeta(i));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = i; });
         }
 
         // alpha > 0

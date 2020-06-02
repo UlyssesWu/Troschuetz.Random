@@ -16,17 +16,42 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests.Discrete
 {
+    using System;
     using Distributions.Discrete;
     using NUnit.Framework;
-    using System;
 
     public sealed class BinomialDistributionTests : DiscreteDistributionTests<BinomialDistribution>
     {
+        [TestCase(double.NaN)]
+        [TestCase(TinyNeg)]
+        [TestCase(SmallNeg)]
+        [TestCase(LargeNeg)]
+        [TestCase(1 + TinyPos)]
+        [TestCase(1 + SmallPos)]
+        [TestCase(1 + LargePos)]
+        public void Alpha_WrongValues(double d)
+        {
+            Assert.False(BinomialDistribution.AreValidParams(d, 1));
+            Assert.False(_dist.IsValidAlpha(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
+        }
+
+        [TestCase(double.NaN)]
+        [TestCase(SmallNeg)]
+        [TestCase(LargeNeg)]
+        public void Beta_WrongValues(double d)
+        {
+            var i = (int)d;
+            Assert.False(BinomialDistribution.AreValidParams(0.5, i));
+            Assert.False(_dist.IsValidBeta(i));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = i; });
+        }
+
         protected override BinomialDistribution GetDist(BinomialDistribution other = null)
         {
             return new BinomialDistribution { Alpha = GetAlpha(other), Beta = GetBeta(other) };
@@ -55,31 +80,6 @@ namespace Troschuetz.Random.Tests.Discrete
         protected override BinomialDistribution GetDistWithParams(IGenerator gen, BinomialDistribution other = null)
         {
             return new BinomialDistribution(gen, GetAlpha(other), GetBeta(other));
-        }
-
-        [TestCase(double.NaN)]
-        [TestCase(TinyNeg)]
-        [TestCase(SmallNeg)]
-        [TestCase(LargeNeg)]
-        [TestCase(1 + TinyPos)]
-        [TestCase(1 + SmallPos)]
-        [TestCase(1 + LargePos)]
-        public void Alpha_WrongValues(double d)
-        {
-            Assert.False(BinomialDistribution.AreValidParams(d, 1));
-            Assert.False(_dist.IsValidAlpha(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
-        }
-
-        [TestCase(double.NaN)]
-        [TestCase(SmallNeg)]
-        [TestCase(LargeNeg)]
-        public void Beta_WrongValues(double d)
-        {
-            var i = (int)d;
-            Assert.False(BinomialDistribution.AreValidParams(0.5, i));
-            Assert.False(_dist.IsValidBeta(i));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Beta = i; });
         }
 
         // alpha >= 0 && alpha <= 1

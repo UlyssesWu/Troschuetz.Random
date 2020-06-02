@@ -16,8 +16,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Troschuetz.Random.Tests
 {
@@ -29,19 +29,52 @@ namespace Troschuetz.Random.Tests
     [TestFixture]
     public abstract class TestBase
     {
-        private const double Epsilon = 0.20; // Relative error: less than 20%
         protected const int Iterations = 200000;
-
-        protected const double TinyNeg = -0.01;
-        protected const double SmallNeg = -1;
         protected const double LargeNeg = -100;
-
-        protected const double TinyPos = -TinyNeg;
-        protected const double SmallPos = -SmallNeg;
         protected const double LargePos = -LargeNeg;
-
-        protected readonly double[] Results = new double[Iterations];
+        protected const double SmallNeg = -1;
+        protected const double SmallPos = -SmallNeg;
+        protected const double TinyNeg = -0.01;
+        protected const double TinyPos = -TinyNeg;
         protected readonly TRandom Rand = new TRandom();
+        protected readonly double[] Results = new double[Iterations];
+        private const double Epsilon = 0.20; // Relative error: less than 20%
+
+        protected static bool ApproxEquals(double expected, double observed)
+        {
+            return ApproxEquals(expected, observed, Epsilon);
+        }
+
+        protected static bool ApproxEquals(double expected, double observed, double epsilon)
+        {
+            if (double.IsNaN(expected))
+            {
+                Assert.Fail("NaN should not be returned");
+            }
+            if (expected.Equals(0))
+            {
+                return Math.Abs(expected - observed) < epsilon;
+            }
+            return Math.Abs((expected - observed) / expected) < epsilon;
+        }
+
+        protected static double ComputeMean(ICollection<double> series)
+        {
+            return series.Select(x => x / series.Count).Sum();
+        }
+
+        protected static double ComputeMedian(IList<double> series)
+        {
+            var hc = series.Count / 2;
+            if (hc % 2 == 0)
+                return series[hc - 1] / 2.0 + series[hc] / 2.0;
+            return series[hc];
+        }
+
+        protected static double ComputeVariance(ICollection<double> series, double mean)
+        {
+            return series.Select(x => Math.Pow(x - mean, 2) / (series.Count - 1)).Sum();
+        }
 
         protected void AssertDist(IDistribution dist)
         {
@@ -106,42 +139,6 @@ namespace Troschuetz.Random.Tests
             var filtered = series.Where(filter).ToList();
             filtered.Sort();
             return filtered;
-        }
-
-        protected static double ComputeMean(ICollection<double> series)
-        {
-            return series.Select(x => x / series.Count).Sum();
-        }
-
-        protected static double ComputeMedian(IList<double> series)
-        {
-            var hc = series.Count / 2;
-            if (hc % 2 == 0)
-                return series[hc - 1] / 2.0 + series[hc] / 2.0;
-            return series[hc];
-        }
-
-        protected static double ComputeVariance(ICollection<double> series, double mean)
-        {
-            return series.Select(x => Math.Pow(x - mean, 2) / (series.Count - 1)).Sum();
-        }
-
-        protected static bool ApproxEquals(double expected, double observed)
-        {
-            return ApproxEquals(expected, observed, Epsilon);
-        }
-
-        protected static bool ApproxEquals(double expected, double observed, double epsilon)
-        {
-            if (double.IsNaN(expected))
-            {
-                Assert.Fail("NaN should not be returned");
-            }
-            if (expected.Equals(0))
-            {
-                return Math.Abs(expected - observed) < epsilon;
-            }
-            return Math.Abs((expected - observed) / expected) < epsilon;
         }
     }
 }
