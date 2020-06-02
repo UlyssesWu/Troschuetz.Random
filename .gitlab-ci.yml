@@ -1,0 +1,37 @@
+stages:
+- test
+- publish
+- deploy
+
+format-test:
+  stage: test
+  image: pommalabs/dotnet-mono:dotnet-3-mono-6-sdk
+  script:
+  - dotnet format --dry-run --check --verbosity diagnostic
+
+myget-publish:
+  stage: publish
+  image: pommalabs/dotnet-mono:dotnet-3-mono-6-sdk
+  script:
+  - find src -name "*.csproj" -exec dotnet pack -c Release -o artifacts -p:Version=$CI_COMMIT_TAG {} \;
+  - find artifacts -name "*.nupkg" -exec dotnet nuget push -k $MYGET_API_KEY {} \;
+  artifacts:
+    paths:
+    - artifacts
+    expire_in: 1 year
+  only:
+  - tags
+
+pages:
+  stage: deploy
+  image:
+    name: knsit/docfx:dotnet-core
+    entrypoint: [""]
+  script:
+  - docfx docs/docfx.json
+  - mv docs/_site public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
