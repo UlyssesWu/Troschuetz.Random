@@ -21,8 +21,6 @@
 
 namespace Troschuetz.Random.Tester
 {
-    using Distributions.Continuous;
-    using Generators;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -31,6 +29,8 @@ namespace Troschuetz.Random.Tester
     using System.Linq;
     using System.Reflection;
     using System.Windows.Forms;
+    using Distributions.Continuous;
+    using Generators;
     using ZedGraph;
     using Label = System.Windows.Forms.Label;
 
@@ -39,95 +39,95 @@ namespace Troschuetz.Random.Tester
     /// </summary>
     public class FormMain : Form
     {
-        IContainer components;
+        private IContainer components;
 
         #region Fields
-        
-        Button buttonClear;
-        Button buttonDeselect;
-        Button buttonDeselectAll;
-        Button buttonSelect;
-        Button buttonSelectAll;
-        Button buttonTest;
-        Button buttonTest2;
-        Button buttonTestGenerators;
-        CheckBox checkBoxBooleans;
-        CheckBox checkBoxDoubles;
-        CheckBox checkBoxDoublesMax;
-        CheckBox checkBoxDoublesMinMax;
-        CheckBox checkBoxHistogramBounds;
-        CheckBox checkBoxIntegers;
-        CheckBox checkBoxIntegersMax;
-        CheckBox checkBoxIntegersMinMax;
-        CheckBox checkBoxNext;
-        CheckBox checkBoxNextBoolean;
-        CheckBox checkBoxNextBytes;
-        CheckBox checkBoxNextDouble;
-        CheckBox checkBoxNextDoubleMax;
-        CheckBox checkBoxNextDoubleMinMax;
-        CheckBox checkBoxNextMax;
-        CheckBox checkBoxNextMinMax;
-        CheckBox checkBoxSmooth;
-        CheckedListBox checkedListBoxDistributions;
-        CheckedListBox checkedListBoxGenerators;
-        ComboBox comboBoxDistribution;
-        ComboBox comboBoxGenerator;
-        ComboBox comboBoxGenerator2;
+
+        private Button buttonClear;
+        private Button buttonDeselect;
+        private Button buttonDeselectAll;
+        private Button buttonSelect;
+        private Button buttonSelectAll;
+        private Button buttonTest;
+        private Button buttonTest2;
+        private Button buttonTestGenerators;
+        private CheckBox checkBoxBooleans;
+        private CheckBox checkBoxDoubles;
+        private CheckBox checkBoxDoublesMax;
+        private CheckBox checkBoxDoublesMinMax;
+        private CheckBox checkBoxHistogramBounds;
+        private CheckBox checkBoxIntegers;
+        private CheckBox checkBoxIntegersMax;
+        private CheckBox checkBoxIntegersMinMax;
+        private CheckBox checkBoxNext;
+        private CheckBox checkBoxNextBoolean;
+        private CheckBox checkBoxNextBytes;
+        private CheckBox checkBoxNextDouble;
+        private CheckBox checkBoxNextDoubleMax;
+        private CheckBox checkBoxNextDoubleMinMax;
+        private CheckBox checkBoxNextMax;
+        private CheckBox checkBoxNextMinMax;
+        private CheckBox checkBoxSmooth;
+        private CheckedListBox checkedListBoxDistributions;
+        private CheckedListBox checkedListBoxGenerators;
+        private ComboBox comboBoxDistribution;
+        private ComboBox comboBoxGenerator;
+        private ComboBox comboBoxGenerator2;
 
         /// <summary>
         ///   Stores the currently active inheritor of Distribution type.
         /// </summary>
-        object currentDistribution;
+        private object currentDistribution;
 
-        DataGridView dataGridViewGenerators;
+        private DataGridView dataGridViewGenerators;
 
         /// <summary>
         ///   Stores <see cref="Type"/> objects of inheritors of Distribution type.
         /// </summary>
-        SortedList<string, Type> distributions;
+        private SortedList<string, Type> distributions;
 
         /// <summary>
         ///   Stores <see cref="Type"/> objects of inheritors of Generator type.
         /// </summary>
-        SortedList<string, Type> generators;
+        private SortedList<string, Type> generators;
 
-        GroupBox groupBoxDistribution1;
-        GroupBox groupBoxDistribution2;
-        
-        Label label1;
-        Label label17;
-        Label label18;
-        Label label2;
-        Label label3;
-        Label label4;
-        Label label5;
-        Label label6;
-        Label label7;
-        Label label8;
-        Label label9;
-        NumericUpDown numericUpDownGenSamples;
-        NumericUpDown numericUpDownMaximum;
-        NumericUpDown numericUpDownMinimum;
-        NumericUpDown numericUpDownSamples;
-        NumericUpDown numericUpDownSamples2;
-        NumericUpDown numericUpDownSteps;
-        RichTextBox richTextBoxDistributionTest;
-        RichTextBox richTextBoxTest;
-        TabControl tabControl1;
-        TabPage tabPageDistributions1;
-        TabPage tabPageDistributions2;
-        TabPage tabPageGenerators;
+        private GroupBox groupBoxDistribution1;
+        private GroupBox groupBoxDistribution2;
+
+        private Label label1;
+        private Label label17;
+        private Label label18;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label label8;
+        private Label label9;
+        private NumericUpDown numericUpDownGenSamples;
+        private NumericUpDown numericUpDownMaximum;
+        private NumericUpDown numericUpDownMinimum;
+        private NumericUpDown numericUpDownSamples;
+        private NumericUpDown numericUpDownSamples2;
+        private NumericUpDown numericUpDownSteps;
+        private RichTextBox richTextBoxDistributionTest;
+        private RichTextBox richTextBoxTest;
+        private TabControl tabControl1;
+        private TabPage tabPageDistributions1;
+        private TabPage tabPageDistributions2;
+        private TabPage tabPageGenerators;
 
         /// <summary>
         ///   Stores the <see cref="Type"/> object for the Distribution type.
         /// </summary>
-        Type typeDistribution;
+        private Type typeDistribution;
 
         /// <summary>
         ///   Stores the <see cref="Type"/> object for the Generator type.
         /// </summary>
-        Type typeGenerator;
-        
+        private Type typeGenerator;
+
         private DataGridViewTextBoxColumn Generator;
         private DataGridViewTextBoxColumn Next;
         private DataGridViewTextBoxColumn NextMax;
@@ -146,7 +146,7 @@ namespace Troschuetz.Random.Tester
         private DataGridViewTextBoxColumn NextBytes;
         private DataGridViewTextBoxColumn Unit;
 
-        ZedGraphControl zedGraphControl;
+        private ZedGraphControl zedGraphControl;
 
         #endregion Fields
 
@@ -158,7 +158,7 @@ namespace Troschuetz.Random.Tester
         ///   Required method for Designer support - do not modify the contents of this method with
         ///   the code editor.
         /// </summary>
-        void InitializeComponent()
+        private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
@@ -248,9 +248,9 @@ namespace Troschuetz.Random.Tester
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaximum)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // tabPageGenerators
-            // 
+            //
             this.tabPageGenerators.Controls.Add(this.checkBoxBooleans);
             this.tabPageGenerators.Controls.Add(this.checkBoxDoublesMinMax);
             this.tabPageGenerators.Controls.Add(this.checkBoxDoublesMax);
@@ -280,9 +280,9 @@ namespace Troschuetz.Random.Tester
             this.tabPageGenerators.TabIndex = 1;
             this.tabPageGenerators.Text = "Generators";
             this.tabPageGenerators.UseVisualStyleBackColor = true;
-            // 
+            //
             // checkBoxBooleans
-            // 
+            //
             this.checkBoxBooleans.AutoSize = true;
             this.checkBoxBooleans.Location = new System.Drawing.Point(946, 47);
             this.checkBoxBooleans.Name = "checkBoxBooleans";
@@ -291,9 +291,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxBooleans.Text = "Booleans()";
             this.checkBoxBooleans.UseVisualStyleBackColor = true;
             this.checkBoxBooleans.CheckedChanged += new System.EventHandler(this.CheckBoxBooleans_CheckedChanged);
-            // 
+            //
             // checkBoxDoublesMinMax
-            // 
+            //
             this.checkBoxDoublesMinMax.AutoSize = true;
             this.checkBoxDoublesMinMax.Location = new System.Drawing.Point(785, 72);
             this.checkBoxDoublesMinMax.Name = "checkBoxDoublesMinMax";
@@ -302,9 +302,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxDoublesMinMax.Text = "DistributedDoubles(-99,99)";
             this.checkBoxDoublesMinMax.UseVisualStyleBackColor = true;
             this.checkBoxDoublesMinMax.CheckedChanged += new System.EventHandler(this.CheckBoxDoublesMinMax_CheckedChanged);
-            // 
+            //
             // checkBoxDoublesMax
-            // 
+            //
             this.checkBoxDoublesMax.AutoSize = true;
             this.checkBoxDoublesMax.Location = new System.Drawing.Point(785, 48);
             this.checkBoxDoublesMax.Name = "checkBoxDoublesMax";
@@ -313,9 +313,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxDoublesMax.Text = "DistributedDoubles(99)";
             this.checkBoxDoublesMax.UseVisualStyleBackColor = true;
             this.checkBoxDoublesMax.CheckedChanged += new System.EventHandler(this.CheckBoxDoublesMax_CheckedChanged);
-            // 
+            //
             // checkBoxDoubles
-            // 
+            //
             this.checkBoxDoubles.AutoSize = true;
             this.checkBoxDoubles.Checked = true;
             this.checkBoxDoubles.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -326,9 +326,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxDoubles.Text = "DistributedDoubles()";
             this.checkBoxDoubles.UseVisualStyleBackColor = true;
             this.checkBoxDoubles.CheckedChanged += new System.EventHandler(this.CheckBoxDoubles_CheckedChanged);
-            // 
+            //
             // checkBoxIntegersMinMax
-            // 
+            //
             this.checkBoxIntegersMinMax.AutoSize = true;
             this.checkBoxIntegersMinMax.Location = new System.Drawing.Point(625, 72);
             this.checkBoxIntegersMinMax.Name = "checkBoxIntegersMinMax";
@@ -337,9 +337,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxIntegersMinMax.Text = "DistributedIntegers(-99,99)";
             this.checkBoxIntegersMinMax.UseVisualStyleBackColor = true;
             this.checkBoxIntegersMinMax.CheckedChanged += new System.EventHandler(this.CheckBoxIntegersMinMax_CheckedChanged);
-            // 
+            //
             // checkBoxIntegersMax
-            // 
+            //
             this.checkBoxIntegersMax.AutoSize = true;
             this.checkBoxIntegersMax.Location = new System.Drawing.Point(625, 48);
             this.checkBoxIntegersMax.Name = "checkBoxIntegersMax";
@@ -348,9 +348,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxIntegersMax.Text = "DistributedIntegers(99)";
             this.checkBoxIntegersMax.UseVisualStyleBackColor = true;
             this.checkBoxIntegersMax.CheckedChanged += new System.EventHandler(this.CheckBoxIntegersMax_CheckedChanged);
-            // 
+            //
             // checkBoxIntegers
-            // 
+            //
             this.checkBoxIntegers.AutoSize = true;
             this.checkBoxIntegers.Checked = true;
             this.checkBoxIntegers.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -361,9 +361,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxIntegers.Text = "DistributedIntegers()";
             this.checkBoxIntegers.UseVisualStyleBackColor = true;
             this.checkBoxIntegers.CheckedChanged += new System.EventHandler(this.CheckBoxIntegers_CheckedChanged);
-            // 
+            //
             // checkBoxNextBytes
-            // 
+            //
             this.checkBoxNextBytes.AutoSize = true;
             this.checkBoxNextBytes.Location = new System.Drawing.Point(946, 70);
             this.checkBoxNextBytes.Name = "checkBoxNextBytes";
@@ -372,9 +372,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxNextBytes.Text = "NextBytes(byte[64])";
             this.checkBoxNextBytes.UseVisualStyleBackColor = true;
             this.checkBoxNextBytes.CheckedChanged += new System.EventHandler(this.CheckBoxNextBytes_CheckedChanged);
-            // 
+            //
             // checkBoxNextBoolean
-            // 
+            //
             this.checkBoxNextBoolean.AutoSize = true;
             this.checkBoxNextBoolean.Checked = true;
             this.checkBoxNextBoolean.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -385,9 +385,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxNextBoolean.Text = "NextBoolean()";
             this.checkBoxNextBoolean.UseVisualStyleBackColor = true;
             this.checkBoxNextBoolean.CheckedChanged += new System.EventHandler(this.CheckBoxNextBoolean_CheckedChanged);
-            // 
+            //
             // checkBoxNextDoubleMinMax
-            // 
+            //
             this.checkBoxNextDoubleMinMax.AutoSize = true;
             this.checkBoxNextDoubleMinMax.Location = new System.Drawing.Point(500, 72);
             this.checkBoxNextDoubleMinMax.Name = "checkBoxNextDoubleMinMax";
@@ -396,9 +396,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxNextDoubleMinMax.Text = "NextDouble(-99,99)";
             this.checkBoxNextDoubleMinMax.UseVisualStyleBackColor = true;
             this.checkBoxNextDoubleMinMax.CheckedChanged += new System.EventHandler(this.CheckBoxNextDoubleMinMax_CheckedChanged);
-            // 
+            //
             // checkBoxNextDoubleMax
-            // 
+            //
             this.checkBoxNextDoubleMax.AutoSize = true;
             this.checkBoxNextDoubleMax.Location = new System.Drawing.Point(500, 48);
             this.checkBoxNextDoubleMax.Name = "checkBoxNextDoubleMax";
@@ -407,9 +407,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxNextDoubleMax.Text = "NextDouble(99)";
             this.checkBoxNextDoubleMax.UseVisualStyleBackColor = true;
             this.checkBoxNextDoubleMax.CheckedChanged += new System.EventHandler(this.CheckBoxNextDoubleMax_CheckedChanged);
-            // 
+            //
             // checkBoxNextMinMax
-            // 
+            //
             this.checkBoxNextMinMax.AutoSize = true;
             this.checkBoxNextMinMax.Location = new System.Drawing.Point(408, 72);
             this.checkBoxNextMinMax.Name = "checkBoxNextMinMax";
@@ -418,9 +418,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxNextMinMax.Text = "Next(-99,99)";
             this.checkBoxNextMinMax.UseVisualStyleBackColor = true;
             this.checkBoxNextMinMax.CheckedChanged += new System.EventHandler(this.CheckBoxNextMinMax_CheckedChanged);
-            // 
+            //
             // checkBoxNextDouble
-            // 
+            //
             this.checkBoxNextDouble.AutoSize = true;
             this.checkBoxNextDouble.Checked = true;
             this.checkBoxNextDouble.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -431,9 +431,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxNextDouble.Text = "NextDouble()";
             this.checkBoxNextDouble.UseVisualStyleBackColor = true;
             this.checkBoxNextDouble.CheckedChanged += new System.EventHandler(this.CheckBoxNextDouble_CheckedChanged);
-            // 
+            //
             // checkBoxNextMax
-            // 
+            //
             this.checkBoxNextMax.AutoSize = true;
             this.checkBoxNextMax.Location = new System.Drawing.Point(408, 48);
             this.checkBoxNextMax.Name = "checkBoxNextMax";
@@ -442,9 +442,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxNextMax.Text = "Next(99)";
             this.checkBoxNextMax.UseVisualStyleBackColor = true;
             this.checkBoxNextMax.CheckedChanged += new System.EventHandler(this.CheckBoxNextMax_CheckedChanged);
-            // 
+            //
             // checkBoxNext
-            // 
+            //
             this.checkBoxNext.AutoSize = true;
             this.checkBoxNext.Checked = true;
             this.checkBoxNext.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -455,9 +455,9 @@ namespace Troschuetz.Random.Tester
             this.checkBoxNext.Text = "Next()";
             this.checkBoxNext.UseVisualStyleBackColor = true;
             this.checkBoxNext.CheckedChanged += new System.EventHandler(this.CheckBoxNext_CheckedChanged);
-            // 
+            //
             // dataGridViewGenerators
-            // 
+            //
             this.dataGridViewGenerators.AllowUserToAddRows = false;
             this.dataGridViewGenerators.AllowUserToDeleteRows = false;
             this.dataGridViewGenerators.AllowUserToResizeColumns = false;
@@ -490,146 +490,146 @@ namespace Troschuetz.Random.Tester
             this.dataGridViewGenerators.ShowEditingIcon = false;
             this.dataGridViewGenerators.Size = new System.Drawing.Size(1033, 545);
             this.dataGridViewGenerators.TabIndex = 11;
-            // 
+            //
             // Generator
-            // 
+            //
             this.Generator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Generator.Frozen = true;
             this.Generator.HeaderText = "Generator";
             this.Generator.Name = "Generator";
             this.Generator.ReadOnly = true;
             this.Generator.Width = 79;
-            // 
+            //
             // Next
-            // 
+            //
             this.Next.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Next.HeaderText = "Next()";
             this.Next.Name = "Next";
             this.Next.ReadOnly = true;
             this.Next.Width = 60;
-            // 
+            //
             // NextMax
-            // 
+            //
             this.NextMax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.NextMax.HeaderText = "Next(99)";
             this.NextMax.Name = "NextMax";
             this.NextMax.ReadOnly = true;
             this.NextMax.Visible = false;
-            // 
+            //
             // NextMinMax
-            // 
+            //
             this.NextMinMax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.NextMinMax.HeaderText = "Next(-99,99)";
             this.NextMinMax.Name = "NextMinMax";
             this.NextMinMax.ReadOnly = true;
             this.NextMinMax.Visible = false;
-            // 
+            //
             // NextDouble
-            // 
+            //
             this.NextDouble.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.NextDouble.HeaderText = "NextDouble()";
             this.NextDouble.Name = "NextDouble";
             this.NextDouble.ReadOnly = true;
             this.NextDouble.Width = 94;
-            // 
+            //
             // NextDoubleMax
-            // 
+            //
             this.NextDoubleMax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.NextDoubleMax.HeaderText = "NextDouble(99)";
             this.NextDoubleMax.Name = "NextDoubleMax";
             this.NextDoubleMax.ReadOnly = true;
             this.NextDoubleMax.Visible = false;
-            // 
+            //
             // NextDoubleMinMax
-            // 
+            //
             this.NextDoubleMinMax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.NextDoubleMinMax.HeaderText = "NextDouble(-99,99)";
             this.NextDoubleMinMax.Name = "NextDoubleMinMax";
             this.NextDoubleMinMax.ReadOnly = true;
             this.NextDoubleMinMax.Visible = false;
-            // 
+            //
             // Integers
-            // 
+            //
             this.Integers.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Integers.HeaderText = "DistributedIntegers()";
             this.Integers.Name = "Integers";
             this.Integers.ReadOnly = true;
             this.Integers.Width = 126;
-            // 
+            //
             // IntegersMax
-            // 
+            //
             this.IntegersMax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.IntegersMax.HeaderText = "DistributedIntegers(99)";
             this.IntegersMax.Name = "IntegersMax";
             this.IntegersMax.ReadOnly = true;
             this.IntegersMax.Visible = false;
-            // 
+            //
             // IntegersMinMax
-            // 
+            //
             this.IntegersMinMax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.IntegersMinMax.HeaderText = "DistributedIntegers(-99,99)";
             this.IntegersMinMax.Name = "IntegersMinMax";
             this.IntegersMinMax.ReadOnly = true;
             this.IntegersMinMax.Visible = false;
-            // 
+            //
             // Doubles
-            // 
+            //
             this.Doubles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Doubles.HeaderText = "DistributedDoubles()";
             this.Doubles.Name = "Doubles";
             this.Doubles.ReadOnly = true;
             this.Doubles.Width = 127;
-            // 
+            //
             // DoublesMax
-            // 
+            //
             this.DoublesMax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.DoublesMax.HeaderText = "DistributedDoubles(99)";
             this.DoublesMax.Name = "DoublesMax";
             this.DoublesMax.ReadOnly = true;
             this.DoublesMax.Visible = false;
-            // 
+            //
             // DoublesMinMax
-            // 
+            //
             this.DoublesMinMax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.DoublesMinMax.HeaderText = "DistributedDoubles(-99,99)";
             this.DoublesMinMax.Name = "DoublesMinMax";
             this.DoublesMinMax.ReadOnly = true;
             this.DoublesMinMax.Visible = false;
-            // 
+            //
             // NextBoolean
-            // 
+            //
             this.NextBoolean.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.NextBoolean.HeaderText = "NextBoolean()";
             this.NextBoolean.Name = "NextBoolean";
             this.NextBoolean.ReadOnly = true;
             this.NextBoolean.Width = 99;
-            // 
+            //
             // Booleans
-            // 
+            //
             this.Booleans.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Booleans.HeaderText = "Booleans()";
             this.Booleans.Name = "Booleans";
             this.Booleans.ReadOnly = true;
             this.Booleans.Visible = false;
-            // 
+            //
             // NextBytes
-            // 
+            //
             this.NextBytes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.NextBytes.HeaderText = "NextBytes(byte[64])";
             this.NextBytes.Name = "NextBytes";
             this.NextBytes.ReadOnly = true;
             this.NextBytes.Visible = false;
-            // 
+            //
             // Unit
-            // 
+            //
             this.Unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Unit.HeaderText = "";
             this.Unit.Name = "Unit";
             this.Unit.ReadOnly = true;
             this.Unit.Width = 19;
-            // 
+            //
             // numericUpDownGenSamples
-            // 
+            //
             this.numericUpDownGenSamples.Location = new System.Drawing.Point(312, 64);
             this.numericUpDownGenSamples.Maximum = new decimal(new int[] {
             100000000,
@@ -650,60 +650,60 @@ namespace Troschuetz.Random.Tester
             0,
             0,
             0});
-            // 
+            //
             // label7
-            // 
+            //
             this.label7.Location = new System.Drawing.Point(208, 64);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(112, 16);
             this.label7.TabIndex = 8;
             this.label7.Text = "Number of samples:";
-            // 
+            //
             // buttonTestGenerators
-            // 
+            //
             this.buttonTestGenerators.Location = new System.Drawing.Point(208, 88);
             this.buttonTestGenerators.Name = "buttonTestGenerators";
             this.buttonTestGenerators.Size = new System.Drawing.Size(184, 24);
             this.buttonTestGenerators.TabIndex = 6;
             this.buttonTestGenerators.Text = "Test selected generators";
             this.buttonTestGenerators.Click += new System.EventHandler(this.ButtonTestGenerators_Click);
-            // 
+            //
             // checkedListBoxGenerators
-            // 
+            //
             this.checkedListBoxGenerators.CheckOnClick = true;
             this.checkedListBoxGenerators.Location = new System.Drawing.Point(8, 24);
             this.checkedListBoxGenerators.Name = "checkedListBoxGenerators";
             this.checkedListBoxGenerators.Size = new System.Drawing.Size(184, 649);
             this.checkedListBoxGenerators.TabIndex = 5;
-            // 
+            //
             // label6
-            // 
+            //
             this.label6.Location = new System.Drawing.Point(8, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(136, 16);
             this.label6.TabIndex = 4;
             this.label6.Text = "Select generators to test:";
-            // 
+            //
             // buttonSelect
-            // 
+            //
             this.buttonSelect.Location = new System.Drawing.Point(208, 24);
             this.buttonSelect.Name = "buttonSelect";
             this.buttonSelect.Size = new System.Drawing.Size(88, 24);
             this.buttonSelect.TabIndex = 6;
             this.buttonSelect.Text = "Select all";
             this.buttonSelect.Click += new System.EventHandler(this.ButtonSelect_Click);
-            // 
+            //
             // buttonDeselect
-            // 
+            //
             this.buttonDeselect.Location = new System.Drawing.Point(304, 24);
             this.buttonDeselect.Name = "buttonDeselect";
             this.buttonDeselect.Size = new System.Drawing.Size(88, 24);
             this.buttonDeselect.TabIndex = 6;
             this.buttonDeselect.Text = "Deselect all";
             this.buttonDeselect.Click += new System.EventHandler(this.ButtonDeselect_Click);
-            // 
+            //
             // tabPageDistributions2
-            // 
+            //
             this.tabPageDistributions2.Controls.Add(this.comboBoxGenerator2);
             this.tabPageDistributions2.Controls.Add(this.label9);
             this.tabPageDistributions2.Controls.Add(this.richTextBoxDistributionTest);
@@ -721,34 +721,34 @@ namespace Troschuetz.Random.Tester
             this.tabPageDistributions2.TabIndex = 2;
             this.tabPageDistributions2.Text = "Distributions II";
             this.tabPageDistributions2.UseVisualStyleBackColor = true;
-            // 
+            //
             // comboBoxGenerator2
-            // 
+            //
             this.comboBoxGenerator2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxGenerator2.Location = new System.Drawing.Point(208, 24);
             this.comboBoxGenerator2.Name = "comboBoxGenerator2";
             this.comboBoxGenerator2.Size = new System.Drawing.Size(184, 21);
             this.comboBoxGenerator2.TabIndex = 19;
-            // 
+            //
             // label9
-            // 
+            //
             this.label9.Location = new System.Drawing.Point(208, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(168, 16);
             this.label9.TabIndex = 20;
             this.label9.Text = "Select an underlying generator :";
-            // 
+            //
             // richTextBoxDistributionTest
-            // 
+            //
             this.richTextBoxDistributionTest.Location = new System.Drawing.Point(208, 88);
             this.richTextBoxDistributionTest.Name = "richTextBoxDistributionTest";
             this.richTextBoxDistributionTest.ReadOnly = true;
             this.richTextBoxDistributionTest.Size = new System.Drawing.Size(1030, 584);
             this.richTextBoxDistributionTest.TabIndex = 18;
             this.richTextBoxDistributionTest.Text = "";
-            // 
+            //
             // numericUpDownSamples2
-            // 
+            //
             this.numericUpDownSamples2.Location = new System.Drawing.Point(504, 24);
             this.numericUpDownSamples2.Maximum = new decimal(new int[] {
             10000000,
@@ -769,60 +769,60 @@ namespace Troschuetz.Random.Tester
             0,
             0,
             0});
-            // 
+            //
             // label17
-            // 
+            //
             this.label17.Location = new System.Drawing.Point(400, 24);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(112, 16);
             this.label17.TabIndex = 16;
             this.label17.Text = "Number of samples:";
-            // 
+            //
             // buttonTest2
-            // 
+            //
             this.buttonTest2.Location = new System.Drawing.Point(400, 56);
             this.buttonTest2.Name = "buttonTest2";
             this.buttonTest2.Size = new System.Drawing.Size(184, 24);
             this.buttonTest2.TabIndex = 15;
             this.buttonTest2.Text = "Test selected distributions";
             this.buttonTest2.Click += new System.EventHandler(this.ButtonTest2_Click);
-            // 
+            //
             // checkedListBoxDistributions
-            // 
+            //
             this.checkedListBoxDistributions.CheckOnClick = true;
             this.checkedListBoxDistributions.Location = new System.Drawing.Point(8, 23);
             this.checkedListBoxDistributions.Name = "checkedListBoxDistributions";
             this.checkedListBoxDistributions.Size = new System.Drawing.Size(184, 649);
             this.checkedListBoxDistributions.TabIndex = 12;
-            // 
+            //
             // label18
-            // 
+            //
             this.label18.Location = new System.Drawing.Point(8, 7);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(136, 16);
             this.label18.TabIndex = 11;
             this.label18.Text = "Select distributions to test:";
-            // 
+            //
             // buttonSelectAll
-            // 
+            //
             this.buttonSelectAll.Location = new System.Drawing.Point(208, 56);
             this.buttonSelectAll.Name = "buttonSelectAll";
             this.buttonSelectAll.Size = new System.Drawing.Size(88, 24);
             this.buttonSelectAll.TabIndex = 14;
             this.buttonSelectAll.Text = "Select all";
             this.buttonSelectAll.Click += new System.EventHandler(this.ButtonSelectAll_Click);
-            // 
+            //
             // buttonDeselectAll
-            // 
+            //
             this.buttonDeselectAll.Location = new System.Drawing.Point(304, 56);
             this.buttonDeselectAll.Name = "buttonDeselectAll";
             this.buttonDeselectAll.Size = new System.Drawing.Size(88, 24);
             this.buttonDeselectAll.TabIndex = 13;
             this.buttonDeselectAll.Text = "Deselect all";
             this.buttonDeselectAll.Click += new System.EventHandler(this.ButtonDeselectAll_Click);
-            // 
+            //
             // tabPageDistributions1
-            // 
+            //
             this.tabPageDistributions1.Controls.Add(this.comboBoxGenerator);
             this.tabPageDistributions1.Controls.Add(this.label1);
             this.tabPageDistributions1.Controls.Add(this.comboBoxDistribution);
@@ -849,93 +849,93 @@ namespace Troschuetz.Random.Tester
             this.tabPageDistributions1.TabIndex = 0;
             this.tabPageDistributions1.Text = "Distributions I";
             this.tabPageDistributions1.UseVisualStyleBackColor = true;
-            // 
+            //
             // comboBoxGenerator
-            // 
+            //
             this.comboBoxGenerator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxGenerator.Location = new System.Drawing.Point(464, 8);
             this.comboBoxGenerator.Name = "comboBoxGenerator";
             this.comboBoxGenerator.Size = new System.Drawing.Size(184, 21);
             this.comboBoxGenerator.TabIndex = 11;
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.Location = new System.Drawing.Point(304, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(168, 16);
             this.label1.TabIndex = 12;
             this.label1.Text = "Select an underlying generator :";
-            // 
+            //
             // comboBoxDistribution
-            // 
+            //
             this.comboBoxDistribution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDistribution.Location = new System.Drawing.Point(112, 8);
             this.comboBoxDistribution.Name = "comboBoxDistribution";
             this.comboBoxDistribution.Size = new System.Drawing.Size(184, 21);
             this.comboBoxDistribution.TabIndex = 1;
-            // 
+            //
             // label8
-            // 
+            //
             this.label8.Location = new System.Drawing.Point(8, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(112, 16);
             this.label8.TabIndex = 2;
             this.label8.Text = "Select a distribution:";
-            // 
+            //
             // groupBoxDistribution1
-            // 
+            //
             this.groupBoxDistribution1.Location = new System.Drawing.Point(8, 40);
             this.groupBoxDistribution1.Name = "groupBoxDistribution1";
             this.groupBoxDistribution1.Size = new System.Drawing.Size(200, 24);
             this.groupBoxDistribution1.TabIndex = 3;
             this.groupBoxDistribution1.TabStop = false;
             this.groupBoxDistribution1.Text = "Distribution Characteristics";
-            // 
+            //
             // groupBoxDistribution2
-            // 
+            //
             this.groupBoxDistribution2.Location = new System.Drawing.Point(8, 72);
             this.groupBoxDistribution2.Name = "groupBoxDistribution2";
             this.groupBoxDistribution2.Size = new System.Drawing.Size(200, 24);
             this.groupBoxDistribution2.TabIndex = 4;
             this.groupBoxDistribution2.TabStop = false;
             this.groupBoxDistribution2.Text = "Distribution Parameters";
-            // 
+            //
             // buttonClear
-            // 
+            //
             this.buttonClear.Location = new System.Drawing.Point(112, 473);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(96, 24);
             this.buttonClear.TabIndex = 6;
             this.buttonClear.Text = "Clear histogram";
             this.buttonClear.Click += new System.EventHandler(this.ButtonClear_Click);
-            // 
+            //
             // label4
-            // 
+            //
             this.label4.Location = new System.Drawing.Point(8, 425);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 16);
             this.label4.TabIndex = 5;
             this.label4.Text = "Histogram minimum:";
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.Location = new System.Drawing.Point(8, 361);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 16);
             this.label2.TabIndex = 5;
             this.label2.Text = "Histogram steps:";
-            // 
+            //
             // buttonTest
-            // 
+            //
             this.buttonTest.Location = new System.Drawing.Point(8, 473);
             this.buttonTest.Name = "buttonTest";
             this.buttonTest.Size = new System.Drawing.Size(96, 24);
             this.buttonTest.TabIndex = 6;
             this.buttonTest.Text = "Test distribution";
             this.buttonTest.Click += new System.EventHandler(this.ButtonTest_Click);
-            // 
+            //
             // numericUpDownSamples
-            // 
+            //
             this.numericUpDownSamples.Location = new System.Drawing.Point(112, 337);
             this.numericUpDownSamples.Maximum = new decimal(new int[] {
             10000000,
@@ -956,9 +956,9 @@ namespace Troschuetz.Random.Tester
             0,
             0,
             0});
-            // 
+            //
             // numericUpDownSteps
-            // 
+            //
             this.numericUpDownSteps.Location = new System.Drawing.Point(112, 361);
             this.numericUpDownSteps.Maximum = new decimal(new int[] {
             10000,
@@ -979,9 +979,9 @@ namespace Troschuetz.Random.Tester
             0,
             0,
             0});
-            // 
+            //
             // checkBoxSmooth
-            // 
+            //
             this.checkBoxSmooth.Checked = true;
             this.checkBoxSmooth.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxSmooth.Location = new System.Drawing.Point(8, 385);
@@ -990,18 +990,18 @@ namespace Troschuetz.Random.Tester
             this.checkBoxSmooth.TabIndex = 10;
             this.checkBoxSmooth.Text = "Smooth histogram curves";
             this.checkBoxSmooth.CheckedChanged += new System.EventHandler(this.CheckBoxSmooth_CheckedChanged);
-            // 
+            //
             // checkBoxHistogramBounds
-            // 
+            //
             this.checkBoxHistogramBounds.Location = new System.Drawing.Point(8, 401);
             this.checkBoxHistogramBounds.Name = "checkBoxHistogramBounds";
             this.checkBoxHistogramBounds.Size = new System.Drawing.Size(200, 16);
             this.checkBoxHistogramBounds.TabIndex = 9;
             this.checkBoxHistogramBounds.Text = "Specify fixed histogram bounds";
             this.checkBoxHistogramBounds.CheckedChanged += new System.EventHandler(this.CheckBoxHistogramBounds_CheckedChanged);
-            // 
+            //
             // numericUpDownMinimum
-            // 
+            //
             this.numericUpDownMinimum.Enabled = false;
             this.numericUpDownMinimum.Location = new System.Drawing.Point(120, 425);
             this.numericUpDownMinimum.Maximum = new decimal(new int[] {
@@ -1025,17 +1025,17 @@ namespace Troschuetz.Random.Tester
             -2147483648});
             this.numericUpDownMinimum.ValueChanged += new System.EventHandler(this.NumericUpDownMinimum_ValueChanged);
             this.numericUpDownMinimum.Validated += new System.EventHandler(this.NumericUpDownMinimum_Validated);
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.Location = new System.Drawing.Point(8, 337);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(112, 16);
             this.label3.TabIndex = 5;
             this.label3.Text = "Number of samples:";
-            // 
+            //
             // numericUpDownMaximum
-            // 
+            //
             this.numericUpDownMaximum.Enabled = false;
             this.numericUpDownMaximum.Location = new System.Drawing.Point(120, 449);
             this.numericUpDownMaximum.Maximum = new decimal(new int[] {
@@ -1059,26 +1059,26 @@ namespace Troschuetz.Random.Tester
             0});
             this.numericUpDownMaximum.ValueChanged += new System.EventHandler(this.NumericUpDownMaximum_ValueChanged);
             this.numericUpDownMaximum.Validated += new System.EventHandler(this.NumericUpDownMaximum_Validated);
-            // 
+            //
             // label5
-            // 
+            //
             this.label5.Location = new System.Drawing.Point(8, 449);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(112, 16);
             this.label5.TabIndex = 5;
             this.label5.Text = "Histogram maximum:";
-            // 
+            //
             // richTextBoxTest
-            // 
+            //
             this.richTextBoxTest.Location = new System.Drawing.Point(8, 505);
             this.richTextBoxTest.Name = "richTextBoxTest";
             this.richTextBoxTest.ReadOnly = true;
             this.richTextBoxTest.Size = new System.Drawing.Size(200, 165);
             this.richTextBoxTest.TabIndex = 8;
             this.richTextBoxTest.Text = "";
-            // 
+            //
             // zedGraphControl
-            // 
+            //
             this.zedGraphControl.Location = new System.Drawing.Point(216, 40);
             this.zedGraphControl.Name = "zedGraphControl";
             this.zedGraphControl.ScrollGrace = 0D;
@@ -1091,9 +1091,9 @@ namespace Troschuetz.Random.Tester
             this.zedGraphControl.Size = new System.Drawing.Size(1025, 630);
             this.zedGraphControl.TabIndex = 0;
             this.zedGraphControl.UseExtendedPrintDialog = true;
-            // 
+            //
             // tabControl1
-            // 
+            //
             this.tabControl1.Controls.Add(this.tabPageDistributions1);
             this.tabControl1.Controls.Add(this.tabPageDistributions2);
             this.tabControl1.Controls.Add(this.tabPageGenerators);
@@ -1102,9 +1102,9 @@ namespace Troschuetz.Random.Tester
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1252, 736);
             this.tabControl1.TabIndex = 11;
-            // 
+            //
             // FormMain
-            // 
+            //
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(1264, 730);
             this.Controls.Add(this.tabControl1);
@@ -1126,7 +1126,6 @@ namespace Troschuetz.Random.Tester
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaximum)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion Windows Form Designer generated code
@@ -1134,7 +1133,7 @@ namespace Troschuetz.Random.Tester
         /// <summary>
         ///   Initializes a new instance of the <see cref="FormMain"/> class.
         /// </summary>
-        FormMain()
+        private FormMain()
         {
             // Required for Windows Form Designer support
             InitializeComponent();
@@ -1152,7 +1151,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="disposing">
         ///   true to release both managed and unmanaged resources; false to release only unmanaged resources.
-        /// </param>       
+        /// </param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -1173,7 +1172,7 @@ namespace Troschuetz.Random.Tester
         ///   The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             try
             {
@@ -1193,7 +1192,7 @@ namespace Troschuetz.Random.Tester
         /// <summary>
         ///   Loads the available random distributions and generators.
         /// </summary>
-        void LoadTroschuetzRandom()
+        private void LoadTroschuetzRandom()
         {
             try
             {
@@ -1286,7 +1285,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="value">The value to format.</param>
         /// <returns>The formatted value.</returns>
-        static string FormatDouble(double value)
+        private static string FormatDouble(double value)
         {
             if (Math.Abs(value) >= 1000000 || (Math.Abs(value) < 0.001 && !TMath.IsZero(value)))
             {
@@ -1302,7 +1301,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ButtonTest_Click(object sender, EventArgs e)
+        private void ButtonTest_Click(object sender, EventArgs e)
         {
             //Adjust GUI.
             comboBoxDistribution.Enabled = false;
@@ -1321,8 +1320,8 @@ namespace Troschuetz.Random.Tester
             Update();
 
             //Generate the samples.
-            var distribution = (IDistribution) currentDistribution;
-            var samples = new double[(int) numericUpDownSamples.Value];
+            var distribution = (IDistribution)currentDistribution;
+            var samples = new double[(int)numericUpDownSamples.Value];
             var watch = new Stopwatch();
             watch.Start();
             for (var index = 0; index < samples.Length; index++)
@@ -1330,7 +1329,7 @@ namespace Troschuetz.Random.Tester
                 samples[index] = distribution.NextDouble();
             }
             watch.Stop();
-            var duration = watch.ElapsedTicks / (double) Stopwatch.Frequency;
+            var duration = watch.ElapsedTicks / (double)Stopwatch.Frequency;
 
             //Determine sum, minimum, maximum and display the last two together with a computed mean value.
             double sum = 0, minimum = double.MaxValue, maximum = double.MinValue;
@@ -1360,8 +1359,8 @@ namespace Troschuetz.Random.Tester
             //If the user wants to apply its own histogram bounds, assign them.
             if (checkBoxHistogramBounds.Checked)
             {
-                minimum = (double) numericUpDownMinimum.Value;
-                maximum = (double) numericUpDownMaximum.Value;
+                minimum = (double)numericUpDownMinimum.Value;
+                maximum = (double)numericUpDownMaximum.Value;
             }
 
             //Compute the range of histogram and generate the histogram values.
@@ -1373,21 +1372,22 @@ namespace Troschuetz.Random.Tester
                 x = new[] { minimum, minimum + double.Epsilon };
                 y = new double[] { samples.Length, 0 };
             }
-            else {
-                x = new double[(int) numericUpDownSteps.Value + 1];
-                y = new double[(int) numericUpDownSteps.Value + 1];
+            else
+            {
+                x = new double[(int)numericUpDownSteps.Value + 1];
+                y = new double[(int)numericUpDownSteps.Value + 1];
 
                 // Compute the histogram intervals (minimum bound of each interval is the x-value of
                 // graph points). The last graph point represents the maximum bound of the last
                 // histogram interval.
                 for (var index = 0; index < x.Length - 1; index++)
                 {
-                    x[index] = minimum + range / (double) numericUpDownSteps.Value * index;
+                    x[index] = minimum + range / (double)numericUpDownSteps.Value * index;
                 }
                 x[x.Length - 1] = maximum;
 
                 // Iterate over samples and increase the histogram interval they lie inside.
-                var samplesUsed = (int) numericUpDownSamples.Value;
+                var samplesUsed = (int)numericUpDownSamples.Value;
                 foreach (var s in samples)
                 {
                     if (s < minimum || s > maximum)
@@ -1402,7 +1402,7 @@ namespace Troschuetz.Random.Tester
                     }
                     else
                     {
-                        var idx = (int) Math.Floor((s - minimum) / range * (double) numericUpDownSteps.Value);
+                        var idx = (int)Math.Floor((s - minimum) / range * (double)numericUpDownSteps.Value);
                         idx = (idx < 0) ? 0 : (idx > y.Length - 2) ? y.Length - 2 : idx;
                         y[idx]++;
                     }
@@ -1412,7 +1412,7 @@ namespace Troschuetz.Random.Tester
                 // of samples
                 for (var index = 0; index < y.Length - 1; index++)
                 {
-                    y[index] = y[index] / samplesUsed * (double) numericUpDownSteps.Value;
+                    y[index] = y[index] / samplesUsed * (double)numericUpDownSteps.Value;
                 }
 
                 // Assign the y-value of the last but one graph point to the last one, so that the
@@ -1448,7 +1448,8 @@ namespace Troschuetz.Random.Tester
             {
                 color = Color.FromArgb(0, 0, 255 - curves * 10);
             }
-            else {
+            else
+            {
                 color = Color.Black;
             }
             var lineItem = zedGraphControl.GraphPane.AddCurve(label, x, y, color, SymbolType.None);
@@ -1476,7 +1477,7 @@ namespace Troschuetz.Random.Tester
         ///   Create labels to display the values of all properties of Distribution type that are of
         ///   type <see cref="double"/> or array of <see cref="double"/>.
         /// </summary>
-        void InitializeGroupBoxDistribution1()
+        private void InitializeGroupBoxDistribution1()
         {
             var propertyInfos = typeDistribution.GetProperties();
             var count = 0;
@@ -1516,11 +1517,11 @@ namespace Troschuetz.Random.Tester
         ///   Updates the displayed values of Distribution properties of the currently selected
         ///   inheritor of Distribution type.
         /// </summary>
-        void UpdateGroupBoxDistribution1()
+        private void UpdateGroupBoxDistribution1()
         {
             for (var index = 0; index < groupBoxDistribution1.Controls.Count; index++)
             {
-                var label = (Label) groupBoxDistribution1.Controls[index];
+                var label = (Label)groupBoxDistribution1.Controls[index];
                 if (label.Name == "")
                 {
                     continue;
@@ -1531,7 +1532,7 @@ namespace Troschuetz.Random.Tester
                 {
                     try
                     {
-                        var value = (double) propertyInfo.GetValue(currentDistribution, null);
+                        var value = (double)propertyInfo.GetValue(currentDistribution, null);
                         if (double.IsNaN(value))
                         {
                             label.Text = "Undefined";
@@ -1544,7 +1545,8 @@ namespace Troschuetz.Random.Tester
                         {
                             label.Text = "Neg. infinity";
                         }
-                        else {
+                        else
+                        {
                             label.Text = FormatDouble(value);
                         }
                     }
@@ -1558,7 +1560,7 @@ namespace Troschuetz.Random.Tester
                 {
                     try
                     {
-                        var values = (double[]) propertyInfo.GetValue(currentDistribution, null);
+                        var values = (double[])propertyInfo.GetValue(currentDistribution, null);
                         label.Text = "";
                         for (var index2 = 0; index2 < values.Length; index2++)
                         {
@@ -1583,7 +1585,7 @@ namespace Troschuetz.Random.Tester
         ///   selected inheritor of Distribution type that are of type <see cref="double"/> or
         ///   <see cref="int"/> and not defined by the Distribution type.
         /// </summary>
-        void UpdateGroupBoxDistribution2()
+        private void UpdateGroupBoxDistribution2()
         {
             groupBoxDistribution2.Controls.Clear();
 
@@ -1622,7 +1624,8 @@ namespace Troschuetz.Random.Tester
                     num.Minimum = decimal.MinValue;
                     num.Maximum = decimal.MaxValue;
                 }
-                else {
+                else
+                {
                     num.Minimum = new decimal(int.MinValue);
                     num.Maximum = new decimal(int.MaxValue);
                 }
@@ -1632,17 +1635,19 @@ namespace Troschuetz.Random.Tester
                 num.CausesValidation = true;
                 if (propertyInfo.PropertyType == typeof(double))
                 {
-                    num.Value = new decimal((double) propertyInfo.GetValue(currentDistribution, null));
+                    num.Value = new decimal((double)propertyInfo.GetValue(currentDistribution, null));
                 }
-                else {
-                    num.Value = new decimal((int) propertyInfo.GetValue(currentDistribution, null));
+                else
+                {
+                    num.Value = new decimal((int)propertyInfo.GetValue(currentDistribution, null));
                 }
                 if (propertyInfo.PropertyType == typeof(double))
                 {
                     num.Validated += Double_Validated;
                     num.ValueChanged += Double_ValueChanged;
                 }
-                else {
+                else
+                {
                     num.Validated += Int_Validated;
                     num.ValueChanged += Int_ValueChanged;
                 }
@@ -1658,7 +1663,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ComboBoxDistribution_SelectedValueChanged(object sender, EventArgs e)
+        private void ComboBoxDistribution_SelectedValueChanged(object sender, EventArgs e)
         {
             if (distributions[comboBoxDistribution.Text].GetConstructor(new[] { typeGenerator }) != null)
             {
@@ -1667,7 +1672,8 @@ namespace Troschuetz.Random.Tester
                 {
                     currentDistribution = Activator.CreateInstance(distributions[comboBoxDistribution.Text]);
                 }
-                else {
+                else
+                {
                     currentDistribution = Activator.CreateInstance(distributions[comboBoxDistribution.Text],
                                                                    new[] {
                                                                              Activator.CreateInstance(
@@ -1675,7 +1681,8 @@ namespace Troschuetz.Random.Tester
                                                                          });
                 }
             }
-            else {
+            else
+            {
                 comboBoxGenerator.Enabled = false;
                 currentDistribution = Activator.CreateInstance(distributions[comboBoxDistribution.Text]);
             }
@@ -1689,14 +1696,15 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ComboBoxGenerator_SelectedValueChanged(object sender, EventArgs e)
+        private void ComboBoxGenerator_SelectedValueChanged(object sender, EventArgs e)
         {
             object newDistribution;
             if (comboBoxGenerator.SelectedIndex == 0)
             {
                 newDistribution = Activator.CreateInstance(distributions[comboBoxDistribution.Text]);
             }
-            else {
+            else
+            {
                 newDistribution = Activator.CreateInstance(distributions[comboBoxDistribution.Text],
                                                            new[] {
                                                                      Activator.CreateInstance(generators[comboBoxGenerator.Text])
@@ -1719,7 +1727,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void Int_Validated(object sender, EventArgs e)
+        private void Int_Validated(object sender, EventArgs e)
         {
             Int_ValueChanged(sender, e);
         }
@@ -1731,23 +1739,24 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void Int_ValueChanged(object sender, EventArgs e)
+        private void Int_ValueChanged(object sender, EventArgs e)
         {
-            var num = (NumericUpDown) sender;
+            var num = (NumericUpDown)sender;
             var propertyInfo = currentDistribution.GetType().GetProperty(num.Name);
             var methodInfo = currentDistribution.GetType().GetMethod("IsValid" + num.Name);
 
-            if (methodInfo == null || (bool) methodInfo.Invoke(currentDistribution, new object[] { (int) num.Value }))
+            if (methodInfo == null || (bool)methodInfo.Invoke(currentDistribution, new object[] { (int)num.Value }))
             {
                 // Either there is no method that checks for validity or the new value is valid.
                 // Assign the new value to the distribution and update the GroupBox with base class infos.
-                propertyInfo.SetValue(currentDistribution, (int) num.Value, null);
+                propertyInfo.SetValue(currentDistribution, (int)num.Value, null);
                 UpdateGroupBoxDistribution1();
             }
-            else {
+            else
+            {
                 // The new value isn't valid. Reassign the current value of the distribution to the
                 // NumericUpDown control.
-                num.Value = new decimal((int) propertyInfo.GetValue(currentDistribution, null));
+                num.Value = new decimal((int)propertyInfo.GetValue(currentDistribution, null));
             }
         }
 
@@ -1758,7 +1767,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void Double_Validated(object sender, EventArgs e)
+        private void Double_Validated(object sender, EventArgs e)
         {
             Double_ValueChanged(sender, e);
         }
@@ -1770,23 +1779,24 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void Double_ValueChanged(object sender, EventArgs e)
+        private void Double_ValueChanged(object sender, EventArgs e)
         {
-            var num = (NumericUpDown) sender;
+            var num = (NumericUpDown)sender;
             var propertyInfo = currentDistribution.GetType().GetProperty(num.Name);
             var methodInfo = currentDistribution.GetType().GetMethod("IsValid" + num.Name);
 
-            if (methodInfo == null || (bool) methodInfo.Invoke(currentDistribution, new object[] { (double) num.Value }))
+            if (methodInfo == null || (bool)methodInfo.Invoke(currentDistribution, new object[] { (double)num.Value }))
             {
                 // Either there is no method that checks for validity or the new value is valid.
                 // Assign the new value to the distribution and update the GroupBox with base class infos.
-                propertyInfo.SetValue(currentDistribution, (double) num.Value, null);
+                propertyInfo.SetValue(currentDistribution, (double)num.Value, null);
                 UpdateGroupBoxDistribution1();
             }
-            else {
+            else
+            {
                 // The new value isn't valid. Reassign the current value of the distribution to the
                 // NumericUpDown control.
-                num.Value = new decimal((double) propertyInfo.GetValue(currentDistribution, null));
+                num.Value = new decimal((double)propertyInfo.GetValue(currentDistribution, null));
             }
         }
 
@@ -1795,7 +1805,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxHistogramBounds_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxHistogramBounds_CheckedChanged(object sender, EventArgs e)
         {
             numericUpDownMinimum.Enabled = checkBoxHistogramBounds.Checked;
             numericUpDownMaximum.Enabled = checkBoxHistogramBounds.Checked;
@@ -1807,7 +1817,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void NumericUpDownMinimum_Validated(object sender, EventArgs e)
+        private void NumericUpDownMinimum_Validated(object sender, EventArgs e)
         {
             NumericUpDownMinimum_ValueChanged(sender, e);
         }
@@ -1818,7 +1828,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void NumericUpDownMinimum_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownMinimum_ValueChanged(object sender, EventArgs e)
         {
             if (numericUpDownMinimum.Value >= numericUpDownMaximum.Value)
             {
@@ -1832,7 +1842,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void NumericUpDownMaximum_Validated(object sender, EventArgs e)
+        private void NumericUpDownMaximum_Validated(object sender, EventArgs e)
         {
             NumericUpDownMaximum_ValueChanged(sender, e);
         }
@@ -1843,7 +1853,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void NumericUpDownMaximum_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownMaximum_ValueChanged(object sender, EventArgs e)
         {
             if (numericUpDownMaximum.Value <= numericUpDownMinimum.Value)
             {
@@ -1856,11 +1866,11 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxSmooth_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxSmooth_CheckedChanged(object sender, EventArgs e)
         {
             foreach (var t in zedGraphControl.GraphPane.CurveList)
             {
-                var lineItem = (LineItem) t;
+                var lineItem = (LineItem)t;
                 lineItem.Line.IsSmooth = checkBoxSmooth.Checked;
                 lineItem.Line.SmoothTension = 1.0F;
             }
@@ -1872,7 +1882,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ButtonClear_Click(object sender, EventArgs e)
+        private void ButtonClear_Click(object sender, EventArgs e)
         {
             zedGraphControl.GraphPane.CurveList.Clear();
             zedGraphControl.Invalidate();
@@ -1887,7 +1897,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ButtonSelectAll_Click(object sender, EventArgs e)
+        private void ButtonSelectAll_Click(object sender, EventArgs e)
         {
             for (var index = 0; index < checkedListBoxDistributions.Items.Count; index++)
             {
@@ -1900,7 +1910,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ButtonDeselectAll_Click(object sender, EventArgs e)
+        private void ButtonDeselectAll_Click(object sender, EventArgs e)
         {
             for (var index = 0; index < checkedListBoxDistributions.Items.Count; index++)
             {
@@ -1913,7 +1923,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ButtonTest2_Click(object sender, EventArgs e)
+        private void ButtonTest2_Click(object sender, EventArgs e)
         {
             richTextBoxDistributionTest.Clear();
             if (checkedListBoxDistributions.CheckedItems.Count == 0)
@@ -1930,7 +1940,7 @@ namespace Troschuetz.Random.Tester
             comboBoxGenerator2.Enabled = false;
             Update();
 
-            var samples = (int) numericUpDownSamples2.Value;
+            var samples = (int)numericUpDownSamples2.Value;
             var watch = new Stopwatch();
             var results = new List<string>(distributions.Count);
 
@@ -1950,7 +1960,7 @@ namespace Troschuetz.Random.Tester
                 {
                     if (comboBoxGenerator2.SelectedIndex == 0)
                     {
-                        distribution = (IDistribution) Activator.CreateInstance(distributions.Values[index]);
+                        distribution = (IDistribution)Activator.CreateInstance(distributions.Values[index]);
                     }
                     else if (distributions.Values[index].GetConstructor(new[] { typeGenerator }) != null)
                     {
@@ -1960,8 +1970,9 @@ namespace Troschuetz.Random.Tester
                                                      new[]
                                                      {Activator.CreateInstance(generators[comboBoxGenerator2.Text])});
                     }
-                    else {
-                        distribution = (IDistribution) Activator.CreateInstance(distributions.Values[index]);
+                    else
+                    {
+                        distribution = (IDistribution)Activator.CreateInstance(distributions.Values[index]);
                         if (richTextBoxDistributionTest.Text == "")
                         {
                             richTextBoxDistributionTest.Text +=
@@ -1979,7 +1990,7 @@ namespace Troschuetz.Random.Tester
                         distribution.NextDouble();
                     }
                     watch.Stop();
-                    var duration = watch.ElapsedTicks / (double) Stopwatch.Frequency;
+                    var duration = watch.ElapsedTicks / (double)Stopwatch.Frequency;
                     results.Add("  " + duration.ToString("00.0000") + " s\t|  " + distributions.Values[index].Name +
                                 "\n");
                 }
@@ -2012,7 +2023,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ButtonTestGenerators_Click(object sender, EventArgs e)
+        private void ButtonTestGenerators_Click(object sender, EventArgs e)
         {
             dataGridViewGenerators.Rows.Clear();
             if (checkedListBoxGenerators.CheckedItems.Count == 0)
@@ -2043,7 +2054,7 @@ namespace Troschuetz.Random.Tester
             Update();
 
             var watch = new Stopwatch();
-            var samples = (int) numericUpDownGenSamples.Value;
+            var samples = (int)numericUpDownGenSamples.Value;
 
             // Do some computation before testing, cause otherwise the first tested generator will
             // have worse results. Guess this needs to be done due to scheduling behaviour of the OS.
@@ -2064,7 +2075,7 @@ namespace Troschuetz.Random.Tester
                 const int testMethodCount = 15;
                 var resultsRow = new string[testMethodCount + 2]; // 1 is for generator name, 1 is for "samples/s" label
                 resultsRow[0] = generators.Values[index].Name;
-                currGen = (IGenerator) Activator.CreateInstance(generators.Values[index]);
+                currGen = (IGenerator)Activator.CreateInstance(generators.Values[index]);
 
                 double samplesPerSec;
 
@@ -2078,7 +2089,7 @@ namespace Troschuetz.Random.Tester
                         currGen.Next();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[1] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2092,7 +2103,7 @@ namespace Troschuetz.Random.Tester
                         currGen.Next(99);
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[2] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2106,7 +2117,7 @@ namespace Troschuetz.Random.Tester
                         currGen.Next(-99, 99);
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[3] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2120,7 +2131,7 @@ namespace Troschuetz.Random.Tester
                         currGen.NextDouble();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[4] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2134,7 +2145,7 @@ namespace Troschuetz.Random.Tester
                         currGen.NextDouble(99.0);
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[5] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2148,7 +2159,7 @@ namespace Troschuetz.Random.Tester
                         currGen.NextDouble(-99.0, 99.0);
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[6] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2163,7 +2174,7 @@ namespace Troschuetz.Random.Tester
                         en.MoveNext();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[7] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2178,7 +2189,7 @@ namespace Troschuetz.Random.Tester
                         en.MoveNext();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[8] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2193,7 +2204,7 @@ namespace Troschuetz.Random.Tester
                         en.MoveNext();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[9] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2208,7 +2219,7 @@ namespace Troschuetz.Random.Tester
                         en.MoveNext();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[10] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2223,7 +2234,7 @@ namespace Troschuetz.Random.Tester
                         en.MoveNext();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[11] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2238,7 +2249,7 @@ namespace Troschuetz.Random.Tester
                         en.MoveNext();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[12] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2252,7 +2263,7 @@ namespace Troschuetz.Random.Tester
                         currGen.NextBoolean();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[13] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2267,7 +2278,7 @@ namespace Troschuetz.Random.Tester
                         en.MoveNext();
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[14] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2282,7 +2293,7 @@ namespace Troschuetz.Random.Tester
                         currGen.NextBytes(bytes);
                     }
                     watch.Stop();
-                    samplesPerSec = Math.Floor(samples / (double) watch.ElapsedTicks * Stopwatch.Frequency);
+                    samplesPerSec = Math.Floor(samples / (double)watch.ElapsedTicks * Stopwatch.Frequency);
                     resultsRow[15] = samplesPerSec.ToString("#,0");
                 }
 
@@ -2318,7 +2329,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ButtonSelect_Click(object sender, EventArgs e)
+        private void ButtonSelect_Click(object sender, EventArgs e)
         {
             for (var index = 0; index < checkedListBoxGenerators.Items.Count; index++)
             {
@@ -2331,7 +2342,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void ButtonDeselect_Click(object sender, EventArgs e)
+        private void ButtonDeselect_Click(object sender, EventArgs e)
         {
             for (var index = 0; index < checkedListBoxGenerators.Items.Count; index++)
             {
@@ -2344,7 +2355,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxNext_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxNext_CheckedChanged(object sender, EventArgs e)
         {
             Next.Visible = checkBoxNext.Checked;
         }
@@ -2354,7 +2365,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxNextMax_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxNextMax_CheckedChanged(object sender, EventArgs e)
         {
             NextMax.Visible = checkBoxNextMax.Checked;
         }
@@ -2364,7 +2375,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxNextMinMax_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxNextMinMax_CheckedChanged(object sender, EventArgs e)
         {
             NextMinMax.Visible = checkBoxNextMinMax.Checked;
         }
@@ -2374,7 +2385,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxNextDouble_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxNextDouble_CheckedChanged(object sender, EventArgs e)
         {
             NextDouble.Visible = checkBoxNextDouble.Checked;
         }
@@ -2384,7 +2395,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxNextDoubleMax_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxNextDoubleMax_CheckedChanged(object sender, EventArgs e)
         {
             NextDoubleMax.Visible = checkBoxNextDoubleMax.Checked;
         }
@@ -2394,7 +2405,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxNextDoubleMinMax_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxNextDoubleMinMax_CheckedChanged(object sender, EventArgs e)
         {
             NextDoubleMinMax.Visible = checkBoxNextDoubleMinMax.Checked;
         }
@@ -2404,7 +2415,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxIntegers_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxIntegers_CheckedChanged(object sender, EventArgs e)
         {
             Integers.Visible = checkBoxIntegers.Checked;
         }
@@ -2414,7 +2425,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxIntegersMax_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxIntegersMax_CheckedChanged(object sender, EventArgs e)
         {
             IntegersMax.Visible = checkBoxIntegersMax.Checked;
         }
@@ -2424,7 +2435,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxIntegersMinMax_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxIntegersMinMax_CheckedChanged(object sender, EventArgs e)
         {
             IntegersMinMax.Visible = checkBoxIntegersMinMax.Checked;
         }
@@ -2434,7 +2445,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxDoubles_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxDoubles_CheckedChanged(object sender, EventArgs e)
         {
             Doubles.Visible = checkBoxDoubles.Checked;
         }
@@ -2444,7 +2455,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxDoublesMax_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxDoublesMax_CheckedChanged(object sender, EventArgs e)
         {
             DoublesMax.Visible = checkBoxDoublesMax.Checked;
         }
@@ -2454,7 +2465,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxDoublesMinMax_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxDoublesMinMax_CheckedChanged(object sender, EventArgs e)
         {
             DoublesMinMax.Visible = checkBoxDoublesMinMax.Checked;
         }
@@ -2464,7 +2475,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxNextBoolean_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxNextBoolean_CheckedChanged(object sender, EventArgs e)
         {
             NextBoolean.Visible = checkBoxNextBoolean.Checked;
         }
@@ -2474,7 +2485,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxBooleans_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxBooleans_CheckedChanged(object sender, EventArgs e)
         {
             Booleans.Visible = checkBoxBooleans.Checked;
         }
@@ -2484,7 +2495,7 @@ namespace Troschuetz.Random.Tester
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="EventArgs"/> object that contains the event data.</param>
-        void CheckBoxNextBytes_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxNextBytes_CheckedChanged(object sender, EventArgs e)
         {
             NextBytes.Visible = checkBoxNextBytes.Checked;
         }

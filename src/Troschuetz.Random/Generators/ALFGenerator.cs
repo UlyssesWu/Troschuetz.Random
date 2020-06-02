@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -144,7 +144,7 @@ namespace Troschuetz.Random.Generators
         ///   A number used to calculate a starting value for the pseudo-random number sequence. If a
         ///   negative number is specified, the absolute value of the number is used.
         /// </param>
-        public ALFGenerator(int seed) : base((uint) Math.Abs(seed))
+        public ALFGenerator(int seed) : base((uint)Math.Abs(seed))
         {
         }
 
@@ -245,7 +245,7 @@ namespace Troschuetz.Random.Generators
             {
                 Fill();
             }
-            var result = (int) (_x[_i++] >> 1);
+            var result = (int)(_x[_i++] >> 1);
 
             // Postconditions
             Debug.Assert(result >= 0);
@@ -266,7 +266,7 @@ namespace Troschuetz.Random.Generators
             {
                 Fill();
             }
-            var result = (int) (_x[_i++] >> 1) * IntToDoubleMultiplier;
+            var result = (int)(_x[_i++] >> 1) * IntToDoubleMultiplier;
 
             // Postconditions
             Debug.Assert(result >= 0.0 && result < 1.0);

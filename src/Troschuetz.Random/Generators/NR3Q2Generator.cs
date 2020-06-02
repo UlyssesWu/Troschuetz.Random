@@ -92,7 +92,7 @@ namespace Troschuetz.Random.Generators
         ///   A number used to calculate a starting value for the pseudo-random number sequence. If a
         ///   negative number is specified, the absolute value of the number is used.
         /// </param>
-        public NR3Q2Generator(int seed) : base((uint) Math.Abs(seed))
+        public NR3Q2Generator(int seed) : base((uint)Math.Abs(seed))
         {
         }
 
@@ -149,7 +149,7 @@ namespace Troschuetz.Random.Generators
             if (_bytesAvailable)
             {
                 _bytesAvailable = false;
-                return (int) ((_v ^ _w) << ULongToIntShift >> ULongToIntShift);
+                return (int)((_v ^ _w) << ULongToIntShift >> ULongToIntShift);
             }
 
             // Its faster to explicitly calculate the unsigned random number than simply call NextULong().
@@ -159,7 +159,7 @@ namespace Troschuetz.Random.Generators
             _w = SeedU * (_w & 0xFFFFFFFFUL) + (_w >> 32);
             _bytesAvailable = true;
 
-            var result = (int) ((_v ^ _w) >> ULongToIntShift);
+            var result = (int)((_v ^ _w) >> ULongToIntShift);
 
             // Postconditions
             Debug.Assert(result >= 0);
@@ -178,7 +178,7 @@ namespace Troschuetz.Random.Generators
             if (_bytesAvailable)
             {
                 _bytesAvailable = false;
-                return (int) ((_v ^ _w) << ULongToIntShift >> ULongToIntShift) * IntToDoubleMultiplier;
+                return (int)((_v ^ _w) << ULongToIntShift >> ULongToIntShift) * IntToDoubleMultiplier;
             }
 
             // Its faster to explicitly calculate the unsigned random number than simply call NextULong().
@@ -188,7 +188,7 @@ namespace Troschuetz.Random.Generators
             _w = SeedU * (_w & 0xFFFFFFFFUL) + (_w >> 32);
             _bytesAvailable = true;
 
-            var result = (int) ((_v ^ _w) >> ULongToIntShift) * IntToDoubleMultiplier;
+            var result = (int)((_v ^ _w) >> ULongToIntShift) * IntToDoubleMultiplier;
 
             // Postconditions
             Debug.Assert(result >= 0.0 && result < 1.0);
@@ -207,7 +207,7 @@ namespace Troschuetz.Random.Generators
             if (_bytesAvailable)
             {
                 _bytesAvailable = false;
-                return (uint) ((_v ^ _w) << ULongToUIntShift >> ULongToUIntShift);
+                return (uint)((_v ^ _w) << ULongToUIntShift >> ULongToUIntShift);
             }
 
             // Its faster to explicitly calculate the unsigned random number than simply call NextULong().
@@ -216,7 +216,7 @@ namespace Troschuetz.Random.Generators
             _v ^= _v >> 8;
             _w = SeedU * (_w & 0xFFFFFFFFUL) + (_w >> 32);
             _bytesAvailable = true;
-            return (uint) ((_v ^ _w) >> ULongToUIntShift);
+            return (uint)((_v ^ _w) >> ULongToUIntShift);
         }
 
         /// <summary>

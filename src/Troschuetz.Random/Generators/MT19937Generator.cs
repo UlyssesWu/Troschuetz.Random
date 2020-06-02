@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -158,7 +158,7 @@ namespace Troschuetz.Random.Generators
         ///   A number used to calculate a starting value for the pseudo-random number sequence. If a
         ///   negative number is specified, the absolute value of the number is used.
         /// </param>
-        public MT19937Generator(int seed) : base((uint) Math.Abs(seed))
+        public MT19937Generator(int seed) : base((uint)Math.Abs(seed))
         {
         }
 
@@ -192,7 +192,7 @@ namespace Troschuetz.Random.Generators
             _seedArray = new uint[seedArray.Count];
             for (var index = 0; index < seedArray.Count; index++)
             {
-                _seedArray[index] = (uint) Math.Abs(seedArray[index]);
+                _seedArray[index] = (uint)Math.Abs(seedArray[index]);
             }
 
             // Necessary, because as seed array has been specified.
@@ -350,7 +350,7 @@ namespace Troschuetz.Random.Generators
             y ^= (y << 7) & 0x9d2c5680U;
             y ^= (y << 15) & 0xefc60000U;
 
-            var result = (int) ((y ^ (y >> 18)) >> 1);
+            var result = (int)((y ^ (y >> 18)) >> 1);
 
             // Postconditions
             Debug.Assert(result >= 0);
@@ -378,7 +378,7 @@ namespace Troschuetz.Random.Generators
             y ^= (y << 7) & 0x9d2c5680U;
             y ^= (y << 15) & 0xefc60000U;
 
-            var result = (int) ((y ^ (y >> 18)) >> 1) * IntToDoubleMultiplier;
+            var result = (int)((y ^ (y >> 18)) >> 1) * IntToDoubleMultiplier;
 
             // Postconditions
             Debug.Assert(result >= 0.0 && result < 1.0);

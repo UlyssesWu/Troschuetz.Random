@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -21,10 +21,10 @@
 
 namespace Troschuetz.Random.Distributions.Continuous
 {
-    using Core;
-    using Generators;
     using System;
     using System.Diagnostics;
+    using Core;
+    using Generators;
 
     /// <summary>
     ///   Provides generation of t-distributed random numbers.
@@ -277,9 +277,9 @@ namespace Troschuetz.Random.Distributions.Continuous
         /// </remarks>
         public static Func<IGenerator, int, double> Sample { get; set; } = (generator, nu) =>
         {
-            const double mu = 0.0;
-            const double sigma = 1.0;
-            var n = NormalDistribution.Sample(generator, mu, sigma);
+            const double Mu = 0.0;
+            const double Sigma = 1.0;
+            var n = NormalDistribution.Sample(generator, Mu, Sigma);
             var c = ChiSquareDistribution.Sample(generator, nu);
             return n / Math.Sqrt(c / nu);
         };

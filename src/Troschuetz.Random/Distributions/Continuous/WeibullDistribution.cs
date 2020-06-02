@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -21,10 +21,10 @@
 
 namespace Troschuetz.Random.Distributions.Continuous
 {
-    using Core;
-    using Generators;
     using System;
     using System.Diagnostics;
+    using Core;
+    using Generators;
 
     /// <summary>
     ///   Provides generation of weibull distributed random numbers.
@@ -54,7 +54,7 @@ namespace Troschuetz.Random.Distributions.Continuous
         /// <summary>
         ///   Represents coefficients for the Lanczos approximation of the Gamma function.
         /// </summary>
-        private static readonly double[] LanczosCoefficients = {
+        private static readonly double[] s_lanczosCoefficients = {
             1.000000000190015, 76.18009172947146, -86.50532032941677,
             24.01409824083091, -1.231739572450155, 1.208650973866179e-3,
             -5.395239384953e-6
@@ -252,10 +252,10 @@ namespace Troschuetz.Random.Distributions.Continuous
         /// </returns>
         private static double Gamma(double x)
         {
-            var sum = LanczosCoefficients[0];
+            var sum = s_lanczosCoefficients[0];
             for (var index = 1; index <= 6; index++)
             {
-                sum += LanczosCoefficients[index] / (x + index);
+                sum += s_lanczosCoefficients[index] / (x + index);
             }
 
             return Math.Sqrt(2.0 * Math.PI) / x * Math.Pow(x + 5.5, x + 0.5) / Math.Exp(x + 5.5) * sum;

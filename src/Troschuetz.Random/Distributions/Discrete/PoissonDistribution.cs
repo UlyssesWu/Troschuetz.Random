@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -75,10 +75,10 @@
 
 namespace Troschuetz.Random.Distributions.Discrete
 {
-    using Core;
-    using Generators;
     using System;
     using System.Diagnostics;
+    using Core;
+    using Generators;
 
     /// <summary>
     ///   Provides generation of poisson distributed random numbers.
@@ -323,7 +323,7 @@ namespace Troschuetz.Random.Distributions.Discrete
         {
             // See contribution of JcBernack on BitBucket (issue #2) and see Wikipedia page about
             // Poisson distribution (https://en.wikipedia.org/wiki/Poisson_distribution#Generating_Poisson-distributed_random_variables).
-            const int step = 500;
+            const int Step = 500;
             var k = 0;
             var p = 1.0;
             double r;
@@ -339,8 +339,8 @@ namespace Troschuetz.Random.Distributions.Discrete
                 p *= r;
                 if (p < Math.E && lambda > 0)
                 {
-                    p *= Math.Exp(lambda > step ? step : lambda);
-                    lambda -= step;
+                    p *= Math.Exp(lambda > Step ? Step : lambda);
+                    lambda -= Step;
                 }
             } while (p > 1);
             return k - 1;

@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -75,10 +75,10 @@
 
 namespace Troschuetz.Random.Distributions.Continuous
 {
-    using Core;
-    using Generators;
     using System;
     using System.Diagnostics;
+    using Core;
+    using Generators;
 
     /// <summary>
     ///   Provides generation of normal distributed random numbers.

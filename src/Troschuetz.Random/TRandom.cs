@@ -21,12 +21,12 @@
 
 namespace Troschuetz.Random
 {
+    using System;
+    using System.Collections.Generic;
     using Core;
     using Distributions.Continuous;
     using Distributions.Discrete;
     using Generators;
-    using System;
-    using System.Collections.Generic;
 
     /// <summary>
     ///   A random generator class similar to the one Python offers, providing functions similar to
@@ -241,7 +241,7 @@ namespace Troschuetz.Random
         public int Categorical(int valueCount)
         {
             if (valueCount <= 0) throw new ArgumentOutOfRangeException(ErrorMessages.InvalidParams);
-            CategoricalDistribution.SetUp(valueCount, null, out double[] cdf);
+            CategoricalDistribution.SetUp(valueCount, null, out var cdf);
             return CategoricalDistribution.Sample(Generator, cdf);
         }
 
@@ -267,7 +267,7 @@ namespace Troschuetz.Random
         public IEnumerable<int> CategoricalSamples(int valueCount)
         {
             if (valueCount <= 0) throw new ArgumentOutOfRangeException(ErrorMessages.InvalidParams);
-            CategoricalDistribution.SetUp(valueCount, null, out double[] cdf);
+            CategoricalDistribution.SetUp(valueCount, null, out var cdf);
             return InfiniteLoop(CategoricalDistribution.Sample, Generator, cdf);
         }
 
@@ -295,7 +295,7 @@ namespace Troschuetz.Random
         public int Categorical(ICollection<double> weights)
         {
             if (!CategoricalDistribution.IsValidParam(weights)) throw new ArgumentOutOfRangeException(ErrorMessages.InvalidParams);
-            CategoricalDistribution.SetUp(weights.Count, weights, out double[] cdf);
+            CategoricalDistribution.SetUp(weights.Count, weights, out var cdf);
             return CategoricalDistribution.Sample(Generator, cdf);
         }
 
@@ -323,7 +323,7 @@ namespace Troschuetz.Random
         public IEnumerable<int> CategoricalSamples(ICollection<double> weights)
         {
             if (!CategoricalDistribution.IsValidParam(weights)) throw new ArgumentOutOfRangeException(ErrorMessages.InvalidParams);
-            CategoricalDistribution.SetUp(weights.Count, weights, out double[] cdf);
+            CategoricalDistribution.SetUp(weights.Count, weights, out var cdf);
             return InfiniteLoop(CategoricalDistribution.Sample, Generator, cdf);
         }
 

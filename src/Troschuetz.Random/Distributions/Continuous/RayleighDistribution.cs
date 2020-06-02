@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -21,10 +21,10 @@
 
 namespace Troschuetz.Random.Distributions.Continuous
 {
-    using Core;
-    using Generators;
     using System;
     using System.Diagnostics;
+    using Core;
+    using Generators;
 
     /// <summary>
     ///   Provides generation of rayleigh distributed random numbers.
@@ -258,9 +258,9 @@ namespace Troschuetz.Random.Distributions.Continuous
         /// </remarks>
         public static Func<IGenerator, double, double> Sample { get; set; } = (generator, sigma) =>
         {
-            const double mu = 0.0;
-            var n1 = TMath.Square(NormalDistribution.Sample(generator, mu, sigma));
-            var n2 = TMath.Square(NormalDistribution.Sample(generator, mu, sigma));
+            const double Mu = 0.0;
+            var n1 = TMath.Square(NormalDistribution.Sample(generator, Mu, sigma));
+            var n2 = TMath.Square(NormalDistribution.Sample(generator, Mu, sigma));
             return Math.Sqrt(n1 + n2);
         };
 

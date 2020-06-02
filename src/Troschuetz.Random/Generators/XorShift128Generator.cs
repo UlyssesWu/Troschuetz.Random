@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -20,6 +20,7 @@
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #region Original Summary
+
 #pragma warning disable HBCommentedCode // Code is commented out
 
 /*
@@ -57,6 +58,7 @@
  */
 
 #pragma warning restore HBCommentedCode // Code is commented out
+
 #endregion Original Summary
 
 namespace Troschuetz.Random.Generators

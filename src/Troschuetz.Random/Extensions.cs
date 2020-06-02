@@ -21,10 +21,10 @@
 
 namespace Troschuetz.Random
 {
-    using Core;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using Core;
 
     /// <summary>
     ///   Module containing extension methods for many interfaces exposed by this library.

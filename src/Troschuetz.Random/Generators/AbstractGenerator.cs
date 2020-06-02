@@ -21,10 +21,10 @@
 
 namespace Troschuetz.Random.Generators
 {
-    using Core;
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using Core;
 
     /// <summary>
     ///   An abstract generator which efficiently implements everything required by the <see
@@ -485,8 +485,7 @@ namespace Troschuetz.Random.Generators
         /// <param name="obj">The object.</param>
         public override bool Equals(object obj)
         {
-            var o = obj as AbstractGenerator;
-            return o != null && Seed == o.Seed && _bitCount == o._bitCount && _bitBuffer == o._bitBuffer;
+            return obj is AbstractGenerator o && Seed == o.Seed && _bitCount == o._bitCount && _bitBuffer == o._bitBuffer;
         }
 
         /// <summary>
@@ -511,11 +510,11 @@ namespace Troschuetz.Random.Generators
         /// </summary>
         public override string ToString()
         {
-            const string generatorSuffix = "Generator";
+            const string GeneratorSuffix = "Generator";
             var generatorName = GetType().Name;
-            if (generatorName.EndsWith(generatorSuffix, StringComparison.Ordinal))
+            if (generatorName.EndsWith(GeneratorSuffix, StringComparison.Ordinal))
             {
-                generatorName = generatorName.Substring(0, generatorName.Length - generatorSuffix.Length);
+                generatorName = generatorName.Substring(0, generatorName.Length - GeneratorSuffix.Length);
             }
             return $"Generator: {generatorName}, Seed: {Seed}";
         }

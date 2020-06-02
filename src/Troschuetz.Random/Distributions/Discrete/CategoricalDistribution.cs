@@ -42,12 +42,12 @@
 
 namespace Troschuetz.Random.Distributions.Discrete
 {
-    using Core;
-    using Generators;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using Core;
+    using Generators;
 
     /// <summary>
     ///   Implements the categorical distribution. For details about this distribution, see

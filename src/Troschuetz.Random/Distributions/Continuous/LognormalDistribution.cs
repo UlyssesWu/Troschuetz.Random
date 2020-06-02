@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright (c) 2006-2007 Stefan Trosch�tz <stefan@troschuetz.de>
 //
@@ -40,10 +40,10 @@
 
 namespace Troschuetz.Random.Distributions.Continuous
 {
-    using Core;
-    using Generators;
     using System;
     using System.Diagnostics;
+    using Core;
+    using Generators;
 
     /// <summary>
     ///   Provides generation of lognormal distributed random numbers.
@@ -333,9 +333,9 @@ namespace Troschuetz.Random.Distributions.Continuous
         /// </remarks>
         public static Func<IGenerator, double, double, double> Sample { get; set; } = (generator, mu, sigma) =>
         {
-            const double nm = 0.0;
-            const double ns = 1.0;
-            return Math.Exp(NormalDistribution.Sample(generator, nm, ns) * sigma + mu);
+            const double Nm = 0.0;
+            const double Ns = 1.0;
+            return Math.Exp(NormalDistribution.Sample(generator, Nm, Ns) * sigma + mu);
         };
 
         #endregion TRandom Helpers
