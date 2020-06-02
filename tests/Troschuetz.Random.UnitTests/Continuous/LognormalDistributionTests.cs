@@ -64,8 +64,8 @@ namespace Troschuetz.Random.Tests.Continuous
         public void Sigma_WrongValues(double d)
         {
             Assert.False(LognormalDistribution.AreValidParams(1, d));
-            Assert.False(Dist.IsValidSigma(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Sigma = d; });
+            Assert.False(_dist.IsValidSigma(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Sigma = d; });
         }
 
         // any value

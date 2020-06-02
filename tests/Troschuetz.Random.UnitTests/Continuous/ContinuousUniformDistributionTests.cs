@@ -67,9 +67,9 @@ namespace Troschuetz.Random.Tests.Continuous
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 Assert.False(ContinuousUniformDistribution.AreValidParams(a, b));
-                Dist.Alpha = Dist.Beta = a;
-                Assert.False(Dist.IsValidBeta(b));
-                Dist.Beta = b;
+                _dist.Alpha = _dist.Beta = a;
+                Assert.False(_dist.IsValidBeta(b));
+                _dist.Beta = b;
             });
         }
 

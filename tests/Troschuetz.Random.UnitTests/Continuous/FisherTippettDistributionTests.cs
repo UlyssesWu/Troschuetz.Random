@@ -65,8 +65,8 @@ namespace Troschuetz.Random.Tests.Continuous
         public void Alpha_WrongValues(double d)
         {
             Assert.False(FisherTippettDistribution.AreValidParams(d, 1));
-            Assert.False(Dist.IsValidAlpha(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Alpha = d; });
+            Assert.False(_dist.IsValidAlpha(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
         }
 
         // alpha > 0

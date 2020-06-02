@@ -65,8 +65,8 @@ namespace Troschuetz.Random.Tests.Continuous
         public void Lambda_WrongValues(double d)
         {
             Assert.False(ExponentialDistribution.IsValidParam(d));
-            Assert.False(Dist.IsValidLambda(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Lambda = d; });
+            Assert.False(_dist.IsValidLambda(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Lambda = d; });
         }
 
         // lambda > 0

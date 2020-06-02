@@ -21,12 +21,12 @@
 
 namespace Troschuetz.Random.Tests
 {
+    using System;
+    using System.Collections.Generic;
     using Distributions.Continuous;
     using Distributions.Discrete;
     using NUnit.Framework;
     using Random.Generators;
-    using System;
-    using System.Collections.Generic;
 
     public sealed class TRandomTests : GeneratorTests
     {
@@ -1396,7 +1396,7 @@ namespace Troschuetz.Random.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                _rand.Binomial(0.5, (int) LargeNeg);
+                _rand.Binomial(0.5, (int)LargeNeg);
             });
         }
 
@@ -1423,7 +1423,7 @@ namespace Troschuetz.Random.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                _rand.Binomial(0.5, (int) SmallNeg);
+                _rand.Binomial(0.5, (int)SmallNeg);
             });
         }
 

@@ -65,8 +65,8 @@ namespace Troschuetz.Random.Tests.Continuous
         public void Alpha_WrongValues(double d)
         {
             Assert.False(WeibullDistribution.AreValidParams(d, 1));
-            Assert.False(Dist.IsValidAlpha(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Alpha = d; });
+            Assert.False(_dist.IsValidAlpha(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
         }
 
         [TestCase(double.NaN)]
@@ -77,8 +77,8 @@ namespace Troschuetz.Random.Tests.Continuous
         public void Lambda_WrongValues(double d)
         {
             Assert.False(WeibullDistribution.AreValidParams(1, d));
-            Assert.False(Dist.IsValidLambda(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Lambda = d; });
+            Assert.False(_dist.IsValidLambda(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Lambda = d; });
         }
 
         // alpha > 0

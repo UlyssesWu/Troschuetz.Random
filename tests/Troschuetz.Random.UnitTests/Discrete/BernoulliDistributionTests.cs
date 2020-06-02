@@ -67,8 +67,8 @@ namespace Troschuetz.Random.Tests.Discrete
         public void Alpha_WrongValues(double d)
         {
             Assert.False(BernoulliDistribution.IsValidParam(d));
-            Assert.False(Dist.IsValidAlpha(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Alpha = d; });
+            Assert.False(_dist.IsValidAlpha(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Alpha = d; });
         }
 
         // alpha >= 0.0 && alpha <= 1.0

@@ -69,26 +69,26 @@ namespace Troschuetz.Random.Tests.Discrete
         {
             var w = new List<double> { d1, d2, d3 };
             Assert.False(CategoricalDistribution.IsValidParam(w));
-            Assert.False(Dist.AreValidWeights(w));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Weights = w; });
+            Assert.False(_dist.AreValidWeights(w));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Weights = w; });
         }
 
         [Test]
         public void Median_EvenEquiWeights()
         {
-            Dist = new CategoricalDistribution(new double[] { 1, 1, 1, 1, 1, 1 });
+            _dist = new CategoricalDistribution(new double[] { 1, 1, 1, 1, 1, 1 });
             for (var i = 0; i < Iterations; ++i)
-                Results[i] = Dist.Next();
-            AssertDist(Dist);
+                Results[i] = _dist.Next();
+            AssertDist(_dist);
         }
 
         [Test]
         public void Median_OddEquiWeights()
         {
-            Dist = new CategoricalDistribution(new double[] { 1, 1, 1, 1, 1 });
+            _dist = new CategoricalDistribution(new double[] { 1, 1, 1, 1, 1 });
             for (var i = 0; i < Iterations; ++i)
-                Results[i] = Dist.Next();
-            AssertDist(Dist);
+                Results[i] = _dist.Next();
+            AssertDist(_dist);
         }
 
         // value count > 0
@@ -100,8 +100,8 @@ namespace Troschuetz.Random.Tests.Discrete
         // all weights > 0
         private ICollection<double> GetWeights(IWeightsDistribution<double> d)
         {
-            Func<double> r = () => Rand.NextDouble(0.1, 10);
-            return d == null ? new List<double> { r(), r(), r(), r(), r() } : d.Weights;
+            double R() => Rand.NextDouble(0.1, 10);
+            return d == null ? new List<double> { R(), R(), R(), R(), R() } : d.Weights;
         }
     }
 }

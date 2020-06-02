@@ -65,8 +65,8 @@ namespace Troschuetz.Random.Tests.Continuous
         public void Gamma_WrongValues(double d)
         {
             Assert.False(CauchyDistribution.AreValidParams(1, d));
-            Assert.False(Dist.IsValidGamma(d));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Dist.Gamma = d; });
+            Assert.False(_dist.IsValidGamma(d));
+            Assert.Throws<ArgumentOutOfRangeException>(() => { _dist.Gamma = d; });
         }
 
         // any value
