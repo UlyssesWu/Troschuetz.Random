@@ -13,7 +13,7 @@ publish-on-myget:
   stage: publish
   image: pommalabs/dotnet-mono:dotnet-3-mono-6-sdk
   script:
-    - find src -name "*.csproj" -exec dotnet pack -c Release -o artifacts -p:Version=$CI_COMMIT_TAG {} \;
+    - find src -name "*.csproj" -exec dotnet pack -c Release -o artifacts -p:Version=$CI_COMMIT_TAG -p:ContinuousIntegrationBuild=true {} \;
     - find artifacts -name "*.nupkg" -exec dotnet nuget push -k $MYGET_API_KEY {} \;
   artifacts:
     paths:
