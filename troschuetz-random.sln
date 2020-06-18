@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{48147844-A
 		.gitlab-ci.yml = .gitlab-ci.yml
 		CHANGELOG.md = CHANGELOG.md
 		CodeMaid.config = CodeMaid.config
+		icon.png = icon.png
 		LICENSE = LICENSE
 		netfx.props = netfx.props
 		NuGet.config = NuGet.config

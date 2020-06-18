@@ -12,6 +12,12 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="NuGet\" />
+    <None Include="..\..\icon.png" Link="NuGet\icon.png" Pack="true" PackagePath="" Label="NuGet Package Icon" />
+    <None Include="..\..\LICENSE" Link="NuGet\LICENSE" Pack="true" PackagePath="" Label="NuGet Package License" />
+  </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <Reference Include="netstandard" />
   </ItemGroup>
