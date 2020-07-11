@@ -25,11 +25,11 @@ publish-on-myget:
 pages:
   stage: deploy
   image:
-    name: knsit/docfx:dotnet-core
+    name: pommalabs/doxygen
     entrypoint: [""]
   script:
-    - docfx docs/docfx.json
-    - mv docs/_site public
+    - PROJECT_NUMBER=$CI_COMMIT_SHA doxygen
+    - mv artifacts/docs public
   artifacts:
     paths:
       - public
