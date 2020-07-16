@@ -1,25 +1,12 @@
 stages:
-  - build
-  - publish
+  - test
   - deploy
 
-build-solution:
-  stage: build
+check-source-code-format:
+  stage: test
   image: pommalabs/dotnet-mono:dotnet-3-mono-6-sdk
   script:
-    - ./build.sh --target build-solution
-
-publish-on-myget:
-  stage: publish
-  image: pommalabs/dotnet-mono:dotnet-3-mono-6-sdk
-  script:
-    - ./build.sh --target publish-on-myget
-  artifacts:
-    expire_in: 1 year
-    paths:
-      - ./artifacts/nuget-packages/*.nupkg
-  only:
-    - tags
+    - ./build.sh --target check-source-code-format
 
 pages:
   stage: deploy
