@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <PackageReference Include="HellBrick.Diagnostics" Version="4.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0" PrivateAssets="All" />
+    <SourceLinkGitLabHosts Include="gitlab.com" />
+    <PackageReference Include="MinVer" Version="2.3.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>
