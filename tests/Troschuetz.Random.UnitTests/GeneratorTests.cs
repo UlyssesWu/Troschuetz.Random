@@ -891,7 +891,7 @@ namespace Troschuetz.Random.Tests
             Serialization
         =============================================================================*/
 
-#if !NETSTD16
+#if HAS_SERIALIZABLE
 
         [Test]
         [Repeat(RepetitionCount)]

@@ -27,7 +27,7 @@ namespace Troschuetz.Random.UnitTests
     {
         public static int Main(string[] args)
         {
-#if (NETSTD16 || NETSTD20)
+#if !HAS_AUTORUN
             return new AutoRun(System.Reflection.Assembly.GetEntryAssembly()).Execute(args, new NUnit.Common.ColorConsoleWriter(), System.Console.In);
 #else
             return new AutoRun().Execute(args);

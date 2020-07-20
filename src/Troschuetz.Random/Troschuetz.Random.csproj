@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\netfx.props" />
-  
+
   <PropertyGroup>
     <AssemblyTitle>Troschuetz.Random - Easy random number generation</AssemblyTitle>
-    <TargetFrameworks>netstandard1.0;netstandard2.0;netstandard2.1;net35;net40;net45;net461;net472</TargetFrameworks>
+    <TargetFrameworks>netstandard1.0;netstandard2.0;netstandard2.1;netcoreapp2.1;net35;net40;net45;net461;net472</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
@@ -17,40 +17,40 @@
     <PackageReleaseNotes>https://gitlab.com/pomma89/troschuetz-random/-/releases</PackageReleaseNotes>
     <PackageTags>random;distribution;generator;normal;exponential;python;alf;mt19937;xorshift128;netstandard</PackageTags>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://gitlab.com/pomma89/troschuetz-random</RepositoryUrl>    
+    <RepositoryUrl>https://gitlab.com/pomma89/troschuetz-random</RepositoryUrl>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
-    <DefineConstants>$(DefineConstants);NETSTD10</DefineConstants>
-  </PropertyGroup>
-
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <DefineConstants>$(DefineConstants);NETSTD20;HAS_SERIALIZABLE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_PROCESS;HAS_SERIALIZABLE;HAS_THREAD</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
-    <DefineConstants>$(DefineConstants);NETSTD21;HAS_SERIALIZABLE;HAS_SPAN</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_PROCESS;HAS_SERIALIZABLE;HAS_SPAN;HAS_THREAD</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
+    <DefineConstants>$(DefineConstants);HAS_PROCESS;HAS_SERIALIZABLE;HAS_SPAN;HAS_THREAD</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net35' ">
-    <DefineConstants>$(DefineConstants);NET35;HAS_SERIALIZABLE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_PROCESS;HAS_SERIALIZABLE;HAS_THREAD</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <DefineConstants>$(DefineConstants);NET40;HAS_SERIALIZABLE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_PROCESS;HAS_SERIALIZABLE;HAS_THREAD</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <DefineConstants>$(DefineConstants);NET45;HAS_SERIALIZABLE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_PROCESS;HAS_SERIALIZABLE;HAS_THREAD</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <DefineConstants>$(DefineConstants);NET46;HAS_SERIALIZABLE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_PROCESS;HAS_SERIALIZABLE;HAS_THREAD</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net472' ">
-    <DefineConstants>$(DefineConstants);NET47;HAS_SERIALIZABLE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_PROCESS;HAS_SERIALIZABLE;HAS_THREAD</DefineConstants>
   </PropertyGroup>
 </Project>

@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.3.2 (2020-07-20)
+
+- Add support for netcoreapp2.1 (partly fixes issue #8).
+
 ## 4.3.1 (2019-08-09)
 
 - Added support for Span of bytes (PR #8 by Konstantin Safonov).

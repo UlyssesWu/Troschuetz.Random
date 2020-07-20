@@ -65,9 +65,9 @@ namespace Troschuetz.Random
                 seed = Factor * seed + BitConverter.ToUInt32(guid, 0);
                 seed = Factor * seed + BitConverter.ToUInt32(guid, 8);
 
-#if !NETSTD10
-                seed = Factor * seed + (uint) System.Threading.Thread.CurrentThread.ManagedThreadId;
-                seed = Factor * seed + (uint) System.Diagnostics.Process.GetCurrentProcess().Id;
+#if HAS_THREAD && HAS_PROCESS
+                seed = Factor * seed + (uint)System.Threading.Thread.CurrentThread.ManagedThreadId;
+                seed = Factor * seed + (uint)System.Diagnostics.Process.GetCurrentProcess().Id;
 #endif
 
                 return seed;
