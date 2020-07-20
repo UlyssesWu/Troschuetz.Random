@@ -100,6 +100,52 @@ namespace Troschuetz.Random
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
         void NextBytes(byte[] buffer);
 
+#if HAS_SPAN
+
+        /// <summary>
+        ///   Fills the elements of a specified span of bytes with random numbers.
+        /// </summary>
+        /// <remarks>
+        ///   Each element of the array of bytes is set to a random number greater than or equal to
+        ///   0, and less than or equal to <see cref="byte.MaxValue"/>.
+        /// </remarks>
+        /// <param name="buffer">A span of bytes to contain random numbers.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
+        void NextBytes(Span<byte> buffer)
+        {
+            // Fill the buffer with 4 bytes (1 uint) at a time.
+            var i = 0;
+            while (i < buffer.Length - 3)
+            {
+                var u = NextUInt();
+                buffer[i++] = (byte)u;
+                buffer[i++] = (byte)(u >> 8);
+                buffer[i++] = (byte)(u >> 16);
+                buffer[i++] = (byte)(u >> 24);
+            }
+
+            // Fill up any remaining bytes in the buffer.
+            if (i < buffer.Length)
+            {
+                var u = NextUInt();
+                buffer[i++] = (byte)u;
+                if (i < buffer.Length)
+                {
+                    buffer[i++] = (byte)(u >> 8);
+                    if (i < buffer.Length)
+                    {
+                        buffer[i++] = (byte)(u >> 16);
+                        if (i < buffer.Length)
+                        {
+                            buffer[i] = (byte)(u >> 24);
+                        }
+                    }
+                }
+            }
+        }
+
+#endif
+
         /// <summary>
         ///   Returns a nonnegative floating point random number less than 1.0.
         /// </summary>
@@ -220,18 +266,5 @@ namespace Troschuetz.Random
         /// <param name="seed">The seed value used by the generator.</param>
         /// <returns>True if the random number generator was reset; otherwise, false.</returns>
         bool Reset(uint seed);
-
-#if HAS_SPAN
-        /// <summary>
-        ///   Fills the elements of a specified span of bytes with random numbers.
-        /// </summary>
-        /// <remarks>
-        ///   Each element of the array of bytes is set to a random number greater than or equal to
-        ///   0, and less than or equal to <see cref="byte.MaxValue"/>.
-        /// </remarks>
-        /// <param name="buffer">A span of bytes to contain random numbers.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        void NextBytes(Span<byte> buffer);
-#endif
     }
 }
