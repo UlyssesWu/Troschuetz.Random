@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## 4.3.2 (2020-07-20)
+## 4.3.3 (2020-07-21)
 
-- Add support for netcoreapp2.1 (partly fixes issue #8).
+- Support for Span of bytes changed as default interface method (issue #8).
 
 ## 4.3.1 (2019-08-09)
 
