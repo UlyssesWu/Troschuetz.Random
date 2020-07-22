@@ -158,7 +158,7 @@ namespace Troschuetz.Random.Generators
         ///   A number used to calculate a starting value for the pseudo-random number sequence. If
         ///   a negative number is specified, the absolute value of the number is used.
         /// </param>
-        public MT19937Generator(int seed) : base((uint)Math.Abs(seed))
+        public MT19937Generator(int seed) : base((uint)seed)
         {
         }
 
@@ -192,7 +192,7 @@ namespace Troschuetz.Random.Generators
             _seedArray = new uint[seedArray.Count];
             for (var index = 0; index < seedArray.Count; index++)
             {
-                _seedArray[index] = (uint)Math.Abs(seedArray[index]);
+                _seedArray[index] = (uint)seedArray[index];
             }
 
             // Necessary, because as seed array has been specified.

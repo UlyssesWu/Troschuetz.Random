@@ -60,7 +60,7 @@ namespace Troschuetz.Random.Generators
         ///   Initializes a new instance of the <see cref="StandardGenerator"/> class, using a
         ///   time-dependent default seed value.
         /// </summary>
-        public StandardGenerator() : this((int)(TMath.Seed() >> 1))
+        public StandardGenerator() : base(TMath.Seed())
         {
         }
 
@@ -72,7 +72,7 @@ namespace Troschuetz.Random.Generators
         ///   A number used to calculate a starting value for the pseudo-random number sequence. If
         ///   a negative number is specified, the absolute value of the number is used.
         /// </param>
-        public StandardGenerator(int seed) : base((uint)Math.Abs(seed))
+        public StandardGenerator(int seed) : base((uint)seed)
         {
         }
 

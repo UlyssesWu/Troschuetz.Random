@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.4.0 (2020-07-22)
+
+- Removed absolute values for integer seeds (issue #9).
+
 ## 4.3.3 (2020-07-21)
 
 - Support for Span of bytes changed as default interface method (issue #8).

@@ -109,7 +109,7 @@ namespace Troschuetz.Random.Generators
         ///   A number used to calculate a starting value for the pseudo-random number sequence. If
         ///   a negative number is specified, the absolute value of the number is used.
         /// </param>
-        public NR3Generator(int seed) : base((uint)Math.Abs(seed))
+        public NR3Generator(int seed) : base((uint)seed)
         {
         }
 
