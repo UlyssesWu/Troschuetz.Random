@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="HellBrick.Diagnostics" Version="4.0.0" PrivateAssets="All" />
-    <PackageReference Include="jnm2.ReferenceAssemblies.net35" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="jnm2.ReferenceAssemblies.net35" Version="1.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0" PrivateAssets="All" />
     <SourceLinkGitLabHosts Include="gitlab.com" />
