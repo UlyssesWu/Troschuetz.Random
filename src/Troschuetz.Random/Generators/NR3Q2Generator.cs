@@ -21,7 +21,6 @@
 
 namespace Troschuetz.Random.Generators
 {
-    using System;
     using System.Diagnostics;
 
     /// <summary>
@@ -35,7 +34,7 @@ namespace Troschuetz.Random.Generators
     ///   This generator is NOT thread safe.
     /// </remarks>
 #if HAS_SERIALIZABLE
-    [Serializable]
+    [System.Serializable]
 #endif
 
     public sealed class NR3Q2Generator : AbstractGenerator
@@ -63,11 +62,11 @@ namespace Troschuetz.Random.Generators
         #endregion Constants
 
         /// <summary>
-        ///   Generators like <see cref="NextDouble"/> and <see cref="NextInclusiveMaxValue"/> use
-        ///   only 32 bits to produce a random result, even if the core algorithm of this generator
-        ///   produces 64 random bits at each iteration. Therefore, instead of throwing 32 bits away
-        ///   every time those methods are called, we use this flag to signal that there 32 bits
-        ///   still available and ready to be used.
+        ///   Generators like <see cref="NextInclusiveMaxValue"/> and
+        ///   <see cref="NextUIntInclusiveMaxValue"/> use only 32 bits to produce a random result,
+        ///   even if the core algorithm of this generator produces 64 random bits at each
+        ///   iteration. Therefore, instead of throwing 32 bits away every time those methods are
+        ///   called, we use this flag to signal that there 32 bits still available and ready to be used.
         /// </summary>
         private bool _bytesAvailable;
 
@@ -126,20 +125,16 @@ namespace Troschuetz.Random.Generators
         /// </returns>
         public override double NextDouble()
         {
-            if (_bytesAvailable)
-            {
-                _bytesAvailable = false;
-                return (int)((_v ^ _w) << ULongToIntShift >> ULongToIntShift) * IntToDoubleMultiplier;
-            }
-
             // Its faster to explicitly calculate the unsigned random number than simply call NextULong().
             _v ^= _v >> 17;
             _v ^= _v << 31;
             _v ^= _v >> 8;
             _w = SeedU * (_w & 0xFFFFFFFFUL) + (_w >> 32);
-            _bytesAvailable = true;
+            _bytesAvailable = false;
 
-            var result = (int)((_v ^ _w) >> ULongToIntShift) * IntToDoubleMultiplier;
+            // Conversion method uses 52 of the 64 bits available. Therefore, we need to regenerate
+            // the whole set and we cannot use the "_bytesAvailable" flag.
+            var result = ConvertULongToDouble(_v ^ _w);
 
             // Postconditions
             Debug.Assert(result >= 0.0 && result < 1.0);
@@ -196,6 +191,7 @@ namespace Troschuetz.Random.Generators
             _v ^= _v >> 8;
             _w = SeedU * (_w & 0xFFFFFFFFUL) + (_w >> 32);
             _bytesAvailable = true;
+
             return (uint)((_v ^ _w) >> ULongToUIntShift);
         }
 
@@ -213,6 +209,7 @@ namespace Troschuetz.Random.Generators
             _v ^= _v >> 8;
             _w = SeedU * (_w & 0xFFFFFFFFUL) + (_w >> 32);
             _bytesAvailable = false;
+
             return _v ^ _w;
         }
 
@@ -233,6 +230,7 @@ namespace Troschuetz.Random.Generators
             _w = NextULong();
             _v = NextULong();
             _bytesAvailable = false;
+
             return true;
         }
 

@@ -69,13 +69,6 @@ namespace Troschuetz.Random.Generators
         protected const double UIntToDoubleMultiplier = 1.0 / (uint.MaxValue + 1.0);
 
         /// <summary>
-        ///   Represents the multiplier that computes a double-precision floating point number
-        ///   greater than or equal to 0.0 and less than 1.0 when it gets applied to a 64-bit
-        ///   unsigned integer.
-        /// </summary>
-        protected const double ULongToDoubleMultiplier = 1.0 / (ulong.MaxValue + 1.0);
-
-        /// <summary>
         ///   The number of left shifts required to transform a 64-bit unsigned integer into a
         ///   nonnegative 32-bit signed integer.
         /// </summary>
@@ -501,5 +494,27 @@ namespace Troschuetz.Random.Generators
         }
 
         #endregion Equality members
+
+        #region Helpers
+
+        /// <summary>
+        ///   Converts given <paramref name="value"/> into a double-precision floating point number
+        ///   greater than or equal to 0.0, and less than 1.0; that is, the range of return values
+        ///   includes 0.0 but not 1.0.
+        /// </summary>
+        /// <param name="value">The value that needs to be converted.</param>
+        /// <returns>
+        ///   A double-precision floating point number greater than or equal to 0.0, and less than
+        ///   1.0; that is, the range of return values includes 0.0 but not 1.0.
+        /// </returns>
+        protected static unsafe double ConvertULongToDouble(ulong value)
+        {
+            // 12 bits are discarded because double mantissa is 52 bits long. The exponent on the
+            // right side generates double values in following range: [1.0, 2.0).
+            value = (value >> 12) | 0x3FF0000000000000;
+            return *((double*)&value) - 1.0;
+        }
+
+        #endregion Helpers
     }
 }
