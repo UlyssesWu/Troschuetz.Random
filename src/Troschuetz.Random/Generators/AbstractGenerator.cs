@@ -23,7 +23,6 @@ namespace Troschuetz.Random.Generators
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using Core;
 
     /// <summary>
