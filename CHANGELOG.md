@@ -97,12 +97,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [5.0.0]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.4.0...5.0.0
 [4.4.0]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.3.3...4.4.0
-[4.3.3]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.3.1...4.3.3
-[4.3.1]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.3.0...4.3.1
-[4.3.0]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.2.0...4.3.0
-[4.2.0]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.1.3...4.2.0
-[4.1.3]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.1.1...4.1.3
-[4.1.1]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.0.8...4.1.1
-[4.0.8]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.0.7...4.0.8
-[4.0.7]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.0.5...4.0.7
-[4.0.5]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.0.4...4.0.5
+[4.3.3]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.3.1...4.3.3
+[4.3.1]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.3.0...v4.3.1
+[4.3.0]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.2.0...v4.3.0
+[4.2.0]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.1.3...v4.2.0
+[4.1.3]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.1.1...v4.1.3
+[4.1.1]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.0.8...v4.1.1
+[4.0.8]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.0.7...v4.0.8
+[4.0.7]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.0.5...v4.0.7
+[4.0.5]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.0.4...v4.0.5
