@@ -216,7 +216,7 @@ namespace Troschuetz.Random.Samples
         // You must provide only three generation methods; from these methods, the AbstractGenerator
         // returns all other necessary objects.
         public override int NextInclusiveMaxValue() => (int) (++_state >> 1);
-        public override double NextDouble() => ++_state * UIntToDoubleMultiplier;
+        public override double NextDouble() => ToDouble(++_state);
         public override uint NextUInt() => ++_state;
     }
 
