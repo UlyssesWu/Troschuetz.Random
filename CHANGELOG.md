@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 5.0.0 (2020-07-26)
+
+- Improved quality of generated double random numbers (issue #10).
+- Removed IntToDoubleMultiplier, UIntToDoubleMultiplier and ULongToDoubleMultiplier from AbstractGenerator.
+- Added ToDouble helper methods to AbstractGenerator.
+
 ## 4.4.0 (2020-07-22)
 
 - Removed absolute values for integer seeds (issue #9).

@@ -146,7 +146,7 @@ namespace Troschuetz.Random.Samples
         // Should return true if your generator can reset, false otherwise.
         public override bool CanReset => true;
 
-        public override double NextDouble() => ++_state * UIntToDoubleMultiplier;
+        public override double NextDouble() => ToDouble(++_state);
 
         // You must provide only three generation methods; from these methods, the AbstractGenerator
         // returns all other necessary objects.

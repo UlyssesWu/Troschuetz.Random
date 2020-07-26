@@ -320,7 +320,7 @@ namespace Troschuetz.Random.Generators
             y ^= (y << 7) & 0x9d2c5680U;
             y ^= (y << 15) & 0xefc60000U;
 
-            var result = (int)((y ^ (y >> 18)) >> 1) * IntToDoubleMultiplier;
+            var result = ToDouble(y ^ (y >> 18));
 
             // Postconditions
             Debug.Assert(result >= 0.0 && result < 1.0);

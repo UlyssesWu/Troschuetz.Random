@@ -125,7 +125,7 @@ namespace Troschuetz.Random.Generators
 
             // Conversion method uses 52 of the 64 bits available. Therefore, we need to regenerate
             // the whole set and we cannot use the "_bytesAvailable" flag.
-            var result = ConvertULongToDouble(_v * SeedU);
+            var result = ToDouble(_v * SeedU);
 
             // Postconditions
             Debug.Assert(result >= 0.0 && result < 1.0);
