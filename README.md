@@ -103,14 +103,14 @@ After a request from a user, the library has been modified in order to allow it 
 
 Starting from version 4.0, these extensibility cases are supported:
 
-- Defining a custom generator by extending the AbstractGenerator class.
-- Defining a custom distribution, by extending the AbstractDistribution class
-  and by implementing either IContinuousDistribution or IDiscreteDistribution.
-- Change the core definition of a standard distribution, by redefining the static Sample delegate,
-  used to generate distributed numbers, and the static IsValidParam/AreValidParams delegate, used to validate parameters.
+- Defining a custom generator by extending the `AbstractGenerator` class.
+- Defining a custom distribution, by extending the `AbstractDistribution` class
+  and by implementing either `IContinuousDistribution` or `IDiscreteDistribution`.
+- Change the core definition of a standard distribution, by redefining the static `Sample` delegate,
+  used to generate distributed numbers, and the static `IsValidParam`/`AreValidParams` delegates, used to validate parameters.
 
 For your convenience, below you can find an example of how you can implement all features above
-(the code is also present in the Examples project):
+(the code is also present in the samples folder):
 
 ```cs
 
