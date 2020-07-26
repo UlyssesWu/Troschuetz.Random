@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added `ToDouble` helper methods to `AbstractGenerator`. They be used to convert `uint` and `ulong` to `double`.
+- Added `ToDouble` helper methods to `AbstractGenerator`. They can be used to convert `uint` and `ulong` to `double`.
 
 ### Changed
 
