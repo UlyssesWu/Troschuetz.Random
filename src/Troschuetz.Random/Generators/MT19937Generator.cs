@@ -319,8 +319,23 @@ namespace Troschuetz.Random.Generators
             y ^= (y >> 11);
             y ^= (y << 7) & 0x9d2c5680U;
             y ^= (y << 15) & 0xefc60000U;
+            var l = y ^ (y >> 18);
 
-            var result = ToDouble(y ^ (y >> 18));
+            // Run again in order to obtain a total of 64 random bits, which are required to
+            // generate a double value with full randomness.
+            if (_mti >= N)
+            {
+                // Generate N words at one time
+                GenerateNUInts();
+            }
+            y = _mt[_mti++];
+            // Tempering
+            y ^= (y >> 11);
+            y ^= (y << 7) & 0x9d2c5680U;
+            y ^= (y << 15) & 0xefc60000U;
+            var r = y ^ (y >> 18);
+
+            var result = ToDouble(((ulong)l << ULongToUIntShift) + r);
 
             // Postconditions
             Debug.Assert(result >= 0.0 && result < 1.0);

@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.1] - 2020-07-26
+
+### Changed
+
+- Improved quality of generated double random numbers (issue #10).
+
+### Removed
+
+- Removed `ToDouble` helper method from `AbstractGenerator` which converted `uint` to `double` (issue #10).
+
 ## [5.0.0] - 2020-07-26
 
 ### Added
@@ -95,6 +105,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added new .NET Standard 1.1 library.
 
+[5.0.1]: https://gitlab.com/pomma89/troschuetz-random/-/compare/5.0.0...5.0.1
 [5.0.0]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.4.0...5.0.0
 [4.4.0]: https://gitlab.com/pomma89/troschuetz-random/-/compare/4.3.3...4.4.0
 [4.3.3]: https://gitlab.com/pomma89/troschuetz-random/-/compare/v4.3.1...4.3.3

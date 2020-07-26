@@ -225,7 +225,17 @@ namespace Troschuetz.Random.Generators
             {
                 Fill();
             }
-            var result = ToDouble(_x[_i++]);
+            var l = _x[_i++];
+
+            // Run again in order to obtain a total of 64 random bits, which are required to
+            // generate a double value with full randomness.
+            if (_i >= _longLag)
+            {
+                Fill();
+            }
+            var r = _x[_i++];
+
+            var result = ToDouble(((ulong)l << ULongToUIntShift) + r);
 
             // Postconditions
             Debug.Assert(result >= 0.0 && result < 1.0);
