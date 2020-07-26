@@ -1850,42 +1850,27 @@ namespace Troschuetz.Random
 
         #region Private Members
 
-#pragma warning disable RECS0135 // Function does not reach its end or a 'return' statement by any of possible execution paths
-
         private static IEnumerable<TRet> InfiniteLoop<T1, T2, TRet>(Func<T1, T2, TRet> f, T1 a1, T2 a2)
-#pragma warning restore RECS0135 // Function does not reach its end or a 'return' statement by any of possible execution paths
         {
             while (true)
             {
-#pragma warning disable CC0031 // Check for null before calling a delegate
                 yield return f(a1, a2);
-#pragma warning restore CC0031 // Check for null before calling a delegate
             }
         }
-
-#pragma warning disable RECS0135 // Function does not reach its end or a 'return' statement by any of possible execution paths
 
         private static IEnumerable<TRet> InfiniteLoop<T1, T2, T3, TRet>(Func<T1, T2, T3, TRet> f, T1 a1, T2 a2, T3 a3)
-#pragma warning restore RECS0135 // Function does not reach its end or a 'return' statement by any of possible execution paths
         {
             while (true)
             {
-#pragma warning disable CC0031 // Check for null before calling a delegate
                 yield return f(a1, a2, a3);
-#pragma warning restore CC0031 // Check for null before calling a delegate
             }
         }
 
-#pragma warning disable RECS0135 // Function does not reach its end or a 'return' statement by any of possible execution paths
-
         private static IEnumerable<TRet> InfiniteLoop<T1, T2, T3, T4, TRet>(Func<T1, T2, T3, T4, TRet> f, T1 a1, T2 a2, T3 a3, T4 a4)
-#pragma warning restore RECS0135 // Function does not reach its end or a 'return' statement by any of possible execution paths
         {
             while (true)
             {
-#pragma warning disable CC0031 // Check for null before calling a delegate
                 yield return f(a1, a2, a3, a4);
-#pragma warning restore CC0031 // Check for null before calling a delegate
             }
         }
 

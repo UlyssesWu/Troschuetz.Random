@@ -88,8 +88,6 @@ namespace Troschuetz.Random.Generators
         /// <param name="seed">
         ///   An unsigned number used to calculate a starting value for the pseudo-random number sequence.
         /// </param>
-        [SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "In this case, it is safe")]
-        [SuppressMessage("Usage", "CC0067:Virtual Method Called On Constructor", Justification = "In this case, it is safe")]
         protected AbstractGenerator(uint seed)
         {
             // Set the initial state for this generator.
@@ -456,11 +454,9 @@ namespace Troschuetz.Random.Generators
             unchecked
             {
                 var hash = 1777771;
-#pragma warning disable RECS0025 // Non-readonly field referenced in 'GetHashCode()'
                 hash = hash * 31 + (int)Seed;
                 hash = hash * 31 + _bitCount;
                 hash = hash * 31 + (int)_bitBuffer;
-#pragma warning restore RECS0025 // Non-readonly field referenced in 'GetHashCode()'
                 return hash;
             }
         }
