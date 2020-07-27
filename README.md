@@ -5,8 +5,8 @@
 [![standard-readme compliant][github-standard-readme-badge]][github-standard-readme]
 [![Docs][doxygen-docs-badge]][doxygen-docs]
 [![Gitlab pipeline status][gitlab-pipeline-status-badge]][gitlab-pipelines]
-[![Nuget version][nuget-version-badge]][nuget-package]
-[![Nuget downloads][nuget-downloads-badge]][nuget-package]
+[![NuGet version][nuget-version-badge]][nuget-package]
+[![NuGet downloads][nuget-downloads-badge]][nuget-package]
 [![Renovate enabled][renovate-badge]][renovate-website]
 
 Fully managed library providing various random number generators and distributions.
@@ -29,7 +29,7 @@ in order to get an overview of the contents of this library.
 
 ## Install
 
-Nuget package [Troschuetz.Random][nuget-package] is available for download:
+NuGet package [Troschuetz.Random][nuget-package] is available for download:
 
 ```bash
 dotnet add package Troschuetz.Random
