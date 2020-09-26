@@ -1,5 +1,5 @@
 
-#r "nuget: Bullseye, 3.3.0"
+#r "nuget: Bullseye, 3.5.0"
 #r "nuget: CommandLineParser, 2.8.0"
 #r "nuget: SimpleExec, 6.2.0"
 
