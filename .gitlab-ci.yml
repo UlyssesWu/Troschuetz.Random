@@ -2,11 +2,11 @@ stages:
   - test
   - deploy
 
-check-source-code-format:
+check-source-code-style:
   stage: test
   image: pommalabs/dotnet-mono:dotnet-3-mono-6-sdk
   script:
-    - ./build.sh --target check-source-code-format
+    - ./build.sh --target check-source-code-style
 
 pages:
   stage: deploy

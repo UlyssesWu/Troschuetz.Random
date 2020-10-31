@@ -1,7 +1,7 @@
 
 #r "nuget: Bullseye, 3.5.0"
 #r "nuget: CommandLineParser, 2.8.0"
-#r "nuget: SimpleExec, 6.2.0"
+#r "nuget: SimpleExec, 6.3.0"
 
 using System.IO;
 using CommandLine;
@@ -47,12 +47,12 @@ Target("clean-solution", () =>
     }
 });
 
-Target("check-source-code-format", DependsOn("clean-solution"), () =>
+Target("check-source-code-style", DependsOn("clean-solution"), () =>
 {
     Run("dotnet", "format --check --verbosity detailed");
 });
 
-Target("restore-nuget-packages", DependsOn("check-source-code-format"), () =>
+Target("restore-nuget-packages", DependsOn("check-source-code-style"), () =>
 {
     Run("dotnet", $"restore");
 });
