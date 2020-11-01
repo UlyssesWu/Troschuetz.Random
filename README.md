@@ -287,7 +287,7 @@ MIT © 2012-2020 [Alessio Parma][personal-website]
 [paypal-donations]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELJWKEYS9QGKA
 [paypal-donations-badge]: https://img.shields.io/badge/Donate-PayPal-important.svg?style=flat-square
 [personal-website]: https://alessioparma.xyz/
-[project-license]: https://gitlab.com/pomma89/troschuetz-random/-/blob/master/LICENSE.htm
+[project-license]: https://gitlab.com/pomma89/troschuetz-random/-/blob/master/LICENSE
 [project-license-badge]: https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square
 [renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square
 [renovate-website]: https://renovate.whitesourcesoftware.com/
