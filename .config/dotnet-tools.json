@@ -9,7 +9,7 @@
       ]
     },
     "dotnet-script": {
-      "version": "0.53.0",
+      "version": "1.0.1",
       "commands": [
         "dotnet-script"
       ]
