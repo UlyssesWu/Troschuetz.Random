@@ -2,7 +2,7 @@
   <Import Project="..\..\netfx.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp3.0;net40;net45;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net40;net45;net461</TargetFrameworks>
     <OutputType>exe</OutputType>
   </PropertyGroup>
 
@@ -16,10 +16,6 @@
     <PackageReference Include="NUnitLite" Version="3.12.0" />
     <PackageReference Include="Shouldly" Version="3.0.2" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <DefineConstants>$(DefineConstants);HAS_SERIALIZABLE</DefineConstants>
-  </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
     <DefineConstants>$(DefineConstants);HAS_AUTORUN;HAS_SERIALIZABLE</DefineConstants>
