@@ -1,7 +1,6 @@
 {
   "extends": [
     "config:base",
-    ":assignee(pomma89)",
-    ":githubComToken(IQ9YROt0JwJE5tkmrU8bV9tjGR3ErxSF9d392ykw5zuyOS62GA8ovhtIVdrLRqudLveJ13pLFaZU0zxy1uOwl31z9dQgTd2PhJH6radt6OA6c4HGNm1uAyd6UTBK9UCM+ESbz43ZORAl2AN1hUeX2PZjAhoasX1jg/OOKbzfrmO5PajYWH6NFXLrmsTwlHSFuYkkcwC604JqNhK49HjbGhNlrXw1jWOalve5BlOp3Zw76SMAWOv8Pz+ZBzyymnZstAfs9a3r1Yx8BK5aLDVKlXnifjTWECSq2awq/kSd58oaQzwxyNlcNJpFNyS7n/jx/HN2GXCrWAf4JJQYTC7ZcQ==)"
+    ":assignee(pomma89)"
   ]
 }
