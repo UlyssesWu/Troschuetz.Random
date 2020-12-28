@@ -20,10 +20,6 @@
     <None Include="..\..\LICENSE" Link="NuGet\LICENSE" Pack="true" PackagePath="" Label="NuGet Package License" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
-    <Reference Include="netstandard" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="HellBrick.Diagnostics" Version="4.0.0" PrivateAssets="All" />
     <PackageReference Include="jnm2.ReferenceAssemblies.net35" Version="1.0.1" PrivateAssets="All" />

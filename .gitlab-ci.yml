@@ -4,7 +4,7 @@ stages:
 
 check-source-code-style:
   stage: test
-  image: pommalabs/dotnet-mono:dotnet-5-mono-6-sdk
+  image: pommalabs/dotnet-mono:preview
   script:
     - ./build.sh --target check-source-code-style
 
