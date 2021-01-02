@@ -271,7 +271,7 @@ Small note: If editing the README, please conform to the [standard-readme][githu
 
 ## License
 
-MIT © 2012-2020 [Alessio Parma][personal-website]
+MIT © 2012-2021 [Alessio Parma][personal-website]
 
 [code-project-article]: https://www.codeproject.com/articles/15102/net-random-number-generators-and-distributions
 [doxygen-docs]: https://pomma89.gitlab.io/troschuetz-random/
