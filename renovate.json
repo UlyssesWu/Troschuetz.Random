@@ -2,5 +2,7 @@
   "extends": [
     "config:base",
     ":assignee(pomma89)"
-  ]
+  ],
+  "automerge": true,
+  "gitLabAutomerge": true
 }
