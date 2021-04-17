@@ -6,20 +6,20 @@ namespace Troschuetz.Random.Generators
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     ///   Represents a simple pseudo-random number generator.
     /// </summary>
     /// <remarks>
-    ///   The <see cref="StandardGenerator"/> type internally uses an instance of the
-    ///   <see cref="Random"/> type to generate pseudo-random numbers.
-    ///
-    ///   This generator is NOT thread safe.
+    ///   <para>
+    ///     The <see cref="StandardGenerator"/> type internally uses an instance of the
+    ///     <see cref="Random"/> type to generate pseudo-random numbers.
+    ///   </para>
+    ///   <para>This generator is NOT thread safe.</para>
     /// </remarks>
-#if HAS_SERIALIZABLE
     [Serializable]
-#endif
-
+    [SuppressMessage("Security", "SCS0005:Weak random number generator.", Justification = "The goal of this library is to generate random numbers quickly")]
     public sealed class StandardGenerator : AbstractGenerator
     {
         #region Fields

@@ -13,11 +13,13 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of beta distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="BetaDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Beta_distribution">Wikipedia - Beta
-    ///   distribution</a> and <a href="http://www.xycoon.com/beta_randomnumbers.htm">Xycoon - Beta Distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="BetaDistribution"/> type bases upon information
+    ///     presented on <a href="http://en.wikipedia.org/wiki/Beta_distribution">Wikipedia - Beta
+    ///     distribution</a> and <a href="http://www.xycoon.com/beta_randomnumbers.htm">Xycoon -
+    ///     Beta Distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class BetaDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<double>, IBetaDistribution<double>

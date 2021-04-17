@@ -13,11 +13,12 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of chi-square distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="ChiSquareDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Chi-square_distribution">Wikipedia -
-    ///   Chi-square distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="ChiSquareDistribution"/> type bases upon
+    ///     information presented on
+    ///     <a href="http://en.wikipedia.org/wiki/Chi-square_distribution">Wikipedia - Chi-square distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class ChiSquareDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<int>

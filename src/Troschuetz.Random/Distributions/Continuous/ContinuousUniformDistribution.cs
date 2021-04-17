@@ -13,12 +13,13 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of continuous uniformly distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="ContinuousUniformDistribution"/> type bases upon
-    ///   information presented on
-    ///   <a href="http://en.wikipedia.org/wiki/Uniform_distribution_%28continuous%29">Wikipedia -
-    ///   Uniform distribution (continuous)</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="ContinuousUniformDistribution"/> type bases upon
+    ///     information presented on
+    ///     <a href="http://en.wikipedia.org/wiki/Uniform_distribution_%28continuous%29">Wikipedia -
+    ///     Uniform distribution (continuous)</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class ContinuousUniformDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<double>, IBetaDistribution<double>

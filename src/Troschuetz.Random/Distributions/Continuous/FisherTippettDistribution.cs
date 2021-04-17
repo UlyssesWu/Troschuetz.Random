@@ -13,11 +13,12 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of Fisher-Tippett distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="FisherTippettDistribution"/> type bases upon
-    ///   information presented on
-    ///   <a href="http://en.wikipedia.org/wiki/Laplace_distribution">Wikipedia - Fisher-Tippett distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="FisherTippettDistribution"/> type bases upon
+    ///     information presented on
+    ///     <a href="http://en.wikipedia.org/wiki/Laplace_distribution">Wikipedia - Fisher-Tippett distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class FisherTippettDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<double>, IMuDistribution<double>

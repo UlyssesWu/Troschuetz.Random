@@ -63,6 +63,28 @@ namespace Troschuetz.Random.Tests
 
         [Test]
         [Repeat(RepetitionCount)]
+        public void NextDouble_Serialization_AfterManyRand()
+        {
+            for (var i = 0; i < Iterations; ++i)
+            {
+                _dist.NextDouble();
+            }
+            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, _dist);
+                ms.Position = 0;
+
+                var otherDist = bf.Deserialize(ms) as TDist;
+                for (var i = 0; i < Iterations; ++i)
+                {
+                    Assert.AreEqual(_dist.NextDouble(), otherDist.NextDouble());
+                }
+            }
+        }
+
+        [Test]
+        [Repeat(RepetitionCount)]
         public void Reset_AfterManyRand()
         {
             if (!_dist.CanReset)
@@ -132,32 +154,6 @@ namespace Troschuetz.Random.Tests
         /*=============================================================================
             Serialization
         =============================================================================*/
-
-#if HAS_SERIALIZABLE
-
-        [Test]
-        [Repeat(RepetitionCount)]
-        public void NextDouble_Serialization_AfterManyRand()
-        {
-            for (var i = 0; i < Iterations; ++i)
-            {
-                _dist.NextDouble();
-            }
-            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, _dist);
-                ms.Position = 0;
-
-                var otherDist = bf.Deserialize(ms) as TDist;
-                for (var i = 0; i < Iterations; ++i)
-                {
-                    Assert.AreEqual(_dist.NextDouble(), otherDist.NextDouble());
-                }
-            }
-        }
-
-#endif
     }
 
     public abstract class DiscreteDistributionTests<TDist> : DistributionTests<TDist>
@@ -225,6 +221,28 @@ namespace Troschuetz.Random.Tests
 
         [Test]
         [Repeat(RepetitionCount)]
+        public void Next_Serialization_AfterManyRand()
+        {
+            for (var i = 0; i < Iterations; ++i)
+            {
+                _dist.Next();
+            }
+            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, _dist);
+                ms.Position = 0;
+
+                var otherDist = bf.Deserialize(ms) as TDist;
+                for (var i = 0; i < Iterations; ++i)
+                {
+                    Assert.AreEqual(_dist.NextDouble(), otherDist.NextDouble());
+                }
+            }
+        }
+
+        [Test]
+        [Repeat(RepetitionCount)]
         public void Reset_AfterManyRand()
         {
             if (!_dist.CanReset)
@@ -296,28 +314,6 @@ namespace Troschuetz.Random.Tests
         =============================================================================*/
 
 #if HAS_SERIALIZABLE
-
-        [Test]
-        [Repeat(RepetitionCount)]
-        public void Next_Serialization_AfterManyRand()
-        {
-            for (var i = 0; i < Iterations; ++i)
-            {
-                _dist.Next();
-            }
-            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, _dist);
-                ms.Position = 0;
-
-                var otherDist = bf.Deserialize(ms) as TDist;
-                for (var i = 0; i < Iterations; ++i)
-                {
-                    Assert.AreEqual(_dist.NextDouble(), otherDist.NextDouble());
-                }
-            }
-        }
 #endif
     }
 

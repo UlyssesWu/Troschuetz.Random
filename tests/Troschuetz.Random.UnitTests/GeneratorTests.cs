@@ -98,6 +98,35 @@ namespace Troschuetz.Random.Tests
         }
 
         [Test]
+        [Repeat(RepetitionCount)]
+        public void Bytes_SameOutputAsNextBytes_WithSerialization()
+        {
+            var b1 = new byte[5];
+            var b2 = new byte[5];
+            var otherGen = GetGenerator(_generator.Seed);
+            var bytesEn = _generator.Bytes(b1).GetEnumerator();
+            bytesEn.MoveNext();
+            for (var i = 0; i < Iterations; ++i, bytesEn.MoveNext())
+            {
+                otherGen.NextBytes(b2);
+                Assert.AreEqual(b2, b1);
+            }
+            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, _generator);
+                ms.Position = 0;
+
+                _generator = bf.Deserialize(ms) as IGenerator;
+                for (var i = 0; i < Iterations; ++i, bytesEn.MoveNext())
+                {
+                    otherGen.NextBytes(b2);
+                    Assert.AreEqual(b2, b1);
+                }
+            }
+        }
+
+        [Test]
         public void Choice_EmptyList()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -873,40 +902,6 @@ namespace Troschuetz.Random.Tests
         /*=============================================================================
             Serialization
         =============================================================================*/
-
-#if HAS_SERIALIZABLE
-
-        [Test]
-        [Repeat(RepetitionCount)]
-        public void Bytes_SameOutputAsNextBytes_WithSerialization()
-        {
-            var b1 = new byte[5];
-            var b2 = new byte[5];
-            var otherGen = GetGenerator(_generator.Seed);
-            var bytesEn = _generator.Bytes(b1).GetEnumerator();
-            bytesEn.MoveNext();
-            for (var i = 0; i < Iterations; ++i, bytesEn.MoveNext())
-            {
-                otherGen.NextBytes(b2);
-                Assert.AreEqual(b2, b1);
-            }
-            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, _generator);
-                ms.Position = 0;
-
-                _generator = bf.Deserialize(ms) as IGenerator;
-                for (var i = 0; i < Iterations; ++i, bytesEn.MoveNext())
-                {
-                    otherGen.NextBytes(b2);
-                    Assert.AreEqual(b2, b1);
-                }
-            }
-        }
-
-#endif
-
         /*=============================================================================
             Seed generation
         =============================================================================*/

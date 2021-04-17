@@ -13,12 +13,13 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of logistic distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="LogisticDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Log-normal_distribution">Wikipedia -
-    ///   Logistic Distribution</a> and the implementation in the
-    ///   <a href="http://www.boost.org/libs/random/index.html">Boost Random Number Library</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="LogisticDistribution"/> type bases upon information
+    ///     presented on <a href="http://en.wikipedia.org/wiki/Log-normal_distribution">Wikipedia -
+    ///     Logistic Distribution</a> and the implementation in the
+    ///     <a href="http://www.boost.org/libs/random/index.html">Boost Random Number Library</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class LogisticDistribution : AbstractDistribution, IContinuousDistribution, IMuDistribution<double>, ISigmaDistribution<double>

@@ -13,11 +13,12 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of laplace distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="LaplaceDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Laplace_distribution">Wikipedia -
-    ///   Laplace distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="LaplaceDistribution"/> type bases upon information
+    ///     presented on <a href="http://en.wikipedia.org/wiki/Laplace_distribution">Wikipedia -
+    ///     Laplace distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class LaplaceDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<double>, IMuDistribution<double>

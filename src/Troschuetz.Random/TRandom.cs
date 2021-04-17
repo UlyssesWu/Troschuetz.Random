@@ -12,14 +12,6 @@ namespace Troschuetz.Random
     using Generators;
 
     /// <summary>
-    ///   Stub.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public sealed class SerializableAttribute : Attribute
-    {
-    }
-
-    /// <summary>
     ///   A random generator class similar to the one Python offers, providing functions similar to
     ///   the ones found in <see cref="System.Random"/> and functions returning random numbers
     ///   according to a particular kind of distribution.
@@ -1859,7 +1851,4 @@ namespace Troschuetz.Random
 
         #endregion Private Members
     }
-
-#if NETSTD10
-#endif
 }

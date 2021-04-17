@@ -13,11 +13,13 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of cauchy distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="CauchyDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Cauchy_distribution">Wikipedia - Cauchy
-    ///   distribution</a> and <a href="http://www.xycoon.com/cauchy2p_random.htm">Xycoon - Cauchy Distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="CauchyDistribution"/> type bases upon information
+    ///     presented on <a href="http://en.wikipedia.org/wiki/Cauchy_distribution">Wikipedia -
+    ///     Cauchy distribution</a> and <a href="http://www.xycoon.com/cauchy2p_random.htm">Xycoon -
+    ///     Cauchy Distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class CauchyDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<double>, IGammaDistribution<double>

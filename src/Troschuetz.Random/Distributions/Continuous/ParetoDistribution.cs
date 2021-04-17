@@ -13,11 +13,13 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of pareto distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="ParetoDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Pareto_distribution">Wikipedia - Pareto
-    ///   distribution</a> and <a href="http://www.xycoon.com/par_random.htm">Xycoon - Pareto Distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="ParetoDistribution"/> type bases upon information
+    ///     presented on <a href="http://en.wikipedia.org/wiki/Pareto_distribution">Wikipedia -
+    ///     Pareto distribution</a> and <a href="http://www.xycoon.com/par_random.htm">Xycoon -
+    ///     Pareto Distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class ParetoDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<double>, IBetaDistribution<double>

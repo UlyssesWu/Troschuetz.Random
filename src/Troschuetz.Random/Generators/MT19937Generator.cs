@@ -58,16 +58,14 @@ namespace Troschuetz.Random.Generators
     ///   Represents a Mersenne Twister pseudo-random number generator with period 2^19937-1.
     /// </summary>
     /// <remarks>
-    ///   The <see cref="MT19937Generator"/> type bases upon information and the implementation
-    ///   presented on the
-    ///   <a href="http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html">Mersenne Twister Home Page</a>.
-    ///
-    ///   This generator is NOT thread safe.
+    ///   <para>
+    ///     The <see cref="MT19937Generator"/> type bases upon information and the implementation
+    ///     presented on the
+    ///     <a href="http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html">Mersenne Twister Home Page</a>.
+    ///   </para>
+    ///   <para>This generator is NOT thread safe.</para>
     /// </remarks>
-#if HAS_SERIALIZABLE
     [Serializable]
-#endif
-
     public sealed class MT19937Generator : AbstractGenerator
     {
         #region Constants

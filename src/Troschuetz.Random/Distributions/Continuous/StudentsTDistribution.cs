@@ -13,12 +13,13 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of t-distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="StudentsTDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Student%27s_t-distribution">Wikipedia -
-    ///   Student's t-distribution</a> and <a href="http://www.xycoon.com/stt_random.htm">Xycoon -
-    ///   Student t Distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="StudentsTDistribution"/> type bases upon
+    ///     information presented on
+    ///     <a href="http://en.wikipedia.org/wiki/Student%27s_t-distribution">Wikipedia - Student's
+    ///     t-distribution</a> and <a href="http://www.xycoon.com/stt_random.htm">Xycoon - Student t Distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class StudentsTDistribution : AbstractDistribution, IContinuousDistribution, INuDistribution<int>

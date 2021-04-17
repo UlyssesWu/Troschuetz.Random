@@ -13,11 +13,13 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of erlang distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="ErlangDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Erlang_distribution">Wikipedia - Erlang
-    ///   distribution</a> and <a href="http://www.xycoon.com/erlang_random.htm">Xycoon - Erlang Distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="ErlangDistribution"/> type bases upon information
+    ///     presented on <a href="http://en.wikipedia.org/wiki/Erlang_distribution">Wikipedia -
+    ///     Erlang distribution</a> and <a href="http://www.xycoon.com/erlang_random.htm">Xycoon -
+    ///     Erlang Distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class ErlangDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<int>, ILambdaDistribution<double>

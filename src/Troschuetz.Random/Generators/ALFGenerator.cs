@@ -30,21 +30,20 @@ namespace Troschuetz.Random.Generators
     ///   Represents a Additive Lagged Fibonacci pseudo-random number generator.
     /// </summary>
     /// <remarks>
-    ///   The <see cref="ALFGenerator"/> type bases upon the implementation in the
-    ///   <a href="http://www.boost.org/libs/random/index.html">Boost Random Number Library</a>. It
-    ///   uses the modulus 2 <sup>32</sup> and by default the "lags" 418 and 1279, which can be
-    ///   adjusted through the associated <see cref="ShortLag"/> and <see cref="LongLag"/> properties.
-    ///
-    ///   Some popular pairs are presented on
-    ///   <a href="http://en.wikipedia.org/wiki/Lagged_Fibonacci_generator">Wikipedia - Lagged
-    ///   Fibonacci generator</a>.
-    ///
-    ///   This generator is NOT thread safe.
+    ///   <para>
+    ///     The <see cref="ALFGenerator"/> type bases upon the implementation in the
+    ///     <a href="http://www.boost.org/libs/random/index.html">Boost Random Number Library</a>.
+    ///     It uses the modulus 2 <sup>32</sup> and by default the "lags" 418 and 1279, which can be
+    ///     adjusted through the associated <see cref="ShortLag"/> and <see cref="LongLag"/> properties.
+    ///   </para>
+    ///   <para>
+    ///     Some popular pairs are presented on
+    ///     <a href="http://en.wikipedia.org/wiki/Lagged_Fibonacci_generator">Wikipedia - Lagged
+    ///     Fibonacci generator</a>.
+    ///   </para>
+    ///   <para>This generator is NOT thread safe.</para>
     /// </remarks>
-#if HAS_SERIALIZABLE
     [Serializable]
-#endif
-
     public sealed class ALFGenerator : AbstractGenerator
     {
         #region Fields

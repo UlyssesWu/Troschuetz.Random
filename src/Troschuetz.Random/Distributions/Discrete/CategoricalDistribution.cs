@@ -38,11 +38,12 @@ namespace Troschuetz.Random.Distributions.Discrete
     ///   distribution</a>. This distribution is sometimes called the Discrete distribution.
     /// </summary>
     /// <remarks>
-    ///   The distribution is parameterized by a vector of ratios: in other words, the parameter
-    ///   does not have to be normalized and sum to 1. The reason is that some vectors can't be
-    ///   exactly normalized to sum to 1 in floating point representation.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The distribution is parameterized by a vector of ratios: in other words, the parameter
+    ///     does not have to be normalized and sum to 1. The reason is that some vectors can't be
+    ///     exactly normalized to sum to 1 in floating point representation.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class CategoricalDistribution : AbstractDistribution, IDiscreteDistribution, IWeightsDistribution<double>
@@ -439,11 +440,15 @@ namespace Troschuetz.Random.Distributions.Discrete
         #region TRandom Helpers
 
         /// <summary>
-        ///   Determines whether categorical distribution is defined under given weights. The
-        ///   default definition returns false if any of the weights is negative or if the sum of
-        ///   parameters is 0.0; otherwise, it returns true.
-        ///
-        ///   Weights do not need to be normalized as this is often impossible using floating point arithmetic.
+        ///   <para>
+        ///     Determines whether categorical distribution is defined under given weights. The
+        ///     default definition returns false if any of the weights is negative or if the sum of
+        ///     parameters is 0.0; otherwise, it returns true.
+        ///   </para>
+        ///   <para>
+        ///     Weights do not need to be normalized as this is often impossible using floating
+        ///     point arithmetic.
+        ///   </para>
         /// </summary>
         /// <remarks>
         ///   This is an extensibility point for the <see cref="CategoricalDistribution"/> class.

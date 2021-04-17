@@ -5,6 +5,8 @@
 namespace Troschuetz.Random
 {
     using System;
+    using System.Diagnostics;
+    using System.Threading;
 
     /// <summary>
     ///   Simple math utilities used inside the library. They are also public, should you need them
@@ -42,16 +44,14 @@ namespace Troschuetz.Random
                 const uint Factor = 19U;
                 var seed = 1777771U;
 
-                seed = Factor * seed + (uint)Environment.TickCount;
+                seed = (Factor * seed) + (uint)Environment.TickCount;
 
                 var guid = Guid.NewGuid().ToByteArray();
-                seed = Factor * seed + BitConverter.ToUInt32(guid, 0);
-                seed = Factor * seed + BitConverter.ToUInt32(guid, 8);
+                seed = (Factor * seed) + BitConverter.ToUInt32(guid, 0);
+                seed = (Factor * seed) + BitConverter.ToUInt32(guid, 8);
 
-#if HAS_THREAD && HAS_PROCESS
-                seed = Factor * seed + (uint)System.Threading.Thread.CurrentThread.ManagedThreadId;
-                seed = Factor * seed + (uint)System.Diagnostics.Process.GetCurrentProcess().Id;
-#endif
+                seed = Factor * seed + (uint)Thread.CurrentThread.ManagedThreadId;
+                seed = Factor * seed + (uint)Process.GetCurrentProcess().Id;
 
                 return seed;
             }

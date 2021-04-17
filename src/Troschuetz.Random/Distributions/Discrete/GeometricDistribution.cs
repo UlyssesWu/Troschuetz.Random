@@ -67,14 +67,15 @@ namespace Troschuetz.Random.Distributions.Discrete
     ///   Provides generation of geometric distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The geometric distribution generates only discrete numbers. <br/> The implementation of
-    ///   the <see cref="GeometricDistribution"/> type bases upon information presented on
-    ///   <a href="http://en.wikipedia.org/wiki/Geometric_distribution">Wikipedia - Geometric
-    ///   distribution</a> and the implementation in the
-    ///   <a href="http://www.lkn.ei.tum.de/lehre/scn/cncl/doc/html/cncl_toc.html">Communication
-    ///   Networks Class Library</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The geometric distribution generates only discrete numbers. <br/> The implementation of
+    ///     the <see cref="GeometricDistribution"/> type bases upon information presented on
+    ///     <a href="http://en.wikipedia.org/wiki/Geometric_distribution">Wikipedia - Geometric
+    ///     distribution</a> and the implementation in the
+    ///     <a href="http://www.lkn.ei.tum.de/lehre/scn/cncl/doc/html/cncl_toc.html">Communication
+    ///     Networks Class Library</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class GeometricDistribution : AbstractDistribution, IDiscreteDistribution, IAlphaDistribution<double>

@@ -13,11 +13,12 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of weibull distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="WeibullDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Weibull_distribution">Wikipedia -
-    ///   Weibull distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="WeibullDistribution"/> type bases upon information
+    ///     presented on <a href="http://en.wikipedia.org/wiki/Weibull_distribution">Wikipedia -
+    ///     Weibull distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class WeibullDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<double>, ILambdaDistribution<double>

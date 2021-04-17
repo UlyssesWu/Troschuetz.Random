@@ -9,29 +9,30 @@ namespace Troschuetz.Random.Generators
     using Core;
 
     /// <summary>
-    ///   An abstract generator which efficiently implements everything required by the
-    ///   <see cref="IGenerator"/> interface using only few methods: <see cref="NextUInt()"/>,
-    ///   <see cref="NextDouble()"/>, <see cref="NextInclusiveMaxValue()"/>.
-    ///
-    ///   Therefore, in order to build a new generator, one must "simply" override the
-    ///   <see cref="Reset(uint)"/>, which is used to automatically initialize the generator, and
-    ///   the generator methods, which, as stated above, are used to generate every kind of random
-    ///   object exposed by the interface.
-    ///
-    ///   All generators implemented in this library extend this abstract class.
+    ///   <para>
+    ///     An abstract generator which efficiently implements everything required by the
+    ///     <see cref="IGenerator"/> interface using only few methods: <see cref="NextUInt()"/>,
+    ///     <see cref="NextDouble()"/>, <see cref="NextInclusiveMaxValue()"/>.
+    ///   </para>
+    ///   <para>
+    ///     Therefore, in order to build a new generator, one must "simply" override the
+    ///     <see cref="Reset(uint)"/>, which is used to automatically initialize the generator, and
+    ///     the generator methods, which, as stated above, are used to generate every kind of random
+    ///     object exposed by the interface.
+    ///   </para>
+    ///   <para>All generators implemented in this library extend this abstract class.</para>
     /// </summary>
     /// <remarks>
-    ///   Methods <see cref="NextBoolean()"/> and <see cref="NextBytes(byte[])"/> are NOT thread
-    ///   safe. The thread safety of other methods depends on the one of the extending class, that
-    ///   is, if all abstract methods are implemented in a thread safe manner, then other methods,
-    ///   excluding <see cref="NextBoolean()"/> and <see cref="NextBytes(byte[])"/>, are thread safe too.
-    ///
-    ///   Please note that all generators implemented in this library are NOT thread safe.
+    ///   <para>
+    ///     Methods <see cref="NextBoolean()"/> and <see cref="NextBytes(byte[])"/> are NOT thread
+    ///     safe. The thread safety of other methods depends on the one of the extending class, that
+    ///     is, if all abstract methods are implemented in a thread safe manner, then other methods,
+    ///     excluding <see cref="NextBoolean()"/> and <see cref="NextBytes(byte[])"/>, are thread
+    ///     safe too.
+    ///   </para>
+    ///   <para>Please note that all generators implemented in this library are NOT thread safe.</para>
     /// </remarks>
-#if HAS_SERIALIZABLE
     [Serializable]
-#endif
-
     public abstract class AbstractGenerator : IGenerator
     {
         #region Constants

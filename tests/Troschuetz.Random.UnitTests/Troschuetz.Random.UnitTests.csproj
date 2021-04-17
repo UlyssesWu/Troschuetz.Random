@@ -11,51 +11,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JunitXml.TestLogger" Version="2.1.81" />
+    <PackageReference Include="JunitXml.TestLogger" Version="3.0.87" />
     <PackageReference Include="NUnit" Version="3.13.1" />
-    <PackageReference Include="NUnitLite" Version="3.12.0" />
+    <PackageReference Include="NUnitLite" Version="3.13.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net40' AND '$(TargetFramework)' != 'net45' ">
+    <PackageReference Include="Shouldly" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' OR '$(TargetFramework)' == 'net45' ">
     <PackageReference Include="Shouldly" Version="3.0.2" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
-    <DefineConstants>$(DefineConstants);HAS_AUTORUN;HAS_SERIALIZABLE</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <DefineConstants>$(DefineConstants);HAS_AUTORUN;HAS_SERIALIZABLE</DefineConstants>
-  </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' OR '$(TargetFramework)' == 'net45' OR '$(TargetFramework)' == 'net461' ">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <DefineConstants>$(DefineConstants);HAS_AUTORUN;HAS_SERIALIZABLE</DefineConstants>
-  </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <DefineConstants>$(DefineConstants);HAS_AUTORUN;HAS_SERIALIZABLE</DefineConstants>
-  </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net472' ">
-    <DefineConstants>$(DefineConstants);HAS_AUTORUN;HAS_SERIALIZABLE</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net48' ">
-    <DefineConstants>$(DefineConstants);HAS_AUTORUN;HAS_SERIALIZABLE</DefineConstants>
-  </PropertyGroup>
 </Project>

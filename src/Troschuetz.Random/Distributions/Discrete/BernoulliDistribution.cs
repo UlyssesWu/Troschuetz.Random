@@ -13,11 +13,12 @@ namespace Troschuetz.Random.Distributions.Discrete
     ///   Provides generation of bernoulli distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The bernoulli distribution generates only discrete numbers. <br/> The implementation of
-    ///   the <see cref="BernoulliDistribution"/> type bases upon information presented on
-    ///   <a href="http://en.wikipedia.org/wiki/Bernoulli_distribution">Wikipedia - Bernoulli distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The bernoulli distribution generates only discrete numbers. <br/> The implementation of
+    ///     the <see cref="BernoulliDistribution"/> type bases upon information presented on
+    ///     <a href="http://en.wikipedia.org/wiki/Bernoulli_distribution">Wikipedia - Bernoulli distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class BernoulliDistribution : AbstractDistribution, IDiscreteDistribution, IAlphaDistribution<double>

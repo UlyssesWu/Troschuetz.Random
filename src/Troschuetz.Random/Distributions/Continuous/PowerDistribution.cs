@@ -13,10 +13,11 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of power distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="PowerDistribution"/> type bases upon information
-    ///   presented on <a href="http://www.xycoon.com/power.htm">Xycoon - Power Distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="PowerDistribution"/> type bases upon information
+    ///     presented on <a href="http://www.xycoon.com/power.htm">Xycoon - Power Distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class PowerDistribution : AbstractDistribution, IContinuousDistribution, IAlphaDistribution<double>, IBetaDistribution<double>

@@ -13,11 +13,12 @@ namespace Troschuetz.Random.Distributions.Discrete
     ///   Provides generation of binomial distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The binomial distribution generates only discrete numbers. <br/> The implementation of the
-    ///   <see cref="BinomialDistribution"/> type bases upon information presented on
-    ///   <a href="http://en.wikipedia.org/wiki/binomial_distribution">Wikipedia - Binomial distribution</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The binomial distribution generates only discrete numbers. <br/> The implementation of
+    ///     the <see cref="BinomialDistribution"/> type bases upon information presented on
+    ///     <a href="http://en.wikipedia.org/wiki/binomial_distribution">Wikipedia - Binomial distribution</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class BinomialDistribution : AbstractDistribution, IDiscreteDistribution, IAlphaDistribution<double>, IBetaDistribution<int>

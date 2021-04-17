@@ -67,13 +67,14 @@ namespace Troschuetz.Random.Distributions.Continuous
     ///   Provides generation of normal distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The implementation of the <see cref="NormalDistribution"/> type bases upon information
-    ///   presented on <a href="http://en.wikipedia.org/wiki/Normal_distribution">Wikipedia - Normal
-    ///   distribution</a> and the implementation in the
-    ///   <a href="http://www.lkn.ei.tum.de/lehre/scn/cncl/doc/html/cncl_toc.html">Communication
-    ///   Networks Class Library</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The implementation of the <see cref="NormalDistribution"/> type bases upon information
+    ///     presented on <a href="http://en.wikipedia.org/wiki/Normal_distribution">Wikipedia -
+    ///     Normal distribution</a> and the implementation in the
+    ///     <a href="http://www.lkn.ei.tum.de/lehre/scn/cncl/doc/html/cncl_toc.html">Communication
+    ///     Networks Class Library</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class NormalDistribution : AbstractDistribution, IContinuousDistribution, IMuDistribution<double>, ISigmaDistribution<double>

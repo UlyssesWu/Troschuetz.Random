@@ -13,13 +13,14 @@ namespace Troschuetz.Random.Distributions.Discrete
     ///   Provides generation of discrete uniformly distributed random numbers.
     /// </summary>
     /// <remarks>
-    ///   The discrete uniform distribution generates only discrete numbers. <br/> The
-    ///   implementation of the <see cref="DiscreteUniformDistribution"/> type bases upon
-    ///   information presented on
-    ///   <a href="http://en.wikipedia.org/wiki/Uniform_distribution_%28discrete%29">Wikipedia -
-    ///   Uniform distribution (discrete)</a>.
-    ///
-    ///   The thread safety of this class depends on the one of the underlying generator.
+    ///   <para>
+    ///     The discrete uniform distribution generates only discrete numbers. <br/> The
+    ///     implementation of the <see cref="DiscreteUniformDistribution"/> type bases upon
+    ///     information presented on
+    ///     <a href="http://en.wikipedia.org/wiki/Uniform_distribution_%28discrete%29">Wikipedia -
+    ///     Uniform distribution (discrete)</a>.
+    ///   </para>
+    ///   <para>The thread safety of this class depends on the one of the underlying generator.</para>
     /// </remarks>
     [Serializable]
     public sealed class DiscreteUniformDistribution : AbstractDistribution, IDiscreteDistribution, IAlphaDistribution<int>, IBetaDistribution<int>

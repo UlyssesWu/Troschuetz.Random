@@ -4,6 +4,7 @@
 
 namespace Troschuetz.Random.Generators
 {
+    using System;
     using System.Diagnostics;
 
     /// <summary>
@@ -11,14 +12,10 @@ namespace Troschuetz.Random.Generators
     ///   Inside the book, it is the highest quality recommended generator.
     /// </summary>
     /// <remarks>
-    ///   This generator has a period of ~ 3.138 * 10^57.
-    ///
-    ///   This generator is NOT thread safe.
+    ///   <para>This generator has a period of ~ 3.138 * 10^57.</para>
+    ///   <para>This generator is NOT thread safe.</para>
     /// </remarks>
-#if HAS_SERIALIZABLE
-    [System.Serializable]
-#endif
-
+    [Serializable]
     public sealed class NR3Generator : AbstractGenerator
     {
         #region Constants

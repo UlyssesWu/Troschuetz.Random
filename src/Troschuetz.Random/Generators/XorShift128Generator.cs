@@ -46,24 +46,23 @@
 
 namespace Troschuetz.Random.Generators
 {
+    using System;
     using System.Diagnostics;
 
     /// <summary>
     ///   Represents a xorshift pseudo-random number generator with period 2^128-1.
     /// </summary>
     /// <remarks>
-    ///   The <see cref="XorShift128Generator"/> type bases upon the implementation presented in the
-    ///   CP article " <a href="http://www.codeproject.com/csharp/fastrandom.asp">A fast equivalent
-    ///   for System.Random</a>" and the theoretical background on xorshift random number generators
-    ///   published by George Marsaglia in this paper "
-    ///   <a href="http://www.jstatsoft.org/v08/i14/xorshift.pdf">Xorshift RNGs</a>".
-    ///
-    ///   This generator is NOT thread safe.
+    ///   <para>
+    ///     The <see cref="XorShift128Generator"/> type bases upon the implementation presented in
+    ///     the CP article " <a href="http://www.codeproject.com/csharp/fastrandom.asp">A fast
+    ///     equivalent for System.Random</a>" and the theoretical background on xorshift random
+    ///     number generators published by George Marsaglia in this paper "
+    ///     <a href="http://www.jstatsoft.org/v08/i14/xorshift.pdf">Xorshift RNGs</a>".
+    ///   </para>
+    ///   <para>This generator is NOT thread safe.</para>
     /// </remarks>
-#if HAS_SERIALIZABLE
-    [System.Serializable]
-#endif
-
+    [Serializable]
     public sealed class XorShift128Generator : AbstractGenerator
     {
         #region Constants
