@@ -277,7 +277,7 @@ MIT © 2012-2021 [Alessio Parma][personal-website]
 [doxygen-docs]: https://pomma89.gitlab.io/troschuetz-random/
 [doxygen-docs-badge]: https://img.shields.io/badge/Doxygen-OK-green?style=flat-square
 [github-standard-readme]: https://github.com/RichardLitt/standard-readme
-[github-standard-readme-badge]: https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square
+[github-standard-readme-badge]: https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square
 [gitlab-pipeline-status-badge]: https://gitlab.com/pomma89/troschuetz-random/badges/main/pipeline.svg?style=flat-square
 [gitlab-pipelines]: https://gitlab.com/pomma89/troschuetz-random/pipelines
 [gitlab-pomma89]: https://gitlab.com/pomma89

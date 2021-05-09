@@ -18,6 +18,7 @@
     <Folder Include="NuGet\" />
     <None Include="..\..\icon.png" Link="NuGet\icon.png" Pack="true" PackagePath="" Label="NuGet Package Icon" />
     <None Include="..\..\LICENSE" Link="NuGet\LICENSE" Pack="true" PackagePath="" Label="NuGet Package License" />
+    <None Include="..\..\README.md" Link="NuGet\README.md" Pack="true" PackagePath="" Label="NuGet Package README" />
   </ItemGroup>
 
   <ItemGroup>
