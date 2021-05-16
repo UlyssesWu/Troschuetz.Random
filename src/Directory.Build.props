@@ -8,6 +8,16 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <PropertyGroup Label="NuGet">
+    <Authors>Stefan Troschütz &lt;stefan@troschuetz.de&gt;; Alessio Parma &lt;alessio.parma@gmail.com&gt;</Authors>
+    <Copyright>Copyright (c) 2012-2021 Alessio Parma &lt;alessio.parma@gmail.com&gt;</Copyright>
+    <PackageProjectUrl>https://gitlab.com/pomma89/troschuetz-random</PackageProjectUrl>
+    <PackageReleaseNotes>https://gitlab.com/pomma89/troschuetz-random/-/releases</PackageReleaseNotes>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
   <PropertyGroup Label="SourceLink">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -17,7 +27,6 @@
   <ItemGroup>
     <Folder Include="NuGet\" />
     <None Include="..\..\icon.png" Link="NuGet\icon.png" Pack="true" PackagePath="" Label="NuGet Package Icon" />
-    <None Include="..\..\LICENSE" Link="NuGet\LICENSE" Pack="true" PackagePath="" Label="NuGet Package License" />
     <None Include="..\..\README.md" Link="NuGet\README.md" Pack="true" PackagePath="" Label="NuGet Package README" />
   </ItemGroup>
 
