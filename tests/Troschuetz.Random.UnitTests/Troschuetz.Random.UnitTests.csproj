@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JunitXml.TestLogger" Version="3.0.87" />
+    <PackageReference Include="JunitXml.TestLogger" Version="3.0.98" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnitLite" Version="3.13.1" />
   </ItemGroup>
