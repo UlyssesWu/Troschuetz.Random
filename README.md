@@ -3,7 +3,6 @@
 [![License: MIT][project-license-badge]][project-license]
 [![Donate][paypal-donations-badge]][paypal-donations]
 [![standard-readme compliant][github-standard-readme-badge]][github-standard-readme]
-[![Docs][doxygen-docs-badge]][doxygen-docs]
 [![Gitlab pipeline status][gitlab-pipeline-status-badge]][gitlab-pipelines]
 [![NuGet version][nuget-version-badge]][nuget-package]
 [![NuGet downloads][nuget-downloads-badge]][nuget-package]
@@ -15,7 +14,7 @@ All the hard work behind this library was done by Stefan Troschütz, and for whi
 What I have done with his great project, was simply to refactor and improve his code,
 while offering a new Python-style random class.
 
-Please visit the [page of the original project][code-project-article]
+Please visit the [page of the original project][codeproject-article]
 in order to get an overview of the contents of this library.
 
 ## Table of Contents
@@ -273,9 +272,7 @@ Small note: If editing the README, please conform to the [standard-readme][githu
 
 MIT © 2012-2021 [Alessio Parma][personal-website]
 
-[code-project-article]: https://www.codeproject.com/articles/15102/net-random-number-generators-and-distributions
-[doxygen-docs]: https://pomma89.gitlab.io/troschuetz-random/
-[doxygen-docs-badge]: https://img.shields.io/badge/Doxygen-OK-green?style=flat-square
+[codeproject-article]: https://www.codeproject.com/articles/15102/net-random-number-generators-and-distributions
 [github-standard-readme]: https://github.com/RichardLitt/standard-readme
 [github-standard-readme-badge]: https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square
 [gitlab-pipeline-status-badge]: https://gitlab.com/pomma89/troschuetz-random/badges/main/pipeline.svg?style=flat-square
