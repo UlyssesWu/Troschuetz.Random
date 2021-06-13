@@ -45,7 +45,7 @@ Options opts;
 
 Target("clean-solution", () =>
 {
-    Run("dotnet", $"clean {opts.ConfigurationFlag} {opts.FrameworkFlag}");
+    Run("dotnet", $"clean {opts.ConfigurationFlag}");
 
     if (Directory.Exists(artifactsDir))
     {
@@ -65,7 +65,7 @@ Target("restore-nuget-packages", DependsOn("check-source-code-style"), () =>
 
 Target("build-solution", DependsOn("restore-nuget-packages"), () =>
 {
-    Run("dotnet", $"build {opts.ConfigurationFlag} {opts.FrameworkFlag} --no-restore");
+    Run("dotnet", $"build {opts.ConfigurationFlag} --no-restore");
 });
 
 Target("run-tests", DependsOn("build-solution"), () =>
@@ -78,13 +78,13 @@ Target("run-tests", DependsOn("build-solution"), () =>
 
 Target("pack-sources", DependsOn("build-solution"), () =>
 {
-    Run("dotnet", $"pack {opts.ConfigurationFlag} {opts.FrameworkFlag} --output {nugetPackagesDir} --no-build");
+    Run("dotnet", $"pack {opts.ConfigurationFlag} --output {nugetPackagesDir} --no-build");
 });
 
 Target("publish-on-myget", DependsOn("pack-sources"), () =>
 {
     var mygetApiKey = Environment.GetEnvironmentVariable("MYGET_API_KEY");
-    Run("dotnet", $"nuget push {nugetPackagesDir}/*.nupkg {opts.FrameworkFlag} --api-key {mygetApiKey}");
+    Run("dotnet", $"nuget push {nugetPackagesDir}/*.nupkg --api-key {mygetApiKey}");
 });
 
 ////////////////////////////////////////////////////////////////////////////////
