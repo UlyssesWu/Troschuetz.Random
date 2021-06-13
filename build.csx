@@ -14,7 +14,8 @@ using static SimpleExec.Command;
 
 var artifactsDir = "./artifacts";
 var nugetPackagesDir = $"./{artifactsDir}/nuget-packages";
-var testResultsDir = $"../../{artifactsDir}/test-results";
+var testResultsDir = $"./{artifactsDir}/test-results";
+var codeCoverageDir = $"./{artifactsDir}/code-coverage";
 
 ////////////////////////////////////////////////////////////////////////////////
 // OPTIONS
@@ -27,7 +28,7 @@ public sealed class Options
 
     public string ConfigurationFlag => !string.IsNullOrWhiteSpace(Configuration) ? $"-c {Configuration}" : string.Empty;
 
-    [Option('t', "target", Required = false, Default = "run-unit-tests")]
+    [Option('t', "target", Required = false, Default = "run-tests")]
     public string Target { get; set; }
 }
 
@@ -62,10 +63,12 @@ Target("build-solution", DependsOn("restore-nuget-packages"), () =>
     Run("dotnet", $"build {opts.ConfigurationFlag} --no-restore");
 });
 
-Target("run-unit-tests", DependsOn("build-solution"), () =>
+Target("run-tests", DependsOn("build-solution"), () =>
 {
-    var logger = $"junit;LogFilePath={testResultsDir}/{{assembly}}-{{framework}}.xml";
-    Run("dotnet", $"test {opts.ConfigurationFlag} -a . -l {logger} --no-build");
+    var loggerFlag = $"--logger \"junit;LogFileName={{assembly}}-{{framework}}.xml;MethodFormat=Class;FailureBodyFormat=Verbose\"";
+    var codeCoverageFlags = $"--collect \"XPlat Code Coverage\" --results-directory {testResultsDir}";
+    Run("dotnet", $"test {opts.ConfigurationFlag} --test-adapter-path . {loggerFlag} {codeCoverageFlags} --no-build");
+    Run("dotnet", $"reportgenerator \"-reports:{testResultsDir}/*/*.xml\" \"-targetdir:{codeCoverageDir}\" -reporttypes:Html");
 });
 
 Target("pack-sources", DependsOn("build-solution"), () =>

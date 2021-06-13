@@ -2,22 +2,12 @@ stages:
   - test
   - deploy
 
+include:
+  - project: pommalabs/templates
+    file: /.gitlab/ci_templates/dotnet/deploy-doxygen-docs.gitlab-ci.yml
+
 check-source-code-style:
   stage: test
   image: pommalabs/dotnet-mono:preview
   script:
     - ./build.sh --target check-source-code-style
-
-pages:
-  stage: deploy
-  image:
-    name: pommalabs/doxygen
-    entrypoint: [""]
-  script:
-    - PROJECT_NUMBER=$CI_COMMIT_SHA doxygen
-    - mv artifacts/docs public
-  artifacts:
-    paths:
-      - public
-  only:
-    - main
