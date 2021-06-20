@@ -25,8 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{48147844-A
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Troschuetz.Random.Tester", "tests\Troschuetz.Random.Tester\Troschuetz.Random.Tester.csproj", "{598F64C2-1343-4202-B6A7-A91CF3248D0C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Troschuetz.Random.Samples", "samples\Troschuetz.Random.Samples\Troschuetz.Random.Samples.csproj", "{52A4D144-3BA1-4768-9F3B-90F5DC86746B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{31B8643F-2BBD-4221-8928-62B6B4B221D5}"
@@ -47,16 +45,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Troschuetz.Random.Benchmark
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5B7378F6-79C7-49AF-836E-3C3275342370}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Troschuetz.Random.Tester", "samples\Troschuetz.Random.Tester\Troschuetz.Random.Tester.csproj", "{598F64C2-1343-4202-B6A7-A91CF3248D0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{598F64C2-1343-4202-B6A7-A91CF3248D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{598F64C2-1343-4202-B6A7-A91CF3248D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{598F64C2-1343-4202-B6A7-A91CF3248D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{598F64C2-1343-4202-B6A7-A91CF3248D0C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52A4D144-3BA1-4768-9F3B-90F5DC86746B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{52A4D144-3BA1-4768-9F3B-90F5DC86746B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52A4D144-3BA1-4768-9F3B-90F5DC86746B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,16 +69,20 @@ Global
 		{B9201484-F681-48CE-9331-CC64A48B75E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9201484-F681-48CE-9331-CC64A48B75E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9201484-F681-48CE-9331-CC64A48B75E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{598F64C2-1343-4202-B6A7-A91CF3248D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{598F64C2-1343-4202-B6A7-A91CF3248D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{598F64C2-1343-4202-B6A7-A91CF3248D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{598F64C2-1343-4202-B6A7-A91CF3248D0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{598F64C2-1343-4202-B6A7-A91CF3248D0C} = {8A09F61A-61A7-4409-B58B-BFC5B16A1EAE}
 		{52A4D144-3BA1-4768-9F3B-90F5DC86746B} = {5B7378F6-79C7-49AF-836E-3C3275342370}
 		{938B9A4C-7CD4-4DEC-8219-9EA1E6116EDE} = {31B8643F-2BBD-4221-8928-62B6B4B221D5}
 		{3305B6F6-FE17-4DAD-909B-EE59D27DF269} = {8A09F61A-61A7-4409-B58B-BFC5B16A1EAE}
 		{B9201484-F681-48CE-9331-CC64A48B75E8} = {8A09F61A-61A7-4409-B58B-BFC5B16A1EAE}
+		{598F64C2-1343-4202-B6A7-A91CF3248D0C} = {5B7378F6-79C7-49AF-836E-3C3275342370}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F2AE4A2-7006-424E-8238-8FECD449D5D6}
