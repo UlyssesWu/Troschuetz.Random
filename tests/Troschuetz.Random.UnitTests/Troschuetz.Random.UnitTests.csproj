@@ -3,17 +3,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net40;net45;net461;net472;net48</TargetFrameworks>
-    <OutputType>exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Troschuetz.Random\Troschuetz.Random.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="JunitXml.TestLogger" Version="3.0.98" />
-    <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="NUnitLite" Version="3.13.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != 'net40' AND '$(TargetFramework)' != 'net45' ">

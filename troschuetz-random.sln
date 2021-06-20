@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{48147844-A
 		build.sh = build.sh
 		CHANGELOG.md = CHANGELOG.md
 		CodeMaid.config = CodeMaid.config
+		coverlet.runsettings = coverlet.runsettings
 		Doxyfile = Doxyfile
 		icon.png = icon.png
 		LICENSE = LICENSE
