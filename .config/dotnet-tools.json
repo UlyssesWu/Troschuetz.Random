@@ -19,6 +19,12 @@
       "commands": [
         "dotnet-script"
       ]
+    },
+    "dotnet-sonarscanner": {
+      "version": "5.2.2",
+      "commands": [
+        "dotnet-sonarscanner"
+      ]
     }
   }
 }

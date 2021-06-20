@@ -2,10 +2,14 @@
 
 [![License: MIT][project-license-badge]][project-license]
 [![Donate][paypal-donations-badge]][paypal-donations]
-[![standard-readme compliant][github-standard-readme-badge]][github-standard-readme]
-[![Gitlab pipeline status][gitlab-pipeline-status-badge]][gitlab-pipelines]
+[![Docs][doxygen-docs-badge]][doxygen-docs]
 [![NuGet version][nuget-version-badge]][nuget-package]
 [![NuGet downloads][nuget-downloads-badge]][nuget-package]
+
+[![standard-readme compliant][github-standard-readme-badge]][github-standard-readme]
+[![GitLab pipeline status][gitlab-pipeline-status-badge]][gitlab-pipelines]
+[![Quality gate][sonar-quality-gate-badge]][sonar-website]
+[![Code coverage][sonar-coverage-badge]][sonar-website]
 [![Renovate enabled][renovate-badge]][renovate-website]
 
 Fully managed library providing various random number generators and distributions.
@@ -273,6 +277,8 @@ Small note: If editing the README, please conform to the [standard-readme][githu
 MIT © 2012-2021 [Alessio Parma][personal-website]
 
 [codeproject-article]: https://www.codeproject.com/articles/15102/net-random-number-generators-and-distributions
+[doxygen-docs]: https://pomma89.gitlab.io/troschuetz-random/
+[doxygen-docs-badge]: https://img.shields.io/badge/Doxygen-OK-green?style=flat-square
 [github-standard-readme]: https://github.com/RichardLitt/standard-readme
 [github-standard-readme-badge]: https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square
 [gitlab-pipeline-status-badge]: https://gitlab.com/pomma89/troschuetz-random/badges/main/pipeline.svg?style=flat-square
@@ -288,3 +294,6 @@ MIT © 2012-2021 [Alessio Parma][personal-website]
 [project-license-badge]: https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square
 [renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square
 [renovate-website]: https://renovate.whitesourcesoftware.com/
+[sonar-coverage-badge]: https://img.shields.io/sonar/coverage/pomma89_troschuetz-random?server=https%3A%2F%2Fsonarcloud.io&sonarVersion=8&style=flat-square
+[sonar-quality-gate-badge]: https://img.shields.io/sonar/quality_gate/pomma89_troschuetz-random?server=https%3A%2F%2Fsonarcloud.io&sonarVersion=8&style=flat-square
+[sonar-website]: https://sonarcloud.io/dashboard?id=pomma89_troschuetz-random
