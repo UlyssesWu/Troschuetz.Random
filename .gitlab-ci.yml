@@ -3,7 +3,6 @@ stages:
   - deploy
 
 include:
-  - template: Security/SAST.gitlab-ci.yml
   - project: pommalabs/templates
     file: /.gitlab/ci_templates/dotnet/deploy-doxygen-docs.gitlab-ci.yml
 
