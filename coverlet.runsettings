@@ -11,6 +11,7 @@
           <UseSourceLink>false</UseSourceLink>
           <IncludeTestAssembly>true</IncludeTestAssembly>
           <SkipAutoProps>true</SkipAutoProps>
+          <!-- OpenCover reporter does not support deterministic reports.  -->
           <DeterministicReport>true</DeterministicReport>
         </Configuration>
       </DataCollector>
