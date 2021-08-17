@@ -25,6 +25,12 @@
       "commands": [
         "dotnet-sonarscanner"
       ]
+    },
+    "minver-cli": {
+      "version": "2.5.0",
+      "commands": [
+        "minver"
+      ]
     }
   }
 }
