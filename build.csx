@@ -1,4 +1,4 @@
-#load "nuget: PommaLabs.BuildTargets, 1.1.2"
+#load "nuget: PommaLabs.BuildTargets, 1.2.1"
 
 ////////////////////////////////////////////////////////////////////////////////
 // EXECUTION
