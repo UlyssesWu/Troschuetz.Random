@@ -3,6 +3,9 @@
     "config:base",
     ":assignee(pomma89)"
   ],
+  "ignorePresets": [
+    ":ignoreModulesAndTests"
+  ],
   "automerge": true,
   "gitLabAutomerge": true
 }
