@@ -8,8 +8,6 @@
 
 [![standard-readme compliant][github-standard-readme-badge]][github-standard-readme]
 [![GitLab pipeline status][gitlab-pipeline-status-badge]][gitlab-pipelines]
-[![Quality gate][sonar-quality-gate-badge]][sonar-website]
-[![Code coverage][sonar-coverage-badge]][sonar-website]
 [![Renovate enabled][renovate-badge]][renovate-website]
 
 Fully managed library providing various random number generators and distributions.
@@ -294,6 +292,3 @@ MIT © 2012-2021 [Alessio Parma][personal-website]
 [project-license-badge]: https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square
 [renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square
 [renovate-website]: https://renovate.whitesourcesoftware.com/
-[sonar-coverage-badge]: https://img.shields.io/sonar/coverage/pomma89_troschuetz-random?server=https%3A%2F%2Fsonarcloud.io&sonarVersion=8&style=flat-square
-[sonar-quality-gate-badge]: https://img.shields.io/sonar/quality_gate/pomma89_troschuetz-random?server=https%3A%2F%2Fsonarcloud.io&sonarVersion=8&style=flat-square
-[sonar-website]: https://sonarcloud.io/dashboard?id=pomma89_troschuetz-random
