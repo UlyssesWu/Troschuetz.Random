@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{48147844-A87B-45D7-A428-1909094301B2}"
 	ProjectSection(SolutionItems) = preProject
@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8A09F61A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Troschuetz.Random.UnitTests", "tests\Troschuetz.Random.UnitTests\Troschuetz.Random.UnitTests.csproj", "{3305B6F6-FE17-4DAD-909B-EE59D27DF269}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Troschuetz.Random.Benchmarks", "tests\Troschuetz.Random.Benchmarks\Troschuetz.Random.Benchmarks.csproj", "{B9201484-F681-48CE-9331-CC64A48B75E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Troschuetz.Random.Benchmarks", "samples\Troschuetz.Random.Benchmarks\Troschuetz.Random.Benchmarks.csproj", "{B9201484-F681-48CE-9331-CC64A48B75E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5B7378F6-79C7-49AF-836E-3C3275342370}"
 EndProject
@@ -81,7 +81,7 @@ Global
 		{52A4D144-3BA1-4768-9F3B-90F5DC86746B} = {5B7378F6-79C7-49AF-836E-3C3275342370}
 		{938B9A4C-7CD4-4DEC-8219-9EA1E6116EDE} = {31B8643F-2BBD-4221-8928-62B6B4B221D5}
 		{3305B6F6-FE17-4DAD-909B-EE59D27DF269} = {8A09F61A-61A7-4409-B58B-BFC5B16A1EAE}
-		{B9201484-F681-48CE-9331-CC64A48B75E8} = {8A09F61A-61A7-4409-B58B-BFC5B16A1EAE}
+		{B9201484-F681-48CE-9331-CC64A48B75E8} = {5B7378F6-79C7-49AF-836E-3C3275342370}
 		{598F64C2-1343-4202-B6A7-A91CF3248D0C} = {5B7378F6-79C7-49AF-836E-3C3275342370}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

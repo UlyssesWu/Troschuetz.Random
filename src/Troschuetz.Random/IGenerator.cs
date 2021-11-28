@@ -83,7 +83,7 @@ namespace Troschuetz.Random
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
         void NextBytes(byte[] buffer);
 
-#if HAS_SPAN
+#if NETCOREAPP3_1_OR_GREATER
 
         /// <summary>
         ///   Fills the elements of a specified span of bytes with random numbers.
