@@ -10,7 +10,7 @@
 
 Fully managed library providing various random number generators and distributions.
 
-:warning: This project is no longer maintained,
+:warning: __This project is no longer maintained__,
 the recommended alternative is [MathNet.Numerics][github-mathnet-numerics].
 That project represents a solid alternative, since it has a wider community,
 it provides more [generators][mathnet-numerics-generators] and,
