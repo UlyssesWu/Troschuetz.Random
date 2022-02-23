@@ -12,8 +12,9 @@ Fully managed library providing various random number generators and distributio
 
 :warning: This project is no longer maintained,
 the recommended alternative is [MathNet.Numerics][github-mathnet-numerics].
-That project provides more [generators][mathnet-numerics-generators] and,
-more or less, the same [distributions][mathnet-numerics-distributions].
+That project represents a solid alternative, since it has a wider community,
+it provides more [generators][mathnet-numerics-generators] and,
+more or less, it implements the same [distributions][mathnet-numerics-distributions].
 
 All the hard work behind this library was done by Stefan Troschütz, and for which I thank him very much.
 What I have done with his great project, was simply to refactor and improve his code,
