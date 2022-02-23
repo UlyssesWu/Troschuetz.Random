@@ -3,14 +3,17 @@
 [![License: MIT][project-license-badge]][project-license]
 [![Donate][paypal-donations-badge]][paypal-donations]
 [![Docs][doxygen-docs-badge]][doxygen-docs]
-[![NuGet version][nuget-version-badge]][nuget-package]
-[![NuGet downloads][nuget-downloads-badge]][nuget-package]
 
 [![standard-readme compliant][github-standard-readme-badge]][github-standard-readme]
 [![GitLab pipeline status][gitlab-pipeline-status-badge]][gitlab-pipelines]
 [![Renovate enabled][renovate-badge]][renovate-website]
 
 Fully managed library providing various random number generators and distributions.
+
+:warning: This project is no longer maintained,
+the recommended alternative is [MathNet.Numerics][github-mathnet-numerics].
+That project provides more [generators][mathnet-numerics-generators] and,
+more or less, the same [distributions][mathnet-numerics-distributions].
 
 All the hard work behind this library was done by Stefan Troschütz, and for which I thank him very much.
 What I have done with his great project, was simply to refactor and improve his code,
@@ -277,11 +280,14 @@ MIT © 2012-2022 [Alessio Parma][personal-website]
 [codeproject-article]: https://www.codeproject.com/articles/15102/net-random-number-generators-and-distributions
 [doxygen-docs]: https://pomma89.gitlab.io/troschuetz-random/
 [doxygen-docs-badge]: https://img.shields.io/badge/Doxygen-OK-green?style=flat-square
+[github-mathnet-numerics]: https://github.com/mathnet/mathnet-numerics
 [github-standard-readme]: https://github.com/RichardLitt/standard-readme
 [github-standard-readme-badge]: https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square
 [gitlab-pipeline-status-badge]: https://gitlab.com/pomma89/troschuetz-random/badges/main/pipeline.svg?style=flat-square
 [gitlab-pipelines]: https://gitlab.com/pomma89/troschuetz-random/pipelines
 [gitlab-pomma89]: https://gitlab.com/pomma89
+[mathnet-numerics-distributions]: https://numerics.mathdotnet.com/Random.html#Uniform-Random-Number-Generators
+[mathnet-numerics-generators]: https://numerics.mathdotnet.com/Probability.html#Continuous-Distributions
 [nuget-downloads-badge]: https://img.shields.io/nuget/dt/Troschuetz.Random?style=flat-square
 [nuget-package]: https://www.nuget.org/packages/Troschuetz.Random/
 [nuget-version-badge]: https://img.shields.io/nuget/v/Troschuetz.Random?style=flat-square
